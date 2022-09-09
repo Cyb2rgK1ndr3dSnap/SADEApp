@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="AutomatizacionServicios.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:AutomatizacionServicios"
+    xmlns:Inicio="clr-namespace:AutomatizacionServicios.Views.Inicio"
+    xmlns:startupPages="clr-namespace:AutomatizacionServicios.Views.startup"
+    Shell.FlyoutBehavior="Disabled">
+
+    <ShellContent
+        ContentTemplate="{DataTemplate startupPages:LoginPage}"
+        Route="LoginPage" />
+
+    <ShellContent
+        ContentTemplate="{DataTemplate Inicio:InicioPage}"
+        Route="InicioPage" />
+
+</Shell>
