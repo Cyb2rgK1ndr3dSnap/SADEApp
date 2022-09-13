@@ -1,21 +1,14 @@
-using static System.Net.Mime.MediaTypeNames;
+using AutomatizacionServicios.ViewModels.Inicio;
 
-namespace AutomatizacionServicios.Views.Inicio;
-
-public partial class InicioPage : ContentPage
+namespace AutomatizacionServicios.Views.Inicio
 {
 
-    public InicioPage()
-	{
-		InitializeComponent();
-		ObtenerDatos();
+    public partial class InicioPage : ContentPage
+    {
+        public InicioPage(InicioPageViewModel viewModel)
+	    {
+		    InitializeComponent();
+            this.BindingContext = viewModel;
+        }
     }
-
-	private void ObtenerDatos()
-	{
-        lblId.Text = Preferences.Get("nombre",null);
-        lblNombre.Text = Preferences.Get("apellido",null);
-        //Apellido.Text = await SecureStorage.Default.GetAsync("apellido");
-    }
-
 }

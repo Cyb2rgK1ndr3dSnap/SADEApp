@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AutomatizacionServicios.Views.startup.LoginPage"
+             xmlns:handlers="clr-namespace:AutomatizacionServicios.Handlers"
              BackgroundColor="White"
              Shell.NavBarIsVisible="False"
              >
@@ -13,8 +14,8 @@
         <Image Source="dotnet_bot.png" HeightRequest="150" WidthRequest="150"/>
 
         <VerticalStackLayout Spacing="10">
-            <Label Text="Bienvenido" FontSize="24" TextColor="Gray" HorizontalTextAlignment="Center"/>
-            <Label Text="B" FontSize="24" TextColor="Gray" HorizontalTextAlignment="Center"/>
+            <Label Text="SADE" FontSize="24" TextColor="Gray" HorizontalTextAlignment="Center"/>
+            <Label Text="-----------------------------------------" FontSize="24" TextColor="Gray" HorizontalTextAlignment="Center"/>
         </VerticalStackLayout>
 
         
@@ -23,8 +24,8 @@
                     <Image Source="user.png" HeightRequest="30" WidthRequest="30"/>
                 </Frame>
                 <Frame HeightRequest="45" Margin="-20,0,0,0" HasShadow="True" BorderColor="White" HorizontalOptions="FillAndExpand" Padding="0">
-                    <Entry Margin="20,0,0,0" Text="{Binding Email}" Placeholder="Usuario" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Keyboard="Email" TextColor="Black"></Entry>
-                </Frame>
+                <Entry Margin="20,0,0,0" Text="{Binding Email}" Placeholder="Usuario" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Keyboard="Email" TextColor="Black"/>
+            </Frame>
             </StackLayout>
         
 
@@ -34,17 +35,21 @@
                     <Image Source="block.png" HeightRequest="30" WidthRequest="30"/>
                 </Frame>
                 <Frame HeightRequest="45" Margin="-20,0,0,0" HasShadow="True" BorderColor="White" HorizontalOptions="FillAndExpand" Padding="0">
-                    <Entry Margin="20,0,0,0" Text="{Binding Password}" Placeholder="Contraseña" HorizontalOptions="FillAndExpand" VerticalOptions="Center" IsPassword="True" TextColor="Black"> </Entry>
+                    <Entry Margin="20,0,0,0" Text="{Binding Password}" Placeholder="Contraseña" HorizontalOptions="FillAndExpand" VerticalOptions="Center" IsPassword="True" TextColor="Black"/>
                 </Frame>
             </StackLayout>
 
-                <Button 
+        <Frame HasShadow="True" HeightRequest="50" WidthRequest="120" BorderColor="White">
+            <Button 
+                HeightRequest="50"
+                WidthRequest="120"
                     Text="Login"
                     TextColor="Black"
                     Command="{Binding LoginCommand}"
-                    VerticalOptions="Center" 
-                    HorizontalOptions="Center">
+                    VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="FillAndExpand">
                 </Button>
+        </Frame>
             
         <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="Center">
             <Label Text="No tienes cuenta?" TextColor="Gray" />

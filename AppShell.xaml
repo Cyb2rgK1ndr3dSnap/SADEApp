@@ -6,14 +6,52 @@
     xmlns:local="clr-namespace:AutomatizacionServicios"
     xmlns:Inicio="clr-namespace:AutomatizacionServicios.Views.Inicio"
     xmlns:startupPages="clr-namespace:AutomatizacionServicios.Views.startup"
-    Shell.FlyoutBehavior="Disabled">
+    xmlns:dispositivosPages="clr-namespace:AutomatizacionServicios.Views.Dispositivos"
+    Shell.TitleColor="Black"
+    Shell.TabBarIsVisible="False"
+    Shell.BackgroundColor="#512BD4"
+    FlyoutBackgroundImage="purpink.jpg"
+    FlyoutHeader="adsad"
+    FlyoutBackgroundImageAspect="Fill"
+    >
 
-    <ShellContent
+    <Shell.Resources>
+        <Style TargetType="Label"
+           Class="FlyoutItemLayoutStyle">
+            <Setter Property="TextColor"
+                Value="Black" />
+            <Setter Property="HeightRequest"
+                Value="100" />
+        </Style>
+    </Shell.Resources>
+
+            <ShellContent FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled" 
+        ContentTemplate="{DataTemplate startupPages:LoadingPage}" 
+        Route="LoadingPage"/>
+
+    <ShellContent FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled" 
         ContentTemplate="{DataTemplate startupPages:LoginPage}"
         Route="LoginPage" />
 
-    <ShellContent
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Route="InicioPage">
+        <ShellContent         
+        Title="Inicio" Icon="house.png" 
         ContentTemplate="{DataTemplate Inicio:InicioPage}"
-        Route="InicioPage" />
+            
+        />
+        <ShellContent
+        Title="Dispositivos" Icon="devices_icon.png"
+        ContentTemplate="{DataTemplate dispositivosPages:DispositivosPage}"
+        
+        />
+        
+    </FlyoutItem>
 
+    
+    <Shell.FlyoutFooter>
+        <StackLayout Padding="40">
+            <Button Text="Cerrar Sesión" Command="{Binding CerrarSesionCommand}" />
+        </StackLayout>
+    </Shell.FlyoutFooter>
+    
 </Shell>

@@ -4,6 +4,7 @@ using AutomatizacionServicios.Views.Inicio;
 using AutomatizacionServicios.Views.startup;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,16 +33,22 @@ namespace AutomatizacionServicios.ViewModels.Startup
             {
                 if (!string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password) && Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
                 {
-                    
-
                     LoginResponse loginResponse = await iLoginRepository.Login(Email, Password);
+                    Email = "";
+                    Password = "";
+                    //App.UserInfo = await iLoginRepository.Login(Email, Password);
 
                     if (loginResponse != null)
                     {
-                        Preferences.Set("nombre", loginResponse.nombre.ToString());
-                        Preferences.Set("apellido", loginResponse.apellido.ToString());
-                        //Preferences.Default.Set("nombre", loginResponse.nombre);
-                        //Preferences.Default.Set("apellido", loginResponse.apellido);
+
+                        if (Preferences.ContainsKey(nameof(App.UserInfoDetails)))
+                        {
+                            Preferences.Remove(nameof(App.UserInfoDetails));
+                        }                       
+                        string userInfoDetails = JsonConvert.SerializeObject(loginResponse);
+                        Preferences.Set(nameof(App.UserInfoDetails), userInfoDetails);
+                        App.UserInfoDetails = loginResponse;
+                        //var route = $"//{nameof(InicioPage)}";
                         await Shell.Current.GoToAsync($"//{nameof(InicioPage)}");
                     }
                     else
@@ -63,7 +70,7 @@ namespace AutomatizacionServicios.ViewModels.Startup
                 await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "Error al conectarse", "OK");
             }
         }
-        #endregion
+        
 
 
         [RelayCommand]
@@ -71,5 +78,6 @@ namespace AutomatizacionServicios.ViewModels.Startup
         {
             await Shell.Current.GoToAsync($"//{nameof(RegisterPage)}");
         }
+        #endregion
     }
 }

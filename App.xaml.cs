@@ -7,7 +7,7 @@ namespace AutomatizacionServicios;
 public partial class App : Application
 {
 
-	public static LoginRequest UserBasicInfo;
+	public static LoginResponse UserInfoDetails;
 
 	public App()
 	{
@@ -18,6 +18,7 @@ public partial class App : Application
             {
 #if __ANDROID__
                 handler.PlatformView.SetBackgroundColor(Colors.Transparent.ToPlatform());
+                handler.PlatformView.SetTextColor(Colors.Black.ToPlatform());
 #elif __IOS__
                 handler.PlatformView.BorderStyle = UIKit.UITextBorderStyle.None;
 #endif

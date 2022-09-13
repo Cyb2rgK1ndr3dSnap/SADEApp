@@ -7,12 +7,7 @@ using System.Threading.Tasks;
 
 namespace AutomatizacionServicios.ViewModels
 {
-    public partial class BaseViewModel : ObservableObject
+    public partial class BaseViewModelObservable
     {
-        [ObservableProperty]
-        private bool _isBusy;
-        [ObservableProperty]
-        private string _title;
-        
     }
 }
