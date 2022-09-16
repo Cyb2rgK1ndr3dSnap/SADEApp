@@ -17,5 +17,7 @@ namespace AutomatizacionServicios.Models
         public string tipo_usuario_id { get; set; }
 
         public string cedula { get; set; }
+
+        public string correo { get; set; }
     }
 }

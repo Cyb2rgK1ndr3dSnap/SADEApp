@@ -1,4 +1,5 @@
-﻿using AutomatizacionServicios.ViewModels.Dispositivos;
+﻿using AutomatizacionServicios.ViewModels;
+using AutomatizacionServicios.ViewModels.Dispositivos;
 using AutomatizacionServicios.ViewModels.Inicio;
 using AutomatizacionServicios.ViewModels.Startup;
 using AutomatizacionServicios.Views.Dispositivos;
@@ -32,6 +33,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<LoadingPageViewModel>();
         builder.Services.AddTransient<LoginPageViewModel>();
         builder.Services.AddSingleton<InicioPageViewModel>();
+        builder.Services.AddSingleton<AppShellViewModel>();
         builder.Services.AddTransient<DispositivosPageViewModel>();
 
         return builder.Build();

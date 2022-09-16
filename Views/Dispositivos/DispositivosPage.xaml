@@ -5,14 +5,17 @@
              BackgroundColor="White"
              >
     <VerticalStackLayout
+        Padding="5"
         Spacing="10">
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" 
-            />
 
-        <Entry Margin="20,0,0,0" Text="{Binding Busqueda}" Placeholder="Busqueda" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Keyboard="Email" TextColor="Black"/>
+        <StackLayout Orientation="Horizontal">
+            <Frame BorderColor="Black" HasShadow="True" HorizontalOptions="FillAndExpand" Padding="0" HeightRequest="45">
+                <Entry Margin="10,0,0,0" Text="{Binding Busqueda}" Placeholder="Busqueda" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Black"/>
+            </Frame>
+            <Frame ZIndex="1" HasShadow="True" BorderColor="White" HeightRequest="56" WidthRequest="56" Margin="-40,0,0,0" >
+                <Image Source="block.png" HeightRequest="30" WidthRequest="30"/>
+            </Frame>
+        </StackLayout>
         
     </VerticalStackLayout>
 </ContentPage>

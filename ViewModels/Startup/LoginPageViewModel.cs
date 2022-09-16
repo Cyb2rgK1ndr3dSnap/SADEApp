@@ -1,4 +1,5 @@
-﻿using AutomatizacionServicios.Models;
+﻿using AutomatizacionServicios.Controls;
+using AutomatizacionServicios.Models;
 using AutomatizacionServicios.Services;
 using AutomatizacionServicios.Views.Inicio;
 using AutomatizacionServicios.Views.startup;
@@ -48,8 +49,9 @@ namespace AutomatizacionServicios.ViewModels.Startup
                         string userInfoDetails = JsonConvert.SerializeObject(loginResponse);
                         Preferences.Set(nameof(App.UserInfoDetails), userInfoDetails);
                         App.UserInfoDetails = loginResponse;
-                        //var route = $"//{nameof(InicioPage)}";
-                        await Shell.Current.GoToAsync($"//{nameof(InicioPage)}");
+                        await AppConstant.AddFlyoutMenusDetails();
+                        //AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
+                        //await Shell.Current.GoToAsync($"//{nameof(InicioPage)}");
                     }
                     else
                     {

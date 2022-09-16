@@ -1,4 +1,5 @@
-﻿using AutomatizacionServicios.Models;
+﻿using AutomatizacionServicios.Controls;
+using AutomatizacionServicios.Models;
 using AutomatizacionServicios.Views.Inicio;
 using AutomatizacionServicios.Views.startup;
 using Newtonsoft.Json;
@@ -44,8 +45,9 @@ namespace AutomatizacionServicios.ViewModels.Startup
                 var userInfoDetails = JsonConvert.DeserializeObject<LoginResponse>(userInfoDetailsStr);
                 App.UserInfoDetails = userInfoDetails;
                 //await AppConstant.AddFlyoutMenusDetails(); Agregar FlyoutMenu Dinámico para usuario
-                await Shell.Current.GoToAsync($"//{nameof(InicioPage)}");
-                
+                //AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
+                await AppConstant.AddFlyoutMenusDetails();
+                //await Shell.Current.GoToAsync($"//{nameof(InicioPage)}"); 
             }
         }
     }

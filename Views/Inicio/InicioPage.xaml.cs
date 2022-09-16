@@ -10,5 +10,11 @@ namespace AutomatizacionServicios.Views.Inicio
 		    InitializeComponent();
             this.BindingContext = viewModel;
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            this.BindingContext = new InicioPageViewModel();
+        }
     }
 }

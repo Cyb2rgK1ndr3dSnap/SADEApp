@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AutomatizacionServicios.Controls.FlyoutHeaderControl">
+    <StackLayout>
+            <Grid BackgroundColor="Black"
+                  HeightRequest="150">
+                <Image Aspect="AspectFill"
+                       Source="amin.jpg"
+                       Opacity="0.4" />
+                <StackLayout Spacing="20" Padding="40">
+                    <Label Text=""
+                       x:Name="Nombre"
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"
+                       VerticalOptions="Center"
+                       />
+                    <Label Text=""
+                       x:Name="Correo"
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"
+                       />
+                </StackLayout>
+            </Grid>
+    </StackLayout>
+</StackLayout>
