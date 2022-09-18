@@ -18,6 +18,7 @@ namespace AutomatizacionServicios.ViewModels.Startup
     public partial class LoginPageViewModel : BaseViewModel
     {
         readonly ILoginRepository iLoginRepository = new LoginService();
+        readonly IGetPost getPost = new LServices();
 
         [ObservableProperty]
         private string _email;
@@ -34,7 +35,9 @@ namespace AutomatizacionServicios.ViewModels.Startup
             {
                 if (!string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password) && Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
                 {
-                    LoginResponse loginResponse = await iLoginRepository.Login(Email, Password);
+                    //NO BORRAR ES PARA PRUEBA
+                    //LoginResponse loginResponse = await iLoginRepository.Login(Email, Password);
+                    LoginResponse loginResponse = await getPost.LoginSer(Email,Password);
                     Email = "";
                     Password = "";
                     //App.UserInfo = await iLoginRepository.Login(Email, Password);
@@ -50,8 +53,6 @@ namespace AutomatizacionServicios.ViewModels.Startup
                         Preferences.Set(nameof(App.UserInfoDetails), userInfoDetails);
                         App.UserInfoDetails = loginResponse;
                         await AppConstant.AddFlyoutMenusDetails();
-                        //AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
-                        //await Shell.Current.GoToAsync($"//{nameof(InicioPage)}");
                     }
                     else
                     {

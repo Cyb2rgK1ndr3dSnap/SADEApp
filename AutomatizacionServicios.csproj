@@ -76,7 +76,13 @@
 	  <MauiXaml Update="Controls\FlyoutHeaderControl.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\CopiaseImpresiones\CopiasImpresionesPage.xaml">
+	  <MauiXaml Update="Views\Copias\CopiasConfirmar.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Copias\CopiasPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Copias\CopiasSeleccionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Dispositivos\DispositivosPage.xaml">

@@ -11,8 +11,10 @@ namespace AutomatizacionServicios.ViewModels
     public partial class BaseViewModel : ObservableObject
     {
 
-        [ObservableProperty]
+        [ObservableProperty]  
         private bool _isBusy;
+
+
         [ObservableProperty]
         private string _title;
         

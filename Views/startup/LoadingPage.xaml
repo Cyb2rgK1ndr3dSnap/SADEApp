@@ -4,8 +4,9 @@
              x:Class="AutomatizacionServicios.Views.startup.LoadingPage"
              Shell.NavBarIsVisible="False"
              Title="LoadingPage">
-    <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
         <Image Source="dotnet_bot.png" HeightRequest="200" WidthRequest="200" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+        
         <Image Source="utp_logo.png" HeightRequest="120" WidthRequest="120" VerticalOptions="End" HorizontalOptions="Center"/>
     </StackLayout>
 </ContentPage>

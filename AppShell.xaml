@@ -10,7 +10,7 @@
     xmlns:controls="clr-namespace:AutomatizacionServicios.Controls"
     xmlns:viewModels="clr-namespace:AutomatizacionServicios.ViewModels"
     Shell.TitleColor="Black"
-    Shell.TabBarIsVisible="False"
+    
     Shell.BackgroundColor="#512BD4"
     FlyoutBackgroundImage="purpink.jpg"
     FlyoutBackgroundImageAspect="Fill"

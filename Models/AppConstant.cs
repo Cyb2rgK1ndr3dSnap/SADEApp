@@ -1,8 +1,9 @@
 ﻿using AutomatizacionServicios.Controls;
-using AutomatizacionServicios.Views.CopiaseImpresiones;
+using AutomatizacionServicios.Views.Copias;
 using AutomatizacionServicios.Views.Dispositivos;
 using AutomatizacionServicios.Views.Inicio;
 using AutomatizacionServicios.Views.startup;
+using Microsoft.Maui.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -88,7 +89,7 @@ namespace AutomatizacionServicios.Models
                                         Title = "Copias e Impresiones",
                                         Route="CopiasImpresionesPage",
                                         IsVisible = permissionDocument,
-                                        ContentTemplate = new DataTemplate(typeof(CopiasImpresionesPage)),
+                                        ContentTemplate = new DataTemplate(typeof(CopiasPage)),
                                     }
                                     ,
                                     new ShellContent
@@ -134,15 +135,15 @@ namespace AutomatizacionServicios.Models
 
                 },
             };
-            
+
             var flyoutItemP = new FlyoutItem()
             {
-                Route="InicioPage",
+                Route = "InicioPage",
                 FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                 Items =
                 {
                     new Tab
-                    {   
+                    {
                         Icon = "house.png",
                         Title="Inicio",
                         Items =
@@ -159,7 +160,7 @@ namespace AutomatizacionServicios.Models
                     new Tab
                     {
                         Icon = "document.png",
-                        Title="Copias e Impresiones",
+                        Title="Copias",
                         Items =
                         {
                             new ShellContent
@@ -168,9 +169,32 @@ namespace AutomatizacionServicios.Models
                                         Title = "Copias e Impresiones",
                                         Route="CopiasImpresionesPage",
                                         //IsVisible = permissionDocument,
-                                        ContentTemplate = new DataTemplate(typeof(CopiasImpresionesPage)),
-                                    }
-                                    ,
+                                        ContentTemplate = new DataTemplate(typeof(CopiasPage)),
+                                    },
+                            new ShellContent
+                                    {
+                                        Icon = "document.png",
+                                        Title = "Confirmar Copias",
+                                        //Route="CopiasImpresionesPage",
+                                        //IsVisible = permissionDocument,
+                                        //ContentTemplate = new DataTemplate(typeof(CopiasPage)),
+                                    },
+                            new ShellContent
+                                    {
+                                        Icon = "document.png",
+                                        Title = "Copias Cerradas",
+                                        //Route="CopiasImpresionesPage",
+                                        //IsVisible = permissionDocument,
+                                        //ContentTemplate = new DataTemplate(typeof(CopiasPage)),
+                                    },
+                            new ShellContent
+                                    {
+                                        Icon = "document.png",
+                                        Title = "Historial",
+                                        //Route="CopiasImpresionesPage",
+                                        //IsVisible = permissionDocument,
+                                        //ContentTemplate = new DataTemplate(typeof(CopiasPage)),
+                                    },
                         }
                     },
                     new Tab
@@ -182,15 +206,20 @@ namespace AutomatizacionServicios.Models
                             new ShellContent
                                     {
                                         Icon = "devices_icon.png",
-                                        Title = "Dispositivos",
+                                        Title ="Dispositivos",
                                         Route="DispositivosPage",
                                         ContentTemplate = new DataTemplate(typeof(DispositivosPage)),
                                     },
                             new ShellContent
                                     {
-                                        Icon = "devices_icon.png",
-                                        Title = "Dispositivos2",
+                                
+                                        FlyoutIcon = "devices_icon.png",
+                                        Icon = "devices_icon",
+                                        Title = "Dis2",
+                                        Route="RegisterPage",
+                                        ContentTemplate = new DataTemplate(typeof(RegisterPage)),
                                         //IsVisible=permissionDocument,
+                                        IsVisible=true,
                                     }
                         }
                     },

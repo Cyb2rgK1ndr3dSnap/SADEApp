@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AutomatizacionServicios.Views.Copias.CopiasSeleccionPage"
+             Title="CopiasSeleccionPage"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="False"
+             >
+    <VerticalStackLayout
+        Spacing="30"
+        Padding="20"
+        >
+        <Border BackgroundColor="White" Padding="20" Stroke="black" StrokeShape="RoundRectangle 40,0,0,40">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0">
+                <Grid Margin="10" Padding="0">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                            <Border BackgroundColor="White" Stroke="white">
+                                <Image Source="document.png" HeightRequest="80" WidthRequest="60" HorizontalOptions="Center"/>
+                            </Border>
+                            <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                                <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" HorizontalOptions="FillAndExpand" Margin="10,10,0,0" Padding="5">
+                                    <Label Text="{Binding User}" BackgroundColor="White"  TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" HeightRequest="25"/>
+                                </Border>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical" Spacing="10">
+                            <StackLayout Orientation="Horizontal">
+                                <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" WidthRequest="200" HorizontalOptions="FillAndExpand" Margin="0,10,0,0">
+                                    <Entry Text="{Binding Identificacion}" BackgroundColor="White"  TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Placeholder="Identificación" IsReadOnly="True"/>
+                                </Border>
+                                <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="45" WidthRequest="45" HorizontalOptions="End" Margin="10,10,0,0" Padding="5">
+                                    <ImageButton Source="camera.png" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,0,0" Command="{Binding Command}" />
+                                </Border>
+                            </StackLayout>
+                            <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" HorizontalOptions="FillAndExpand" Margin="0,0,0,0">
+                                <Entry Text="{Binding MaterialCopiado}" BackgroundColor="White"  TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Placeholder="MaterialCopiado "/>
+                            </Border>
+                            <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" HorizontalOptions="FillAndExpand" Margin="0,0,0,0">
+                                <Entry Text="{Binding Cantidad}" BackgroundColor="White"  TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Placeholder="Cantidad"/>
+                            </Border>
+                            <StackLayout Orientation="Horizontal" Spacing="10"  
+                                        RadioButtonGroup.GroupName="{Binding GroupName}"
+                                        RadioButtonGroup.SelectedValue="{Binding Selection}">
+                                <RadioButton Content="C" Value="Corta"/>
+                                <RadioButton Content="L" Value="Larga"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" Spacing="2">
+                                <Frame HasShadow="True" HeightRequest="50" WidthRequest="140" BorderColor="Transparent" Padding="0" BackgroundColor="Transparent">
+                                    <Button
+                                        Command="{Binding Command}"
+                                        Text="Realizar Petición"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="CenterAndExpand"
+                                        CornerRadius="20"
+                                        BackgroundColor="Green"
+                                        >
+                                    </Button>
+                                </Frame>
+                                <Frame HasShadow="True" HeightRequest="50" WidthRequest="140" BorderColor="Transparent" Padding="0" BackgroundColor="Transparent">
+                                    <Button
+                                        Command="{Binding VolverCommand}"
+                                        Text="Cancelar"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="CenterAndExpand"
+                                        CornerRadius="20"
+                                        BackgroundColor="Red"
+                                        >
+                                    </Button>
+                                </Frame>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+        </Border>
+    </VerticalStackLayout>
+</ContentPage>

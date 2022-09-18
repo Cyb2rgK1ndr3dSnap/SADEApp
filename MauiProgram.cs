@@ -1,7 +1,9 @@
 ﻿using AutomatizacionServicios.ViewModels;
+using AutomatizacionServicios.ViewModels.Copias;
 using AutomatizacionServicios.ViewModels.Dispositivos;
 using AutomatizacionServicios.ViewModels.Inicio;
 using AutomatizacionServicios.ViewModels.Startup;
+using AutomatizacionServicios.Views.Copias;
 using AutomatizacionServicios.Views.Dispositivos;
 using AutomatizacionServicios.Views.Inicio;
 using AutomatizacionServicios.Views.startup;
@@ -23,18 +25,22 @@ public static class MauiProgram
 			});
 
         //return builder.Build();
+        //builder.Services.AddSingleton<>();
         //View
         builder.Services.AddSingleton<LoadingPage>();
         builder.Services.AddTransient<LoginPage>();
         builder.Services.AddSingleton<InicioPage>();
-        //builder.Services.AddSingleton<RegisterPage>();
         builder.Services.AddTransient<DispositivosPage>();
+        builder.Services.AddTransient<CopiasPage>();
+        builder.Services.AddTransient<CopiasSeleccionPage>();
+
         //ViewModels
         builder.Services.AddSingleton<LoadingPageViewModel>();
         builder.Services.AddTransient<LoginPageViewModel>();
         builder.Services.AddSingleton<InicioPageViewModel>();
-        builder.Services.AddSingleton<AppShellViewModel>();
         builder.Services.AddTransient<DispositivosPageViewModel>();
+        builder.Services.AddTransient<CopiasPageViewModel>();
+        builder.Services.AddTransient<CopiasSeleccionPageViewModel>();
 
         return builder.Build();
     }

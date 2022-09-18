@@ -34,12 +34,12 @@
                 <Frame ZIndex="1" HasShadow="True" BorderColor="White" HeightRequest="56" WidthRequest="56" CornerRadius="28" >
                     <Image Source="block.png" HeightRequest="30" WidthRequest="30"/>
                 </Frame>
-            <Frame  HeightRequest="45" Margin="-20,0,0,0" HasShadow="True" BorderColor="White" HorizontalOptions="FillAndExpand" Padding="0">
+                <Frame  HeightRequest="45" Margin="-20,0,0,0" HasShadow="True" BorderColor="White" HorizontalOptions="FillAndExpand" Padding="0">
                     <Entry Margin="20,0,0,0" Text="{Binding Password}" Placeholder="Contraseña" HorizontalOptions="FillAndExpand" VerticalOptions="Center" IsPassword="True" TextColor="Black"/>
                 </Frame>
             </StackLayout>
 
-        <Frame HasShadow="True" HeightRequest="40" WidthRequest="140" BorderColor="White" Padding="0">
+        <Frame HasShadow="True" HeightRequest="50" WidthRequest="140" BorderColor="White" Padding="0">
             <Button 
                     Text="Login"
                     TextColor="Black"
