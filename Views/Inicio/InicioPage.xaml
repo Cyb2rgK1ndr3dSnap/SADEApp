@@ -10,25 +10,25 @@
         Spacing="10"
         Padding="10"
         >
-        
-        <Frame HeightRequest="200" WidthRequest="200" BorderColor="White">
+
+        <Frame HeightRequest="200" WidthRequest="200" BorderColor="Black">
             <Image Source="sade3.png" HeightRequest="200" WidthRequest="200" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"/>
         </Frame>
 
-        
-        <Frame Padding="0" BackgroundColor="Aqua" BorderColor="Black">
-             <Label Text="{Binding Nombre}" FontSize="24" TextColor="Black" HorizontalTextAlignment="Center"/>
+        <Frame Padding="0" BorderColor="White">
+            <Label Text="Bienvenido" FontSize="24" TextColor="Black" HorizontalTextAlignment="Center"/>
         </Frame>
 
-        <Frame Padding="0" BackgroundColor="Aqua" BorderColor="Black">
+        <Frame Padding="0" BorderColor="Black">
+            <Label Text="{Binding Nombre}" FontSize="24" TextColor="Black" HorizontalTextAlignment="Center"/>
+        </Frame>
+
+        <Frame Padding="0" BorderColor="Black">
             <Label x:Name="lblId"             
             Text="{Binding Id}"      
-            VerticalOptions="Center" 
             HorizontalOptions="Center" 
             TextColor="Black"
          />
         </Frame>
-        
     </VerticalStackLayout>
-    
 </ContentPage>

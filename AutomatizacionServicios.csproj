@@ -64,6 +64,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\Copias\CopiasConfirmarPage.xaml.cs">
+	    <DependentUpon>CopiasConfirmarPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\Inicio\InicioPage.xaml.cs">
 	    <DependentUpon>InicioPage.xaml</DependentUpon>
 	  </Compile>
@@ -76,7 +79,10 @@
 	  <MauiXaml Update="Controls\FlyoutHeaderControl.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Copias\CopiasConfirmar.xaml">
+	  <MauiXaml Update="Views\Copias\CopiasConfirmarPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Copias\CopiasConfirmarSeleccionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Copias\CopiasPage.xaml">

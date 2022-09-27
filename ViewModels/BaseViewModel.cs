@@ -17,6 +17,20 @@ namespace AutomatizacionServicios.ViewModels
 
         [ObservableProperty]
         private string _title;
-        
+
+        //[ObservableProperty] _isRefreshing
+
+        /*
+        public bool IsBusy
+        {
+            get => _isBusy;
+            set => SetProperty(ref _isBusy, value);
+        }
+        public string Title
+        {
+            get => _title;
+            set => SetProperty(ref _title, value);
+        }
+        */
     }
 }

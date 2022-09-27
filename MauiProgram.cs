@@ -23,7 +23,7 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
-
+        /////////////////////////////////////ORDENAR DE UNA MEJOR MANERA ESTA SECCIÓN DEL CÓDIGO PARA MÁS LEGIBILIDAD
         //return builder.Build();
         //builder.Services.AddSingleton<>();
         //View
@@ -34,13 +34,20 @@ public static class MauiProgram
         builder.Services.AddTransient<CopiasPage>();
         builder.Services.AddTransient<CopiasSeleccionPage>();
 
-        //ViewModels
+        builder.Services.AddTransient<CopiasConfirmarPage>();
+        builder.Services.AddTransient<CopiasConfirmarSeleccionPage>();
+
+        //ViewModels Login
         builder.Services.AddSingleton<LoadingPageViewModel>();
         builder.Services.AddTransient<LoginPageViewModel>();
         builder.Services.AddSingleton<InicioPageViewModel>();
+
         builder.Services.AddTransient<DispositivosPageViewModel>();
         builder.Services.AddTransient<CopiasPageViewModel>();
         builder.Services.AddTransient<CopiasSeleccionPageViewModel>();
+
+        builder.Services.AddTransient<CopiasConfirmarViewModel>();
+        builder.Services.AddTransient<CopiasConfirmarSeleccionViewModel>();
 
         return builder.Build();
     }

@@ -18,6 +18,7 @@ public partial class AppShell : Shell
         this.BindingContext = new AppShellViewModel();
 
         Routing.RegisterRoute(nameof(CopiasSeleccionPage), typeof(CopiasSeleccionPage));
+        Routing.RegisterRoute(nameof(CopiasConfirmarSeleccionPage), typeof(CopiasConfirmarSeleccionPage));
         //Routing.RegisterRoute(nameof(DispositivosPage), typeof(DispositivosPage));
         //Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
         /*Routing.RegisterRoute(nameof(LoginPageViewModel), typeof(LoginPageViewModel));*/

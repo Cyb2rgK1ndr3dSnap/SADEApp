@@ -7,9 +7,11 @@
     xmlns:Inicio="clr-namespace:AutomatizacionServicios.Views.Inicio"
     xmlns:startupPages="clr-namespace:AutomatizacionServicios.Views.startup"
     xmlns:dispositivosPages="clr-namespace:AutomatizacionServicios.Views.Dispositivos"
+    xmlns:copiasPages="clr-namespace:AutomatizacionServicios.Views.Copias"
     xmlns:controls="clr-namespace:AutomatizacionServicios.Controls"
     xmlns:viewModels="clr-namespace:AutomatizacionServicios.ViewModels"
     Shell.TitleColor="Black"
+    Shell.NavBarIsVisible="False"
     
     Shell.BackgroundColor="#512BD4"
     FlyoutBackgroundImage="purpink.jpg"

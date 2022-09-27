@@ -9,4 +9,9 @@ public partial class CopiasSeleccionPage : ContentPage
 		InitializeComponent();
 		this.BindingContext = viewModel;
 	}
+
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        base.OnNavigatedTo(args);
+    }
 }

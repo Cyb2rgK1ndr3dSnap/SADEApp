@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design"
+             x:Class="AutomatizacionServicios.Views.Copias.CopiasConfirmarPage"
+             Title="CopiasConfirmarPage"
+             
+             Shell.NavBarIsVisible="True"
+             Shell.FlyoutItemIsVisible="True"
+             Shell.FlyoutBehavior="Flyout"
+             >
+    <ScrollView HorizontalOptions="CenterAndExpand" Orientation="Vertical">
+        <ListView ItemsSource="{Binding LstConfirmaciones}"
+                  SelectedItem="{Binding SelectedPeticion}"
+                  ItemTapped="ListView_ItemTapped"
+                  >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+                            <Image Source="dotnet_bot.png" HeightRequest="50" WidthRequest="50"/>
+                            <Label Text="{Binding Tipo_usuario_id}"/>
+                            <Label Text="{Binding Cedula}"/>
+                            <Label Text="{Binding Nombre}" />
+                        </HorizontalStackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ScrollView>
+</ContentPage>

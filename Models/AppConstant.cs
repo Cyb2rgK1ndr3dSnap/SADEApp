@@ -23,7 +23,7 @@ namespace AutomatizacionServicios.Models
 
             AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
 
-            if (App.UserInfoDetails.tipo_usuario_id == "3")
+            if (App.UserInfoDetails.Tipo_usuario_id == "3")
             {
                 permissionDocument = false;
             }
@@ -88,7 +88,7 @@ namespace AutomatizacionServicios.Models
                                         Icon = "document.png",
                                         Title = "Copias e Impresiones",
                                         Route="CopiasImpresionesPage",
-                                        IsVisible = permissionDocument,
+                                        //IsVisible = permissionDocument,
                                         ContentTemplate = new DataTemplate(typeof(CopiasPage)),
                                     }
                                     ,
@@ -136,6 +136,8 @@ namespace AutomatizacionServicios.Models
                 },
             };
 
+            //Flyout que se le presenta al usuario al entrar y loguearse correctamente
+
             var flyoutItemP = new FlyoutItem()
             {
                 Route = "InicioPage",
@@ -165,20 +167,27 @@ namespace AutomatizacionServicios.Models
                         {
                             new ShellContent
                                     {
-                                        Icon = "document.png",
-                                        Title = "Copias e Impresiones",
+                                        FlyoutIcon = "document.png",
+                                        Title = "Peticiones",
                                         Route="CopiasImpresionesPage",
                                         //IsVisible = permissionDocument,
                                         ContentTemplate = new DataTemplate(typeof(CopiasPage)),
                                     },
                             new ShellContent
                                     {
-                                        Icon = "document.png",
-                                        Title = "Confirmar Copias",
-                                        //Route="CopiasImpresionesPage",
+                                        FlyoutIcon = "document.png",
+                                        Title = "Confirmarciones",
+                                        Route="CopiasConfirmarPage",
                                         //IsVisible = permissionDocument,
-                                        //ContentTemplate = new DataTemplate(typeof(CopiasPage)),
-                                    },
+                                        ContentTemplate = new DataTemplate(typeof(CopiasConfirmarPage)),
+                                        MenuItems =
+                                        {
+                                            new MenuItem
+                                            {
+                                                Text="ADD"
+                                            }
+                                        }
+                                    },/*
                             new ShellContent
                                     {
                                         Icon = "document.png",
@@ -194,7 +203,7 @@ namespace AutomatizacionServicios.Models
                                         //Route="CopiasImpresionesPage",
                                         //IsVisible = permissionDocument,
                                         //ContentTemplate = new DataTemplate(typeof(CopiasPage)),
-                                    },
+                                    },*/
                         }
                     },
                     new Tab
@@ -236,20 +245,6 @@ namespace AutomatizacionServicios.Models
             if (!AppShell.Current.Items.Contains(flyoutItemP))
                 {
                 AppShell.Current.Items.Add(flyoutItemP);
-                /*
-                AppShell.Current.Items.Add(flyoutItem);
-                
-                AppShell.Current.Items.Add(tabPrueba);
-
-                AppShell.Current.CurrentItem = tabPrueba;
-
-                AppShell.Current.FlyoutContent = tabPrueba;
-                
-                AppShell.Current.CurrentItem = tab;
-                */
-                
-
-                //AppShell.Current.FlyoutContent = tab;
 
                 if (DeviceInfo.Platform == DevicePlatform.WinUI)
                     {

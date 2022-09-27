@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace AutomatizacionServicios.Models
 {
-    public class LoginRequest
+    public class CopiaseImpresionesRequest
     {
-        public string Correo { get; set; }
+        public string IdFacultad { get; set; }
 
-        public string Contrasena { get; set; }
+        public string TipoUsuarioId { get; set; }
     }
 }

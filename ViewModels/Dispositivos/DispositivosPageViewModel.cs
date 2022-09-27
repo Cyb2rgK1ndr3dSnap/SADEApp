@@ -16,6 +16,8 @@ namespace AutomatizacionServicios.ViewModels.Dispositivos
         [ObservableProperty]
         private string _prueba2;
 
+
+
         public DispositivosPageViewModel(){
             
         }

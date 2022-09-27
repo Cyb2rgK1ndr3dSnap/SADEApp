@@ -1,7 +1,6 @@
 ﻿using AutomatizacionServicios.Models;
 using AutomatizacionServicios.Services;
 using AutomatizacionServicios.Views.Copias;
-using AutomatizacionServicios.Views.Inicio;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
@@ -13,13 +12,12 @@ using System.Threading.Tasks;
 
 namespace AutomatizacionServicios.ViewModels.Copias
 {
-    public partial class CopiasPageViewModel : BaseViewModel
+    public partial class CopiasConfirmarViewModel : BaseViewModel
     {
-
-        readonly LServices getPost = new LServices();
+        readonly IGetPost getPost = new LServices();
 
         #region Properties
-        public ObservableCollection<CopiaseImpresionesResponse> LstCopias { get; set; } = new ObservableCollection<CopiaseImpresionesResponse>();
+        public ObservableCollection<Usuarios> LstConfirmaciones { get; set; } = new ObservableCollection<Usuarios>();
 
         private Usuarios _selectedUsuarios;
 
@@ -34,11 +32,11 @@ namespace AutomatizacionServicios.ViewModels.Copias
         public Usuarios SelectedPeticion
         {
             get => _selectedPeticion;
-            set
+            set 
             {
                 //if (_selectedPeticion != value)
                 //{
-                SetProperty(ref _selectedPeticion, value);
+                    SetProperty(ref _selectedPeticion, value);
                 //}
 
                 //SelectItem(_selectedPeticion);
@@ -46,55 +44,54 @@ namespace AutomatizacionServicios.ViewModels.Copias
             }
         }
 
-        public CopiasPageViewModel()
+        #endregion
+
+        public CopiasConfirmarViewModel()
         {
-            AddServList();
+            AddUserList();
         }
 
-        private void AddServList()
+        private void AddUserList()
         {
-            LstCopias.Clear();
+            LstConfirmaciones.Clear();
             IsBusy = true;
             Task.Run(() =>
-            {
+            {   
                 //List<Usuarios> usuarios = await getPost.InfosSer();
-                List<CopiaseImpresionesResponse> copias = new List<CopiaseImpresionesResponse>();
+                List<Usuarios> usuarios = new List<Usuarios>();
                 //await Task.Delay(2000);                
                 Application.Current.Dispatcher.Dispatch(async () =>
                 {
                     try
                     {
-                        copias = await getPost.CopiaseImpreseionesSer("1", App.UserInfoDetails.Tipo_usuario_id);
+                        usuarios = await getPost.InfosSer();
                     }
                     catch (HttpRequestException)
                     {
-                        await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "No se ha podido actualizar el feed", "OK");
+                        await Application.Current.MainPage.DisplayAlert("Connection Problem 500","No se ha podido actualizar el feed","OK");
                     }
                     catch (WebException)
                     {
-                        await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "Error al conectarse", "OK");
+                        await Application.Current.MainPage.DisplayAlert("Connection Problem 500","Error al conectarse","OK");
                     }
 
                     await Task.Delay(2000);
 
-                    foreach (CopiaseImpresionesResponse usuar in copias)
+                    foreach (Usuarios usuar in usuarios)
                     {
-                        LstCopias.Add(usuar);
+                        LstConfirmaciones.Add(usuar);
                     }
                     IsBusy = false;
                 });
             }
             );
         }
-
-        #endregion
-
-        #region Commands
-        [RelayCommand]
-        async void Seleccion()
+        /*
+        async Task SelectItem(Usuarios data)
         {
-            await Shell.Current.GoToAsync($"{nameof(CopiasSeleccionPage)}",false);
-        }
-        #endregion
+            if (data != null)
+            await Shell.Current.GoToAsync($"{nameof(CopiasConfirmarSeleccionPage)}?IdSelect={data.Cedula}");
+        }*/
+        
     }
 }

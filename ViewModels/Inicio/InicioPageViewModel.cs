@@ -22,10 +22,10 @@ namespace AutomatizacionServicios.ViewModels.Inicio
         public InicioPageViewModel()
         {
             string userInfoDetailsStr = Preferences.Get(nameof(App.UserInfoDetails),"");
-            Nombre=App.UserInfoDetails.nombre;
-            Nombre += " " + App.UserInfoDetails.apellido;
-            Apellido = App.UserInfoDetails.apellido;
-            Id = App.UserInfoDetails.usuario_id.ToString();
+            Nombre=App.UserInfoDetails.Nombre;
+            Nombre += " " + App.UserInfoDetails.Apellido;
+            Apellido = App.UserInfoDetails.Apellido;
+            Id = App.UserInfoDetails.Usuario_id.ToString();
         }
            
     }

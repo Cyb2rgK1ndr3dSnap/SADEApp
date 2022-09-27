@@ -20,7 +20,7 @@ namespace AutomatizacionServicios.Services
 
             //client.BaseAddress = url;
 
-            LoginRequest loginRequest = new LoginRequest(){ correo = email, contrasena = password };
+            LoginRequest loginRequest = new LoginRequest(){ Correo = email, Contrasena = password };
 
             StringContent content = new StringContent(JsonConvert.SerializeObject(loginRequest),Encoding.UTF8,"application/json");
 

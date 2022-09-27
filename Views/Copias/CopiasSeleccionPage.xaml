@@ -5,6 +5,8 @@
              Title="CopiasSeleccionPage"
              Shell.FlyoutBehavior="Disabled"
              Shell.NavBarIsVisible="False"
+             xmlns:copiasPages="clr-namespace:AutomatizacionServicios.Views.Copias"
+             BackgroundColor="White"
              >
     <VerticalStackLayout
         Spacing="30"
@@ -18,27 +20,31 @@
                             <Border BackgroundColor="White" Stroke="white">
                                 <Image Source="document.png" HeightRequest="80" WidthRequest="60" HorizontalOptions="Center"/>
                             </Border>
-                            <StackLayout Orientation="Vertical" HorizontalOptions="Center">
-                                <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" HorizontalOptions="FillAndExpand" Margin="10,10,0,0" Padding="5">
-                                    <Label Text="{Binding User}" BackgroundColor="White"  TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" HeightRequest="25"/>
+                            <StackLayout Orientation="Vertical" HorizontalOptions="Center" Spacing="5" >
+                                <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" HorizontalOptions="FillAndExpand" Margin="10,10,0,0" >
+                                    <Label Text="{Binding User}" BackgroundColor="White"  TextColor="Black" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="5"/>
+                                </Border>
+
+                                <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" HorizontalOptions="FillAndExpand" Margin="10,10,0,0" >
+                                    <Label Text="{Binding SerSelect}" BackgroundColor="White"  TextColor="Black" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"  Padding="5"/>
                                 </Border>
                             </StackLayout>
                         </StackLayout>
                         <StackLayout Orientation="Vertical" Spacing="10">
                             <StackLayout Orientation="Horizontal">
-                                <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" WidthRequest="200" HorizontalOptions="FillAndExpand" Margin="0,10,0,0">
-                                    <Entry Text="{Binding Identificacion}" BackgroundColor="White"  TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Placeholder="Identificación" IsReadOnly="True"/>
+                                <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" HorizontalOptions="FillAndExpand" Margin="0,10,0,0">
+                                    <Label Text="{Binding Identificacion}" BackgroundColor="White" TextColor="Black" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="5"/>
                                 </Border>
-                                <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="45" WidthRequest="45" HorizontalOptions="End" Margin="10,10,0,0" Padding="5">
-                                    <ImageButton Source="camera.png" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,0,0" Command="{Binding Command}" />
+                                <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="45" WidthRequest="45" HorizontalOptions="End" Margin="10,10,0,0" Padding="0">
+                                    <ImageButton Source="camera.png" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,0,0" Command="{Binding ScannerIdCommand}" BackgroundColor="White"/>
                                 </Border>
                             </StackLayout>
-                            <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" HorizontalOptions="FillAndExpand" Margin="0,0,0,0">
-                                <Entry Text="{Binding MaterialCopiado}" BackgroundColor="White"  TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Placeholder="MaterialCopiado "/>
-                            </Border>
-                            <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" HorizontalOptions="FillAndExpand" Margin="0,0,0,0">
-                                <Entry Text="{Binding Cantidad}" BackgroundColor="White"  TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Placeholder="Cantidad"/>
-                            </Border>
+                                <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" HorizontalOptions="FillAndExpand" Margin="0,0,0,0">
+                                    <Entry Text="{Binding MaterialCopiado}" BackgroundColor="White" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Placeholder="MaterialCopiado "/>
+                                </Border>
+                                <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" HorizontalOptions="FillAndExpand" Margin="0,0,0,0">
+                                    <Entry Text="{Binding Cantidad}" BackgroundColor="White" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Placeholder="Cantidad"/>
+                                </Border>
                             <StackLayout Orientation="Horizontal" Spacing="10"  
                                         RadioButtonGroup.GroupName="{Binding GroupName}"
                                         RadioButtonGroup.SelectedValue="{Binding Selection}">
