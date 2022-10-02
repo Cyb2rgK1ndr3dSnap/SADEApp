@@ -27,6 +27,7 @@ public static class MauiProgram
         //return builder.Build();
         //builder.Services.AddSingleton<>();
         //View
+        builder.Services.AddTransient<RegisterPage>();
         builder.Services.AddSingleton<LoadingPage>();
         builder.Services.AddTransient<LoginPage>();
         builder.Services.AddSingleton<InicioPage>();
@@ -38,6 +39,7 @@ public static class MauiProgram
         builder.Services.AddTransient<CopiasConfirmarSeleccionPage>();
 
         //ViewModels Login
+        builder.Services.AddTransient<RegisterPageViewModel>();
         builder.Services.AddSingleton<LoadingPageViewModel>();
         builder.Services.AddTransient<LoginPageViewModel>();
         builder.Services.AddSingleton<InicioPageViewModel>();

@@ -18,7 +18,8 @@ namespace AutomatizacionServicios.ViewModels.Startup
     public partial class LoginPageViewModel : BaseViewModel
     {
         readonly ILoginRepository iLoginRepository = new LoginService();
-        readonly IGetPost getPost = new LServices();
+        //readonly IGetPost getPost = new LServices();
+        readonly LServices getPost = new LServices();
 
         [ObservableProperty]
         private string _email;
@@ -26,8 +27,14 @@ namespace AutomatizacionServicios.ViewModels.Startup
         [ObservableProperty]
         private string _password;
 
-
         #region Commands
+
+        [RelayCommand]
+        async void LoginP()
+        {
+            await Shell.Current.GoToAsync($"//{nameof(InicioPage)}");
+        }
+
         [RelayCommand]
         async void Login()
         {
@@ -77,9 +84,9 @@ namespace AutomatizacionServicios.ViewModels.Startup
 
 
         [RelayCommand]
-        async void RegistroPage()
+        async void RegisterPage()
         {
-            await Shell.Current.GoToAsync($"//{nameof(RegisterPage)}");
+            await Shell.Current.GoToAsync($"{nameof(RegisterPage)}");
         }
         #endregion
     }

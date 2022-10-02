@@ -5,6 +5,7 @@
              Title=""
              Shell.NavBarIsVisible="True"
              BackgroundColor="White"
+             Shell.PresentationMode="Animated"
              >
     <ContentPage.Resources>
         <Style x:Key="GridColorStyle" TargetType="Grid">
@@ -28,7 +29,9 @@
         <ToolbarItem Text="Save" />
     </ContentPage.ToolbarItems>
     <ScrollView HorizontalOptions="CenterAndExpand" Orientation="Vertical" Padding="20">
-        <ListView ItemsSource="{Binding LstCopias}"
+        <ListView IsEnabled="{Binding LstState}"
+                  ItemsSource="{Binding LstCopias}"
+                  SelectedItem="{Binding SelectedPeticion}"
                   ItemTapped="ListView_ItemTapped"
                   RowHeight="100"
                   >
@@ -57,10 +60,13 @@
                                     <Border BackgroundColor="Transparent" Padding="0" Stroke="black" StrokeShape="RoundRectangle 40,0,0,40">
                                     <Label HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Black" Opacity="0.4" Padding="10"/>
                                 </Border>
-                                <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
-                                    <Image Source="document.png" HeightRequest="40" WidthRequest="40"/>
-                                    <Label Text="{Binding Nombre}" Margin="10,10,10,10" FontAttributes="Bold" TextColor="White"/>
-                                </HorizontalStackLayout>
+                                    <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+                                        <Image Source="document.png" HeightRequest="40" WidthRequest="40"/>
+                                            <VerticalStackLayout >
+                                                <Label Text="{Binding Nombre}" Margin="10,10,0,0" FontAttributes="Bold" TextColor="White"/>
+                                                <Label Text="{Binding Costo}" Margin="10,0,0,0" FontAttributes="Bold" TextColor="White"/>
+                                            </VerticalStackLayout>
+                                    </HorizontalStackLayout>
                                 </Grid>
                             </Border>
                         </Grid>

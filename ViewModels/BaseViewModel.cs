@@ -18,6 +18,14 @@ namespace AutomatizacionServicios.ViewModels
         [ObservableProperty]
         private string _title;
 
+        [ObservableProperty]
+        private bool _lstState;
+
+        [ObservableProperty]
+        private bool _isRefreshing;
+
+        //[ObservableProperty]
+
         //[ObservableProperty] _isRefreshing
 
         /*

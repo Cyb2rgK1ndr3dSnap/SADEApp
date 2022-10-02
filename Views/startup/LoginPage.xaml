@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AutomatizacionServicios.Views.startup.LoginPage"
              xmlns:handlers="clr-namespace:AutomatizacionServicios.Handlers"
-             BackgroundColor="White"
+             BackgroundImageSource="portada3.png"
              Shell.NavBarIsVisible="False"
              >
     <VerticalStackLayout
@@ -21,15 +21,13 @@
         
             <StackLayout Orientation="Horizontal">
                 <Frame ZIndex="1" HasShadow="True" BorderColor="White" HeightRequest="56" WidthRequest="56"  CornerRadius="28" >
-                    <Image Source="user.png" HeightRequest="30" WidthRequest="30"/>
+                    <Image Source="user.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="Center" VerticalOptions="Center"/>
                 </Frame>
                 <Frame HeightRequest="45" Margin="-20,0,0,0" HasShadow="True" BorderColor="White" HorizontalOptions="FillAndExpand" Padding="0">
                     <Entry Margin="20,0,0,0" Text="{Binding Email}" Placeholder="Usuario" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Keyboard="Email" TextColor="Black"/>
                 </Frame>
             </StackLayout>
-        
 
-        
             <StackLayout Orientation="Horizontal">
                 <Frame ZIndex="1" HasShadow="True" BorderColor="White" HeightRequest="56" WidthRequest="56" CornerRadius="28" >
                     <Image Source="block.png" HeightRequest="30" WidthRequest="30"/>
@@ -39,7 +37,7 @@
                 </Frame>
             </StackLayout>
 
-        <Frame HasShadow="True" HeightRequest="50" WidthRequest="140" BorderColor="White" Padding="0">
+        <Frame HasShadow="True" HeightRequest="50" WidthRequest="140" BorderColor="Transparent" Padding="0" BackgroundColor="Transparent">
             <Button 
                     Text="Login"
                     TextColor="Black"
@@ -50,8 +48,8 @@
         </Frame>
             
         <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="Center">
-            <Label Text="No tienes cuenta?" TextColor="Gray" />
-            <Label Text="Regístrate aquí" TextColor="#50b3f2" />
+            <Label Text="No tienes cuenta?" TextColor="Black" />
+            <Button Text="Regístrate aquí" TextColor="#50b3f2" BackgroundColor="Transparent" BorderColor="Transparent" Command="{Binding RegisterPageCommand}" Margin="0,0,0,0" Padding="0"/>
         </StackLayout>
 
     </VerticalStackLayout>

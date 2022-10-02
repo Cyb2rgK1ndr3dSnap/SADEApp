@@ -19,5 +19,7 @@ namespace AutomatizacionServicios.Models
         public string Cedula { get; set; }
 
         public string Correo { get; set; }
+
+        public string Facultad_id { get; set; }
     }
 }

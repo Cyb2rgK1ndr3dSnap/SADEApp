@@ -4,9 +4,12 @@
              x:Class="AutomatizacionServicios.Views.startup.LoadingPage"
              Shell.NavBarIsVisible="False"
              Title="LoadingPage">
-    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-        <Image Source="dotnet_bot.png" HeightRequest="200" WidthRequest="200" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
-        
-        <Image Source="utp_logo.png" HeightRequest="120" WidthRequest="120" VerticalOptions="End" HorizontalOptions="Center"/>
-    </StackLayout>
+    <VerticalStackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Image Source="logosample.png" HeightRequest="200" WidthRequest="200" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+        </StackLayout>
+        <StackLayout VerticalOptions="End">
+            <Image Source="bannerlogo.png" HeightRequest="160" WidthRequest="160" VerticalOptions="End" HorizontalOptions="Center"/>
+        </StackLayout>
+    </VerticalStackLayout>
 </ContentPage>

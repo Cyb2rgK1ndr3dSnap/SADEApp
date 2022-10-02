@@ -2,6 +2,7 @@
 using AutomatizacionServicios.Services;
 using AutomatizacionServicios.Views.Copias;
 using AutomatizacionServicios.Views.Inicio;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
@@ -21,30 +22,34 @@ namespace AutomatizacionServicios.ViewModels.Copias
         #region Properties
         public ObservableCollection<CopiaseImpresionesResponse> LstCopias { get; set; } = new ObservableCollection<CopiaseImpresionesResponse>();
 
-        private Usuarios _selectedUsuarios;
+        private CopiaseImpresionesResponse _selectedUsuarios;
 
-        public Usuarios SelectedUsuarios
+        public CopiaseImpresionesResponse SelectedUsuarios
         {
             get => _selectedUsuarios;
             set => SetProperty(ref _selectedUsuarios, value);
         }
 
-        private Usuarios _selectedPeticion;
+        private CopiaseImpresionesResponse _selectedPeticion;
 
-        public Usuarios SelectedPeticion
+        public CopiaseImpresionesResponse SelectedPeticion
         {
             get => _selectedPeticion;
             set
             {
-                //if (_selectedPeticion != value)
-                //{
+                if (value != null)
+                {
+                //No se puede seleccionar elemento del Listview
+                LstState = false;
                 SetProperty(ref _selectedPeticion, value);
-                //}
-
-                //SelectItem(_selectedPeticion);
-
+                Seleccion();
+                }
+                
             }
         }
+
+        //[ObservableProperty]
+        //private bool lstState;
 
         public CopiasPageViewModel()
         {
@@ -64,7 +69,8 @@ namespace AutomatizacionServicios.ViewModels.Copias
                 {
                     try
                     {
-                        copias = await getPost.CopiaseImpreseionesSer("1", App.UserInfoDetails.Tipo_usuario_id);
+                        //##Traer en el objeto el número de facultad a la que pertenece el usuario
+                        copias = await getPost.CopiaseImpreseionesSer(App.UserInfoDetails.Facultad_id, App.UserInfoDetails.Tipo_usuario_id);
                     }
                     catch (HttpRequestException)
                     {
@@ -77,11 +83,12 @@ namespace AutomatizacionServicios.ViewModels.Copias
 
                     await Task.Delay(2000);
 
-                    foreach (CopiaseImpresionesResponse usuar in copias)
+                    foreach (CopiaseImpresionesResponse cop in copias)
                     {
-                        LstCopias.Add(usuar);
+                        LstCopias.Add(cop);
                     }
                     IsBusy = false;
+                    LstState = true;
                 });
             }
             );
@@ -90,10 +97,26 @@ namespace AutomatizacionServicios.ViewModels.Copias
         #endregion
 
         #region Commands
-        [RelayCommand]
-        async void Seleccion()
+        //[RelayCommand]
+        void Seleccion()
         {
-            await Shell.Current.GoToAsync($"{nameof(CopiasSeleccionPage)}",false);
+            //CopiaseImpresionesResponse copias = e.Item as CopiaseImpresionesResponse;
+            Task.Run(() =>
+            {
+                Application.Current.Dispatcher.Dispatch(async () =>
+                {
+                    await Shell.Current.GoToAsync($"{nameof(CopiasSeleccionPage)}",
+                    new Dictionary<string, object>
+                    {
+                        ["SerId"] = _selectedPeticion.Id,
+                        ["SerSelect"] = _selectedPeticion.Nombre,
+                        ["SerCosto"] = _selectedPeticion.Costo,
+                        ["SerColor"] = _selectedPeticion.Color
+                    });
+                    //Se puede seleccionar nuevamente un elementos del Listview
+                    LstState = true;
+                });
+            });
         }
         #endregion
     }

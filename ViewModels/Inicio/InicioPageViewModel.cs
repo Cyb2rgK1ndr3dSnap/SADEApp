@@ -21,7 +21,7 @@ namespace AutomatizacionServicios.ViewModels.Inicio
 
         public InicioPageViewModel()
         {
-            string userInfoDetailsStr = Preferences.Get(nameof(App.UserInfoDetails),"");
+            //string userInfoDetailsStr = Preferences.Get(nameof(App.UserInfoDetails),"");
             Nombre=App.UserInfoDetails.Nombre;
             Nombre += " " + App.UserInfoDetails.Apellido;
             Apellido = App.UserInfoDetails.Apellido;

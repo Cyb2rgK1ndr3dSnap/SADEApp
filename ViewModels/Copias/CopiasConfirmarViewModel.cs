@@ -14,7 +14,7 @@ namespace AutomatizacionServicios.ViewModels.Copias
 {
     public partial class CopiasConfirmarViewModel : BaseViewModel
     {
-        readonly IGetPost getPost = new LServices();
+        readonly LServices getPost = new LServices();
 
         #region Properties
         public ObservableCollection<Usuarios> LstConfirmaciones { get; set; } = new ObservableCollection<Usuarios>();

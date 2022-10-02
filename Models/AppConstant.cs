@@ -206,6 +206,7 @@ namespace AutomatizacionServicios.Models
                                     },*/
                         }
                     },
+                    /*
                     new Tab
                     {
                         Icon = "devices_icon.png",
@@ -232,6 +233,7 @@ namespace AutomatizacionServicios.Models
                                     }
                         }
                     },
+                    */
                 }
             };
             //DE QUÉ ES LA COPIA

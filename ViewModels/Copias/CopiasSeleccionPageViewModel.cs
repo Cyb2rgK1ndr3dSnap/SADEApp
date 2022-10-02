@@ -11,11 +11,9 @@ using System.Threading.Tasks;
 namespace AutomatizacionServicios.ViewModels.Copias
 {
     [QueryProperty(nameof(SerSelect), nameof(SerSelect))]
-    [QueryProperty(nameof(SerCorta), nameof(SerCorta))]
-    [QueryProperty(nameof(SerLarga), nameof(SerLarga))]
-    [QueryProperty(nameof(SerColor), nameof(SerColor))]
+    [QueryProperty(nameof(SerCosto), nameof(SerCosto))]
     [QueryProperty(nameof(SerId), nameof(SerId))]
-    //[QueryProperty(nameof(Objeto), nameof(Objeto))]
+    [QueryProperty(nameof(SerColor), nameof(SerColor))]
     public partial class CopiasSeleccionPageViewModel : BaseViewModel
     {
 
@@ -26,46 +24,44 @@ namespace AutomatizacionServicios.ViewModels.Copias
         public string serId;
 
         [ObservableProperty]
-        public bool serCorta;
+        public decimal serCosto;
 
         [ObservableProperty]
-        public bool serLarga;
+        public decimal serColor;
 
         [ObservableProperty]
-        public bool serColor;
+        private decimal precio;
+
+        [ObservableProperty]
+        private bool flag;
+
+        [ObservableProperty]
+        private string rdbSelection;
+
+        [ObservableProperty]
+        private string rdbTamano;
+
+        private string cantidad;
+
+        public string Cantidad
+        {
+            get => cantidad;
+            set
+            {
+                //Validaciones de una manera dinámica de que se calcule solo cuando sean números
+                value = value.ToCharArray().All(Char.IsDigit) ? value : "0";
+                value = String.IsNullOrWhiteSpace(value) ? "0" : value;
+                value = int.Parse(value) <= 10000 ? value : "10000";
+                SetProperty(ref cantidad, value);
+                Precio = int.Parse(Cantidad) < 0 ? 0 : (serCosto * int.Parse(Cantidad));
+            }
+        }
 
         [ObservableProperty]
         private string _user;
 
-        //[ObservableProperty]
-        /*private CopiaseImpresionesResponse objeto;
-        
-        public CopiaseImpresionesResponse Objeto
-        {
-            get => objeto;
-            set
-            {
-                var copiaseImpresionesResponse = new CopiaseImpresionesResponse();
-                //copiaseImpresionesResponse = JsonConvert.DeserializeObject(value);
-                copiaseImpresionesResponse = value;
-                SetProperty(ref objeto, copiaseImpresionesResponse);
-            }
-        }*/
-
         [ObservableProperty]
         private string _identificacion;
-        /*
-        public string User
-        {
-            get => _user;
-            set => SetProperty(ref _user, value);
-        }*/
-        /*
-        public string Identificacion
-        {
-            get => _identificacion;
-            set => SetProperty(ref _identificacion, value);
-        }*/
 
         public CopiasSeleccionPageViewModel()
         {
@@ -80,8 +76,18 @@ namespace AutomatizacionServicios.ViewModels.Copias
             Identificacion = "";
         }*/
 
+        
         [RelayCommand]
-        async void Volver() => await Shell.Current.GoToAsync("..");
+        async Task Realizar()
+        {
+            var a = RdbSelection;
+            var b = RdbTamano;
+            var c = RdbTamano;
+            //flag = RdbSelection;
+        }
+        
+        [RelayCommand]
+        async Task Cancelar() => await Shell.Current.GoToAsync("..");
         #endregion
     }
 }

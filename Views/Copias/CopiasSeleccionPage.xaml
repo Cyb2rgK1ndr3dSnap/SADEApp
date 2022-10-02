@@ -2,21 +2,23 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AutomatizacionServicios.Views.Copias.CopiasSeleccionPage"
-             Title="CopiasSeleccionPage"
              Shell.FlyoutBehavior="Disabled"
-             Shell.NavBarIsVisible="False"
-             xmlns:copiasPages="clr-namespace:AutomatizacionServicios.Views.Copias"
+             Shell.NavBarIsVisible="True"
              BackgroundColor="White"
+             Shell.PresentationMode="Animated"
+             Title="Petición"
              >
     <VerticalStackLayout
+        VerticalOptions="CenterAndExpand"
         Spacing="30"
-        Padding="20"
+        Padding="10"
         >
         <Border BackgroundColor="White" Padding="20" Stroke="black" StrokeShape="RoundRectangle 40,0,0,40">
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0">
                 <Grid Margin="10" Padding="0">
                     <StackLayout Orientation="Vertical" HorizontalOptions="Center">
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                        
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                             <Border BackgroundColor="White" Stroke="white">
                                 <Image Source="document.png" HeightRequest="80" WidthRequest="60" HorizontalOptions="Center"/>
                             </Border>
@@ -30,6 +32,7 @@
                                 </Border>
                             </StackLayout>
                         </StackLayout>
+                        
                         <StackLayout Orientation="Vertical" Spacing="10">
                             <StackLayout Orientation="Horizontal">
                                 <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" HorizontalOptions="FillAndExpand" Margin="0,10,0,0">
@@ -39,22 +42,38 @@
                                     <ImageButton Source="camera.png" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,0,0" Command="{Binding ScannerIdCommand}" BackgroundColor="White"/>
                                 </Border>
                             </StackLayout>
-                                <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" HorizontalOptions="FillAndExpand" Margin="0,0,0,0">
-                                    <Entry Text="{Binding MaterialCopiado}" BackgroundColor="White" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Placeholder="MaterialCopiado "/>
+
+                            <StackLayout Orientation="Vertical" Spacing="5" Padding="0" HorizontalOptions="FillAndExpand">
+                                <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+                                    <Entry Text="{Binding MaterialCopiado}" HeightRequest="35" WidthRequest="300" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Placeholder="MaterialCopiado " Margin="5,0,0,0"/>
                                 </Border>
-                                <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" HorizontalOptions="FillAndExpand" Margin="0,0,0,0">
-                                    <Entry Text="{Binding Cantidad}" BackgroundColor="White" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Placeholder="Cantidad"/>
-                                </Border>
-                            <StackLayout Orientation="Horizontal" Spacing="10"  
-                                        RadioButtonGroup.GroupName="{Binding GroupName}"
-                                        RadioButtonGroup.SelectedValue="{Binding Selection}">
-                                <RadioButton Content="C" Value="Corta"/>
-                                <RadioButton Content="L" Value="Larga"/>
                             </StackLayout>
-                            <StackLayout Orientation="Horizontal" Spacing="2">
+                            
+                            <StackLayout Orientation="Horizontal" Spacing="0" Padding="0" HorizontalOptions="FillAndExpand">
+                                <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+                                    <Entry Text="{Binding Cantidad}" TextColor="Black" HorizontalOptions="FillAndExpand" HeightRequest="35" Placeholder="Cantidad" Keyboard="Numeric" MaxLength="4" Margin="5,0,0,0"/>
+                                </Border>
+                                <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+                                    <Entry Text="{Binding Precio}" TextColor="Black" HorizontalOptions="FillAndExpand" HeightRequest="35"  Placeholder="Precio" IsReadOnly="True" Margin="5,0,0,0" />
+                                </Border>
+                            </StackLayout>
+                            
+                            <StackLayout Orientation="Horizontal" Spacing="0" Padding="0" HorizontalOptions="FillAndExpand">
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox IsChecked="{Binding SerColor}" Margin="0,0,0,0" Color="Green" IsEnabled="False"/>
+                                    <Label Text="A color" VerticalOptions="Center" Margin="0,0,0,0" HorizontalOptions="FillAndExpand" Padding="2" TextColor="Black"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" Margin="0,0,0,0" Spacing="0" RadioButtonGroup.GroupName="Hojas" RadioButtonGroup.SelectedValue="{Binding RdbSelection}">
+                                    <RadioButton Content="Corta" Value="Corta" TextColor="Black" IsChecked="true" RadioButtonGroup.GroupName="{Binding RdbTamano}" GroupName="Hojas" RadioButtonGroup.SelectedValue="{Binding RdbSelection}" />
+                                    <RadioButton Content="Larga" Value="Larga" TextColor="Black" RadioButtonGroup.GroupName="{Binding RdbTamano}" GroupName="Hojas" RadioButtonGroup.SelectedValue="{Binding RdbSelection}"/>
+                                    <Picker />
+                                </StackLayout>
+                            </StackLayout>
+                            
+                            <StackLayout Orientation="Horizontal" Spacing="2" HorizontalOptions="CenterAndExpand">
                                 <Frame HasShadow="True" HeightRequest="50" WidthRequest="140" BorderColor="Transparent" Padding="0" BackgroundColor="Transparent">
                                     <Button
-                                        Command="{Binding Command}"
+                                        Command="{Binding RealizarCommand}"
                                         Text="Realizar Petición"
                                         VerticalOptions="Center"
                                         HorizontalOptions="CenterAndExpand"
@@ -65,7 +84,7 @@
                                 </Frame>
                                 <Frame HasShadow="True" HeightRequest="50" WidthRequest="140" BorderColor="Transparent" Padding="0" BackgroundColor="Transparent">
                                     <Button
-                                        Command="{Binding VolverCommand}"
+                                        Command="{Binding CancelarCommand}"
                                         Text="Cancelar"
                                         VerticalOptions="Center"
                                         HorizontalOptions="CenterAndExpand"

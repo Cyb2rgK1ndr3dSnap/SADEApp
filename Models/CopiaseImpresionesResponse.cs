@@ -12,10 +12,8 @@ namespace AutomatizacionServicios.Models
 
         public string Nombre { get; set; }
 
-        public int Corta { get; set; }
+        public decimal Costo { get; set; }
 
-        public int Larga { get; set; }
-
-        public int Color { get; set; }
+        public bool Color { get; set; }
     }
 }

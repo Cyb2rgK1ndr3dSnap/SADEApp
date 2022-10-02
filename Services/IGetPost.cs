@@ -44,9 +44,9 @@ namespace AutomatizacionServicios.Services
             }
         }
 
-        Task<LoginResponse> LoginSer(string email, string password);
+        //Task<LoginResponse> LoginSer(string email, string password);
 
-        Task<List<Usuarios>> InfosSer();
+        //Task<List<Usuarios>> InfosSer();
 
         //Task<List<CopiaseImpresionesResponse>> CopiaseImpreseionesSer(string idFac, string tipoUsuario);
     }
