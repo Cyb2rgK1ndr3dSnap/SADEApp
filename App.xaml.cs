@@ -1,5 +1,5 @@
 ﻿using AutomatizacionServicios.Handlers;
-using AutomatizacionServicios.Models;
+using AutomatizacionServicios.Models.Startup;
 using Microsoft.Maui.Platform;
 
 namespace AutomatizacionServicios;

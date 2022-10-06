@@ -1,4 +1,5 @@
 ﻿using AutomatizacionServicios.Models;
+using AutomatizacionServicios.Models.CopiasEImpresiones;
 using AutomatizacionServicios.Services;
 using AutomatizacionServicios.Views.Copias;
 using CommunityToolkit.Mvvm.Input;
@@ -14,10 +15,10 @@ namespace AutomatizacionServicios.ViewModels.Copias
 {
     public partial class CopiasConfirmarViewModel : BaseViewModel
     {
-        readonly LServices getPost = new LServices();
+        readonly CService getPost = new CService();
 
         #region Properties
-        public ObservableCollection<Usuarios> LstConfirmaciones { get; set; } = new ObservableCollection<Usuarios>();
+        public ObservableCollection<CopiaseImpresionesRegistrosResponse> LstRegistros { get; set; } = new ObservableCollection<CopiaseImpresionesRegistrosResponse>();
 
         private Usuarios _selectedUsuarios;
 
@@ -27,16 +28,16 @@ namespace AutomatizacionServicios.ViewModels.Copias
             set => SetProperty(ref _selectedUsuarios, value);
         }
 
-        private Usuarios _selectedPeticion;
+        private Usuarios _selectedRegistros;
 
-        public Usuarios SelectedPeticion
+        public Usuarios SelectedRegistros
         {
-            get => _selectedPeticion;
+            get => _selectedRegistros;
             set 
             {
                 //if (_selectedPeticion != value)
                 //{
-                    SetProperty(ref _selectedPeticion, value);
+                    SetProperty(ref _selectedRegistros, value);
                 //}
 
                 //SelectItem(_selectedPeticion);
@@ -53,18 +54,26 @@ namespace AutomatizacionServicios.ViewModels.Copias
 
         private void AddUserList()
         {
-            LstConfirmaciones.Clear();
+            LstRegistros.Clear();
             IsBusy = true;
             Task.Run(() =>
             {   
                 //List<Usuarios> usuarios = await getPost.InfosSer();
-                List<Usuarios> usuarios = new List<Usuarios>();
+                List<CopiaseImpresionesRegistrosResponse> registros = new List<CopiaseImpresionesRegistrosResponse>();
                 //await Task.Delay(2000);                
                 Application.Current.Dispatcher.Dispatch(async () =>
                 {
                     try
                     {
-                        usuarios = await getPost.InfosSer();
+                        registros = await getPost.CopiaseImpreseionesRegistrosSrv(App.UserInfoDetails.Facultad_id,App.UserInfoDetails.Usuario_id);
+
+                        await Task.Delay(2000);
+
+                        foreach (CopiaseImpresionesRegistrosResponse registro in registros)
+                        {
+                            LstRegistros.Add(registro);
+                        }
+                        IsBusy = false;
                     }
                     catch (HttpRequestException)
                     {
@@ -74,14 +83,6 @@ namespace AutomatizacionServicios.ViewModels.Copias
                     {
                         await Application.Current.MainPage.DisplayAlert("Connection Problem 500","Error al conectarse","OK");
                     }
-
-                    await Task.Delay(2000);
-
-                    foreach (Usuarios usuar in usuarios)
-                    {
-                        LstConfirmaciones.Add(usuar);
-                    }
-                    IsBusy = false;
                 });
             }
             );

@@ -1,5 +1,6 @@
 ﻿using AutomatizacionServicios.Controls;
 using AutomatizacionServicios.Models;
+using AutomatizacionServicios.Models.Startup;
 using AutomatizacionServicios.Services;
 using AutomatizacionServicios.Views.Inicio;
 using AutomatizacionServicios.Views.startup;
@@ -45,13 +46,13 @@ namespace AutomatizacionServicios.ViewModels.Startup
                     //NO BORRAR ES PARA PRUEBA
                     //LoginResponse loginResponse = await iLoginRepository.Login(Email, Password);
                     LoginResponse loginResponse = await getPost.LoginSer(Email,Password);
-                    Email = "";
-                    Password = "";
+                    //Email = "";
+                    //Password = "";
                     //App.UserInfo = await iLoginRepository.Login(Email, Password);
 
                     if (loginResponse != null)
                     {
-
+                        Email = "";
                         if (Preferences.ContainsKey(nameof(App.UserInfoDetails)))
                         {
                             Preferences.Remove(nameof(App.UserInfoDetails));
@@ -63,6 +64,7 @@ namespace AutomatizacionServicios.ViewModels.Startup
                     }
                     else
                     {
+                        Password = "";
                         await Application.Current.MainPage.DisplayAlert("Warning", "usuario o contraseña incorrectos", "OK");
                     }
                 }
@@ -73,11 +75,13 @@ namespace AutomatizacionServicios.ViewModels.Startup
             }
             catch (HttpRequestException)
             {
+                Password = "";
                 await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "Sin conexión a internet", "OK");
             }
             catch (WebException)
             {
-                await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "Error al conectarse", "OK");
+                Password = "";
+                await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "Problemas al cargar el feed", "OK");
             }
         }
         

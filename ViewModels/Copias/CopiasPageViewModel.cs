@@ -1,4 +1,4 @@
-﻿using AutomatizacionServicios.Models;
+﻿using AutomatizacionServicios.Models.CopiasEImpresiones;
 using AutomatizacionServicios.Services;
 using AutomatizacionServicios.Views.Copias;
 using AutomatizacionServicios.Views.Inicio;
@@ -17,7 +17,7 @@ namespace AutomatizacionServicios.ViewModels.Copias
     public partial class CopiasPageViewModel : BaseViewModel
     {
 
-        readonly LServices getPost = new LServices();
+        readonly CService getPost = new CService();
 
         #region Properties
         public ObservableCollection<CopiaseImpresionesResponse> LstCopias { get; set; } = new ObservableCollection<CopiaseImpresionesResponse>();
@@ -70,7 +70,7 @@ namespace AutomatizacionServicios.ViewModels.Copias
                     try
                     {
                         //##Traer en el objeto el número de facultad a la que pertenece el usuario
-                        copias = await getPost.CopiaseImpreseionesSer(App.UserInfoDetails.Facultad_id, App.UserInfoDetails.Tipo_usuario_id);
+                        copias = await getPost.CopiaseImpreseionesSrv(App.UserInfoDetails.Facultad_id, App.UserInfoDetails.Tipo_usuario_id);
                     }
                     catch (HttpRequestException)
                     {
@@ -100,7 +100,6 @@ namespace AutomatizacionServicios.ViewModels.Copias
         //[RelayCommand]
         void Seleccion()
         {
-            //CopiaseImpresionesResponse copias = e.Item as CopiaseImpresionesResponse;
             Task.Run(() =>
             {
                 Application.Current.Dispatcher.Dispatch(async () =>

@@ -4,7 +4,7 @@
              x:Class="AutomatizacionServicios.Views.Copias.CopiasSeleccionPage"
              Shell.FlyoutBehavior="Disabled"
              Shell.NavBarIsVisible="True"
-             BackgroundColor="White"
+             BackgroundColor="Gray"
              Shell.PresentationMode="Animated"
              Title="Petición"
              >
@@ -51,26 +51,32 @@
                             
                             <StackLayout Orientation="Horizontal" Spacing="0" Padding="0" HorizontalOptions="FillAndExpand">
                                 <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
-                                    <Entry Text="{Binding Cantidad}" TextColor="Black" HorizontalOptions="FillAndExpand" HeightRequest="35" Placeholder="Cantidad" Keyboard="Numeric" MaxLength="4" Margin="5,0,0,0"/>
+                                    <Entry Text="{Binding Cantidad}" TextColor="Black" HorizontalOptions="FillAndExpand" HeightRequest="35" Placeholder="Cantidad" Keyboard="Numeric" MaxLength="4" Margin="5,0,0,0" />
                                 </Border>
                                 <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
                                     <Entry Text="{Binding Precio}" TextColor="Black" HorizontalOptions="FillAndExpand" HeightRequest="35"  Placeholder="Precio" IsReadOnly="True" Margin="5,0,0,0" />
                                 </Border>
                             </StackLayout>
                             
-                            <StackLayout Orientation="Horizontal" Spacing="0" Padding="0" HorizontalOptions="FillAndExpand">
+                            <StackLayout Orientation="Horizontal" Spacing="30" Padding="0" HorizontalOptions="FillAndExpand">
+                                <StackLayout Orientation="Horizontal" Margin="0,0,0,0" Spacing="0">
+                                    <Border Stroke="transparent" StrokeShape="RoundRectangle 20,20,20,20"  BackgroundColor="BlueViolet" Padding="2">
+                                        <Picker Title="--Seleccione tipo de hoja--" ItemsSource="{Binding PkrHojas}" ItemDisplayBinding="{Binding Nombre}" SelectedItem="{Binding SelectedItem}" TextColor="Black" TitleColor="Black" HorizontalTextAlignment="Center"/>
+                                    </Border>
+                                </StackLayout>
                                 <StackLayout Orientation="Horizontal">
                                     <CheckBox IsChecked="{Binding SerColor}" Margin="0,0,0,0" Color="Green" IsEnabled="False"/>
                                     <Label Text="A color" VerticalOptions="Center" Margin="0,0,0,0" HorizontalOptions="FillAndExpand" Padding="2" TextColor="Black"/>
                                 </StackLayout>
-                                <StackLayout Orientation="Horizontal" Margin="0,0,0,0" Spacing="0" RadioButtonGroup.GroupName="Hojas" RadioButtonGroup.SelectedValue="{Binding RdbSelection}">
-                                    <RadioButton Content="Corta" Value="Corta" TextColor="Black" IsChecked="true" RadioButtonGroup.GroupName="{Binding RdbTamano}" GroupName="Hojas" RadioButtonGroup.SelectedValue="{Binding RdbSelection}" />
-                                    <RadioButton Content="Larga" Value="Larga" TextColor="Black" RadioButtonGroup.GroupName="{Binding RdbTamano}" GroupName="Hojas" RadioButtonGroup.SelectedValue="{Binding RdbSelection}"/>
-                                    <Picker />
-                                </StackLayout>
                             </StackLayout>
                             
-                            <StackLayout Orientation="Horizontal" Spacing="2" HorizontalOptions="CenterAndExpand">
+                            <StackLayout Orientation="Horizontal" Spacing="0" Padding="0" HorizontalOptions="FillAndExpand">
+                                <StackLayout Orientation="Horizontal" >
+                                    <Label Text="{Binding Disponible}" VerticalOptions="Center" Margin="25,0,0,0" HorizontalOptions="FillAndExpand" Padding="2" TextColor="Black"/>
+                                </StackLayout>
+                             </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Spacing="2" HorizontalOptions="CenterAndExpand">
                                 <Frame HasShadow="True" HeightRequest="50" WidthRequest="140" BorderColor="Transparent" Padding="0" BackgroundColor="Transparent">
                                     <Button
                                         Command="{Binding RealizarCommand}"
@@ -78,7 +84,7 @@
                                         VerticalOptions="Center"
                                         HorizontalOptions="CenterAndExpand"
                                         CornerRadius="20"
-                                        BackgroundColor="Green"
+                                        BackgroundColor="ForestGreen"
                                         >
                                     </Button>
                                 </Frame>

@@ -3,25 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design"
              x:Class="AutomatizacionServicios.Views.Copias.CopiasConfirmarPage"
              Title="CopiasConfirmarPage"
-             
+             BackgroundColor="White"
              Shell.NavBarIsVisible="True"
              Shell.FlyoutItemIsVisible="True"
              Shell.FlyoutBehavior="Flyout"
              >
     <ScrollView HorizontalOptions="CenterAndExpand" Orientation="Vertical">
-        <ListView ItemsSource="{Binding LstConfirmaciones}"
-                  SelectedItem="{Binding SelectedPeticion}"
+        <ListView ItemsSource="{Binding LstRegistros}"
+                  SelectedItem="{Binding SelectedRegistro}"
                   ItemTapped="ListView_ItemTapped"
+                  SeparatorColor="Black"
+                  RowHeight="180"
                   >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
-                            <Image Source="dotnet_bot.png" HeightRequest="50" WidthRequest="50"/>
-                            <Label Text="{Binding Tipo_usuario_id}"/>
-                            <Label Text="{Binding Cedula}"/>
-                            <Label Text="{Binding Nombre}" />
-                        </HorizontalStackLayout>
+                        <Grid Style="{StaticResource GridColorStyle}">
+                            <Border BackgroundColor="White" Padding="5" Stroke="black" StrokeShape="RoundRectangle 40,0,0,40" Margin="10,10,10,10" HeightRequest="140">
+                                <Grid HeightRequest="130" >
+                                    <VerticalStackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Margin="20,10,10,20">
+                                        <Label Text="{Binding Id}" TextColor="Black"/>
+                                        <Label Text="{Binding Usuario_Id}" TextColor="Black"/>
+                                        <Label Text="{Binding Nombre}" TextColor="Black"/>
+                                        <Label Text="{Binding Gastado}" TextColor="Black"/>
+                                        <Label Text="{Binding Pagado}" TextColor="Black"/>
+                                        <Label Text="{Binding Estado}" TextColor="Black"/>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -1,4 +1,4 @@
-﻿using AutomatizacionServicios.Models;
+﻿using AutomatizacionServicios.Models.Startup;
 using System;
 using System.Collections.Generic;
 using System.Linq;

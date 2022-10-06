@@ -58,23 +58,21 @@
                             <Border BackgroundColor="White" Padding="5" Stroke="black" StrokeShape="RoundRectangle 40,0,0,40" Margin="10,10,10,10" HeightRequest="70">
                                 <Grid>
                                     <Border BackgroundColor="Transparent" Padding="0" Stroke="black" StrokeShape="RoundRectangle 40,0,0,40">
-                                    <Label HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Black" Opacity="0.4" Padding="10"/>
-                                </Border>
+                                        <Label HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Black" Opacity="0.4" Padding="10"/>
+                                    </Border>
                                     <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
                                         <Image Source="document.png" HeightRequest="40" WidthRequest="40"/>
-                                            <VerticalStackLayout >
-                                                <Label Text="{Binding Nombre}" Margin="10,10,0,0" FontAttributes="Bold" TextColor="White"/>
-                                                <Label Text="{Binding Costo}" Margin="10,0,0,0" FontAttributes="Bold" TextColor="White"/>
-                                            </VerticalStackLayout>
+                                        <VerticalStackLayout >
+                                            <Label Text="{Binding Nombre}" Margin="10,10,0,0" FontAttributes="Bold" TextColor="White"/>
+                                            <Label Text="{Binding Costo}" Margin="10,0,0,0" FontAttributes="Bold" TextColor="White"/>
+                                        </VerticalStackLayout>
                                     </HorizontalStackLayout>
                                 </Grid>
                             </Border>
                         </Grid>
-                        
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
     </ScrollView>
-
 </ContentPage>
