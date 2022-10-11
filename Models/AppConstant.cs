@@ -171,7 +171,14 @@ namespace AutomatizacionServicios.Models
                                         Title = "Peticiones",
                                         Route="CopiasImpresionesPage",
                                         //IsVisible = permissionDocument,
-                                        ContentTemplate = new DataTemplate(typeof(CopiasPage)),
+                                        ContentTemplate = new DataTemplate(typeof(CopiasPage)),      
+                                        MenuItems =
+                                        {
+                                            new MenuItem
+                                            {
+                                                Text="ADDITEM"
+                                            }
+                                        }
                                     },
                             new ShellContent
                                     {
@@ -179,14 +186,7 @@ namespace AutomatizacionServicios.Models
                                         Title = "Confirmarciones",
                                         Route="CopiasConfirmarPage",
                                         //IsVisible = permissionDocument,
-                                        ContentTemplate = new DataTemplate(typeof(CopiasConfirmarPage)),
-                                        MenuItems =
-                                        {
-                                            new MenuItem
-                                            {
-                                                Text="ADD"
-                                            }
-                                        }
+                                        ContentTemplate = new DataTemplate(typeof(CopiasConfirmarPage))
                                     },/*
                             new ShellContent
                                     {

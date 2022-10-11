@@ -14,8 +14,6 @@ public partial class CopiasPage : ContentPage
 
 	private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
 	{
-		//
 		((ListView)sender).SelectedItem = null;
-        //((ListView)sender).IsEnabled = false;
     }
 }

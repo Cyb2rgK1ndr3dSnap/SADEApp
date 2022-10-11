@@ -8,33 +8,73 @@
              Shell.FlyoutItemIsVisible="True"
              Shell.FlyoutBehavior="Flyout"
              >
-    <ScrollView HorizontalOptions="CenterAndExpand" Orientation="Vertical">
-        <ListView ItemsSource="{Binding LstRegistros}"
+    <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+        <StackLayout Orientation="Vertical" Padding="0">
+            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="End" Padding="10">
+                <ActivityIndicator IsRunning="True" IsVisible="{Binding IsBusy}" Color="BlueViolet"/>
+                <Label Margin="0,10,0,10" Text="Servicio de Copias e Impresiones/Peticiones" FontSize="12" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center"/>
+            </StackLayout>
+            <ScrollView HorizontalOptions="CenterAndExpand" Orientation="Vertical" VerticalOptions="FillAndExpand">
+                <ListView ItemsSource="{Binding LstRegistros}"
                   SelectedItem="{Binding SelectedRegistro}"
                   ItemTapped="ListView_ItemTapped"
                   SeparatorColor="Black"
-                  RowHeight="180"
+                  HasUnevenRows="True"
                   >
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid Style="{StaticResource GridColorStyle}">
-                            <Border BackgroundColor="White" Padding="5" Stroke="black" StrokeShape="RoundRectangle 40,0,0,40" Margin="10,10,10,10" HeightRequest="140">
-                                <Grid HeightRequest="130" >
-                                    <VerticalStackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Margin="20,10,10,20">
-                                        <Label Text="{Binding Id}" TextColor="Black"/>
-                                        <Label Text="{Binding Usuario_Id}" TextColor="Black"/>
-                                        <Label Text="{Binding Nombre}" TextColor="Black"/>
-                                        <Label Text="{Binding Gastado}" TextColor="Black"/>
-                                        <Label Text="{Binding Pagado}" TextColor="Black"/>
-                                        <Label Text="{Binding Estado}" TextColor="Black"/>
-                                    </VerticalStackLayout>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Border BackgroundColor="#b6e8ff" Padding="5" Stroke="black" StrokeShape="RoundRectangle 40,0,0,40" Margin="10,10,10,10" VerticalOptions="FillAndExpand">
+                                        <Grid >
+                                            <VerticalStackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Margin="20,10,10,20" Spacing="5">
+                                                <StackLayout Orientation="Horizontal" Spacing="5">
+                                                    <Label Text="Tarea Realizado:" TextColor="Black"/>
+                                                    <Label Text="{Binding StatePrueba}" TextColor="Black"/>
+                                                    <ImageButton Source="{Binding StateImage}" Command="{Binding RealizadoCommand}" HeightRequest="20" WidthRequest="20"/>
+                                                </StackLayout>
+                                                <StackLayout Orientation="Horizontal" Spacing="5">
+                                                    <Label Text="ID Petición:" TextColor="Black"/>
+                                                    <Label Text="{Binding Id}" TextColor="Black"/>
+                                                    <Label Text="ID Usuario:" TextColor="Black"/>
+                                                    <Label Text="{Binding Usuario_Id}" TextColor="Black"/>
+                                                </StackLayout>
+                                                <StackLayout Orientation="Horizontal" Spacing="15">
+                                                    <Label Text="Material:" TextColor="Black"/>
+                                                    <Label Text="{Binding Matnombre}" TextColor="Black"/>
+                                                    <Label Text="Gastada:" TextColor="Black"/>
+                                                    <Label Text="{Binding Gastado}" TextColor="Black"/>
+                                                </StackLayout>
+                                                <StackLayout Orientation="Horizontal" Spacing="15" HorizontalOptions="CenterAndExpand">
+                                                    <Border BackgroundColor="Red" Padding="0" Stroke="black" StrokeShape="RoundRectangle 20,20,20,20" HorizontalOptions="FillAndExpand">
+                                                        <Label Text="{Binding Pagado}" TextColor="Black" HorizontalOptions="CenterAndExpand"/>
+                                                    </Border>
+                                                    <Border BackgroundColor="Green" Padding="0" Stroke="black" StrokeShape="RoundRectangle 20,20,20,20" HorizontalOptions="FillAndExpand">
+                                                        <Label Text="{Binding Estado}" TextColor="Black" HorizontalOptions="CenterAndExpand"/>
+                                                    </Border>
+                                                </StackLayout>
+                                                <StackLayout Orientation="Horizontal" Spacing="15" HorizontalOptions="CenterAndExpand">
+                                                    <Button BackgroundColor="Green"
+                                                    Text="Confirmar petición"
+                                                    Command="{Binding ConfirmCommand}"
+                                                    HorizontalOptions="CenterAndExpand">
+                                                    </Button>
+                                                    <Button BackgroundColor="Red"
+                                                    Text="Cancelar petición"
+                                                    Command="{Binding CancelarCommand}"
+                                                    HorizontalOptions="CenterAndExpand">
+                                                    </Button>
+                                                </StackLayout>
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </Border>
                                 </Grid>
-                            </Border>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </ScrollView>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </ScrollView>
+        </StackLayout>
+    </RefreshView>
 </ContentPage>

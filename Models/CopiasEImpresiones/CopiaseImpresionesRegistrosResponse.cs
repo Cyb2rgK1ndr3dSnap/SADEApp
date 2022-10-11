@@ -22,8 +22,12 @@ namespace AutomatizacionServicios.Models.CopiasEImpresiones
 
         public string Precio { get; set; }
 
+        public string Tarea { get; set; }
+
         public string Pagado { get; set; }
 
         public string Estado { get; set; }
+
+        public string StateImage { get; set; }
     }
 }

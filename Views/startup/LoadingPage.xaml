@@ -3,13 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AutomatizacionServicios.Views.startup.LoadingPage"
              Shell.NavBarIsVisible="False"
-             Title="LoadingPage">
-    <VerticalStackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-        <StackLayout VerticalOptions="CenterAndExpand">
-            <Image Source="logosample.png" HeightRequest="200" WidthRequest="200" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
-        </StackLayout>
-        <StackLayout VerticalOptions="End">
-            <Image Source="bannerlogo.png" HeightRequest="160" WidthRequest="160" VerticalOptions="End" HorizontalOptions="Center"/>
-        </StackLayout>
-    </VerticalStackLayout>
+             BackgroundColor="Black"
+             Title="LoadingPage"
+             >
+    <StackLayout HorizontalOptions="Fill" VerticalOptions="CenterAndExpand" Orientation="Vertical">
+        <Grid VerticalOptions="CenterAndExpand">
+            <StackLayout VerticalOptions="CenterAndExpand">
+                <Image Source="logosample.png" HeightRequest="200" WidthRequest="200" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+        </Grid>
+        <Grid VerticalOptions="EndAndExpand">
+            <StackLayout VerticalOptions="EndAndExpand">
+                <Image Source="bannerlogo.png" HeightRequest="160" WidthRequest="160" VerticalOptions="End" HorizontalOptions="Center"/>
+            </StackLayout>
+        </Grid>
+    </StackLayout>
 </ContentPage>

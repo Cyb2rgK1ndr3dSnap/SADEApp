@@ -45,7 +45,7 @@
 
                             <StackLayout Orientation="Vertical" Spacing="5" Padding="0" HorizontalOptions="FillAndExpand">
                                 <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" HorizontalOptions="FillAndExpand" BackgroundColor="White">
-                                    <Entry Text="{Binding MaterialCopiado}" HeightRequest="35" WidthRequest="300" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Placeholder="MaterialCopiado " Margin="5,0,0,0"/>
+                                    <Entry Text="{Binding MaterialCopiado}" HeightRequest="35" WidthRequest="300" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Placeholder="MaterialCopiado " Margin="5,0,0,0" MaxLength="100"/>
                                 </Border>
                             </StackLayout>
                             

@@ -109,4 +109,10 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Models\Materiales\" />
+	  <Folder Include="ViewModels\Materiales\" />
+	  <Folder Include="Views\Materiales\" />
+	</ItemGroup>
+
 </Project>

@@ -2,6 +2,7 @@
 using AutomatizacionServicios.Models.CopiasEImpresiones;
 using AutomatizacionServicios.Services;
 using AutomatizacionServicios.Views.Copias;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
@@ -20,24 +21,16 @@ namespace AutomatizacionServicios.ViewModels.Copias
         #region Properties
         public ObservableCollection<CopiaseImpresionesRegistrosResponse> LstRegistros { get; set; } = new ObservableCollection<CopiaseImpresionesRegistrosResponse>();
 
-        private Usuarios _selectedUsuarios;
+        private CopiaseImpresionesRegistrosResponse _selectedRegistro;
 
-        public Usuarios SelectedUsuarios
+        public CopiaseImpresionesRegistrosResponse SelectedRegistro
         {
-            get => _selectedUsuarios;
-            set => SetProperty(ref _selectedUsuarios, value);
-        }
-
-        private Usuarios _selectedRegistros;
-
-        public Usuarios SelectedRegistros
-        {
-            get => _selectedRegistros;
+            get => _selectedRegistro;
             set 
             {
                 //if (_selectedPeticion != value)
                 //{
-                    SetProperty(ref _selectedRegistros, value);
+                    SetProperty(ref _selectedRegistro, value);
                 //}
 
                 //SelectItem(_selectedPeticion);
@@ -47,16 +40,22 @@ namespace AutomatizacionServicios.ViewModels.Copias
 
         #endregion
 
+        [ObservableProperty]
+        private string stateImage;
+
+        [ObservableProperty]
+        private string statePrueba;
+
         public CopiasConfirmarViewModel()
         {
             AddUserList();
         }
 
-        private void AddUserList()
+        async Task AddUserList()
         {
             LstRegistros.Clear();
             IsBusy = true;
-            Task.Run(() =>
+            await Task.Run(() =>
             {   
                 //List<Usuarios> usuarios = await getPost.InfosSer();
                 List<CopiaseImpresionesRegistrosResponse> registros = new List<CopiaseImpresionesRegistrosResponse>();
@@ -67,13 +66,30 @@ namespace AutomatizacionServicios.ViewModels.Copias
                     {
                         registros = await getPost.CopiaseImpreseionesRegistrosSrv(App.UserInfoDetails.Facultad_id,App.UserInfoDetails.Usuario_id);
 
-                        await Task.Delay(2000);
+                        await Task.Delay(500);
 
-                        foreach (CopiaseImpresionesRegistrosResponse registro in registros)
+                        try
                         {
-                            LstRegistros.Add(registro);
+                            foreach (CopiaseImpresionesRegistrosResponse registro in registros)
+                            {
+                                if (registro.Tarea=="1")
+                                {
+                                    registro.StateImage = "ok.png";
+                                }
+                                else
+                                {
+                                    registro.StateImage = "nook.png";
+                                }
+                                LstRegistros.Add(registro);
+
+                            }
+                            
                         }
-                        IsBusy = false;
+                        catch (ArgumentNullException)
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "No existen pedidos en este momento", "OK");
+                        }
+                        
                     }
                     catch (HttpRequestException)
                     {
@@ -86,13 +102,26 @@ namespace AutomatizacionServicios.ViewModels.Copias
                 });
             }
             );
+            IsBusy = false;
         }
+
+        #region Commands
+
+        [RelayCommand]
+        async Task Refresh()
+        {
+            IsRefreshing=true;
+            await AddUserList();
+            IsRefreshing = false;
+        }
+
+        #endregion
         /*
         async Task SelectItem(Usuarios data)
         {
             if (data != null)
             await Shell.Current.GoToAsync($"{nameof(CopiasConfirmarSeleccionPage)}?IdSelect={data.Cedula}");
         }*/
-        
+
     }
 }

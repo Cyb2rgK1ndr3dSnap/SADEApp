@@ -48,19 +48,25 @@ namespace AutomatizacionServicios.ViewModels.Copias
             }
         }
 
+        [ObservableProperty]
+        private bool btnAdd;
+
+        #endregion
+
         //[ObservableProperty]
         //private bool lstState;
 
         public CopiasPageViewModel()
         {
+            BtnAdd = App.UserInfoDetails.Tipo_usuario_id == "2" ? false : true;
             AddServList();
         }
 
-        private void AddServList()
+        async Task AddServList()
         {
             LstCopias.Clear();
             IsBusy = true;
-            Task.Run(() =>
+            await Task.Run(() =>
             {
                 //List<Usuarios> usuarios = await getPost.InfosSer();
                 List<CopiaseImpresionesResponse> copias = new List<CopiaseImpresionesResponse>();
@@ -71,6 +77,22 @@ namespace AutomatizacionServicios.ViewModels.Copias
                     {
                         //##Traer en el objeto el número de facultad a la que pertenece el usuario
                         copias = await getPost.CopiaseImpreseionesSrv(App.UserInfoDetails.Facultad_id, App.UserInfoDetails.Tipo_usuario_id);
+
+                        await Task.Delay(1000);
+
+                        try
+                        {
+                            foreach (CopiaseImpresionesResponse copia in copias)
+                            {
+                                LstCopias.Add(copia);
+                            }
+                            //IsBusy = false;
+                        }
+                        catch (ArgumentNullException)
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "No se ha podido cargar el feed", "OK");
+                        }
+                        
                     }
                     catch (HttpRequestException)
                     {
@@ -80,23 +102,24 @@ namespace AutomatizacionServicios.ViewModels.Copias
                     {
                         await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "Error al conectarse", "OK");
                     }
-
-                    await Task.Delay(2000);
-
-                    foreach (CopiaseImpresionesResponse cop in copias)
-                    {
-                        LstCopias.Add(cop);
-                    }
-                    IsBusy = false;
                     LstState = true;
                 });
             }
             );
+            IsBusy = false;
         }
 
-        #endregion
+
 
         #region Commands
+        [RelayCommand]
+        async Task Refresh()
+        {
+            IsRefreshing=true;
+            await AddServList();
+            IsRefreshing = false;
+        }
+
         //[RelayCommand]
         void Seleccion()
         {
