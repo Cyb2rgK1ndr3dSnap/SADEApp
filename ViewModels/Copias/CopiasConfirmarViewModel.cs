@@ -28,13 +28,7 @@ namespace AutomatizacionServicios.ViewModels.Copias
             get => _selectedRegistro;
             set 
             {
-                //if (_selectedPeticion != value)
-                //{
                     SetProperty(ref _selectedRegistro, value);
-                //}
-
-                //SelectItem(_selectedPeticion);
-
             }
         }
 
@@ -57,35 +51,22 @@ namespace AutomatizacionServicios.ViewModels.Copias
             IsBusy = true;
             await Task.Run(() =>
             {   
-                //List<Usuarios> usuarios = await getPost.InfosSer();
-                List<CopiaseImpresionesRegistrosResponse> registros = new List<CopiaseImpresionesRegistrosResponse>();
-                //await Task.Delay(2000);                
+                List<CopiaseImpresionesRegistrosResponse> registros = new List<CopiaseImpresionesRegistrosResponse>();             
                 Application.Current.Dispatcher.Dispatch(async () =>
                 {
                     try
                     {
-                        registros = await getPost.CopiaseImpreseionesRegistrosSrv(App.UserInfoDetails.Facultad_id,App.UserInfoDetails.Usuario_id);
-
-                        await Task.Delay(500);
-
+                        registros = await getPost.CopiaseImpreseionesRegistrosSrv(App.UserInfoDetails.Facultad_id,App.UserInfoDetails.Api_token);
+                        //await Task.Delay(500);
                         try
                         {
                             foreach (CopiaseImpresionesRegistrosResponse registro in registros)
                             {
-                                if (registro.Tarea=="1")
-                                {
-                                    registro.StateImage = "ok.png";
-                                }
-                                else
-                                {
-                                    registro.StateImage = "nook.png";
-                                }
                                 LstRegistros.Add(registro);
-
                             }
                             
                         }
-                        catch (ArgumentNullException)
+                        catch (NullReferenceException)
                         {
                             await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "No existen pedidos en este momento", "OK");
                         }
@@ -113,6 +94,20 @@ namespace AutomatizacionServicios.ViewModels.Copias
             IsRefreshing=true;
             await AddUserList();
             IsRefreshing = false;
+        }
+
+        [RelayCommand]
+        async Task Realizar()
+        {
+            var tmp = SelectedRegistro;
+            LstRegistros.RemoveAt(0);
+        }
+
+        [RelayCommand]
+        async Task Cancelar()
+        {
+            var a = LstRegistros.IndexOf(SelectedRegistro);
+            await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "Error al conectarse", "OK");
         }
 
         #endregion

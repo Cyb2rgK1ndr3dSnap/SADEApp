@@ -17,15 +17,12 @@ namespace AutomatizacionServicios.ViewModels.Inicio
         private string _apellido;
 
         [ObservableProperty]
-        private string _id;
+        private string billetera;
 
         public InicioPageViewModel()
         {
-            //string userInfoDetailsStr = Preferences.Get(nameof(App.UserInfoDetails),"");
             Nombre=App.UserInfoDetails.Nombre;
-            Nombre += " " + App.UserInfoDetails.Apellido;
-            Apellido = App.UserInfoDetails.Apellido;
-            Id = App.UserInfoDetails.Usuario_id.ToString();
+            Billetera = App.UserInfoDetails.Usuario_id.ToString();
         }
            
     }

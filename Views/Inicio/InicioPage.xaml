@@ -11,7 +11,7 @@
         Padding="10"
         >
 
-        <Frame HeightRequest="200" WidthRequest="200" BorderColor="Black">
+        <Frame HeightRequest="220" WidthRequest="220" BorderColor="Black" CornerRadius="120" BackgroundColor="White">
             <Image Source="sade3.png" HeightRequest="200" WidthRequest="200" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"/>
         </Frame>
 
@@ -25,7 +25,7 @@
 
         <Frame Padding="0" BorderColor="Black">
             <Label x:Name="lblId"             
-            Text="{Binding Id}"      
+            Text="{Binding Billetera}"      
             HorizontalOptions="Center" 
             TextColor="Black"
          />

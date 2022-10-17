@@ -8,9 +8,11 @@ namespace AutomatizacionServicios.Models.Startup
 {
     public class LoginResponse
     {
+        public string Id { get; set; }
+
         public string Nombre { get; set; }
 
-        public string Apellido { get; set; }
+        //public string Apellido { get; set; }
 
         public string Usuario_id { get; set; }
 
@@ -21,5 +23,7 @@ namespace AutomatizacionServicios.Models.Startup
         public string Correo { get; set; }
 
         public string Facultad_id { get; set; }
+
+        public string Api_token { get; set; }
     }
 }

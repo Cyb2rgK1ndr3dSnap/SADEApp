@@ -86,9 +86,8 @@ namespace AutomatizacionServicios.ViewModels.Copias
                             {
                                 LstCopias.Add(copia);
                             }
-                            //IsBusy = false;
                         }
-                        catch (ArgumentNullException)
+                        catch (NullReferenceException e)
                         {
                             await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "No se ha podido cargar el feed", "OK");
                         }

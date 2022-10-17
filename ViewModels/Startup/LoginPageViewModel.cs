@@ -43,11 +43,8 @@ namespace AutomatizacionServicios.ViewModels.Startup
             {
                 if (!string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password) && Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
                 {
-                    //NO BORRAR ES PARA PRUEBA
                     //LoginResponse loginResponse = await iLoginRepository.Login(Email, Password);
                     LoginResponse loginResponse = await getPost.LoginSer(Email,Password);
-                    //Email = "";
-                    //Password = "";
                     //App.UserInfo = await iLoginRepository.Login(Email, Password);
 
                     if (loginResponse != null)
@@ -56,6 +53,7 @@ namespace AutomatizacionServicios.ViewModels.Startup
                         if (Preferences.ContainsKey(nameof(App.UserInfoDetails)))
                         {
                             Preferences.Remove(nameof(App.UserInfoDetails));
+                            //Preferences.Clear();
                         }                       
                         string userInfoDetails = JsonConvert.SerializeObject(loginResponse);
                         Preferences.Set(nameof(App.UserInfoDetails), userInfoDetails);

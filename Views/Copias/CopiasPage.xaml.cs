@@ -16,4 +16,6 @@ public partial class CopiasPage : ContentPage
 	{
 		((ListView)sender).SelectedItem = null;
     }
+
+
 }

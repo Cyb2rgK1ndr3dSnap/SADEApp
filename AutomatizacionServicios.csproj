@@ -98,6 +98,12 @@
 	  <MauiXaml Update="Views\Inicio\InicioPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Materiales\MaterialesAgregarPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Materiales\MaterialesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\startup\LoadingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -107,12 +113,6 @@
 	  <MauiXaml Update="Views\startup\RegisterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Models\Materiales\" />
-	  <Folder Include="ViewModels\Materiales\" />
-	  <Folder Include="Views\Materiales\" />
 	</ItemGroup>
 
 </Project>

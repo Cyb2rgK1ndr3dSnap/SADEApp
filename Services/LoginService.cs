@@ -26,7 +26,7 @@ namespace AutomatizacionServicios.Services
 
             using var response = await client.PostAsync(url,content);
 
-            client.DefaultRequestHeaders.Accept.Clear();
+            //client.DefaultRequestHeaders.Accept.Clear();
 
             if (response.IsSuccessStatusCode)
             {

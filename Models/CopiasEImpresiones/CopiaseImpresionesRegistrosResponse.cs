@@ -27,7 +27,5 @@ namespace AutomatizacionServicios.Models.CopiasEImpresiones
         public string Pagado { get; set; }
 
         public string Estado { get; set; }
-
-        public string StateImage { get; set; }
     }
 }

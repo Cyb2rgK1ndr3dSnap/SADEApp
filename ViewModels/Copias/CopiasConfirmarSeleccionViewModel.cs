@@ -19,7 +19,6 @@ namespace AutomatizacionServicios.ViewModels.Copias
         public CopiasConfirmarSeleccionViewModel()
         {
             Texto = IdSelect;
-            
         }
     }
 }

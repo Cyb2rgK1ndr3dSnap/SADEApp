@@ -108,6 +108,22 @@ namespace AutomatizacionServicios.ViewModels.Copias
                     {
                         //##Traer en el objeto el número de facultad a la que pertenece el usuario
                         hojas = await getPost.CopiaseImpreseionesHojasSrv(App.UserInfoDetails.Facultad_id);
+
+                        await Task.Delay(500);
+                        //PONER VALIDACIOENS AQUÍ PARA QUE HAYA ERROR POR NULL EXCEPTION Y EN TODAS LAS DEMÁS TAMBIÉN
+
+                        try
+                        {
+                            foreach (CopiaseImpresionesHojasResponse hoj in hojas)
+                            {
+                                PkrHojas.Add(hoj);
+                            }
+                        }
+                        catch (NullReferenceException)
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "No se ha podido cargar el feed", "OK");
+                        }
+
                     }
                     catch (HttpRequestException)
                     {
@@ -116,13 +132,6 @@ namespace AutomatizacionServicios.ViewModels.Copias
                     catch (WebException)
                     {
                         await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "Error al cargar hojas", "OK");
-                    }
-
-                    await Task.Delay(500);
-                    //PONER VALIDACIOENS AQUÍ PARA QUE HAYA ERROR POR NULL EXCEPTION Y EN TODAS LAS DEMÁS TAMBIÉN
-                    foreach (CopiaseImpresionesHojasResponse hoj in hojas)
-                    {
-                        PkrHojas.Add(hoj);
                     }
                 });
             }
@@ -146,7 +155,7 @@ namespace AutomatizacionServicios.ViewModels.Copias
             {
                 if (!String.IsNullOrWhiteSpace(Cantidad)&&!String.IsNullOrWhiteSpace(MaterialCopiado)&&!String.IsNullOrWhiteSpace(Precio.ToString())&&SelectedItem!=null&&Int32.Parse(Cantidad)>0&&Cantidad.ToCharArray().All(Char.IsDigit)) { 
                 
-                    response = await getPost.CopiaseImpreseionesInsertRegistroSrv(App.UserInfoDetails.Facultad_id, App.UserInfoDetails.Usuario_id, _selectedItem.Material_Id, MaterialCopiado, SerColor, SerId, Int32.Parse(Cantidad),Precio);
+                    response = await getPost.CopiaseImpreseionesInsertRegistroSrv(App.UserInfoDetails.Facultad_id, _selectedItem.Material_Id, MaterialCopiado, SerColor, SerId, Int32.Parse(Cantidad),Precio);
                     if (response.ErrorInfo!=null)
                     {
                         AddHojas();

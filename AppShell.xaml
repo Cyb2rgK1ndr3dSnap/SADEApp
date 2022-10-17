@@ -11,9 +11,9 @@
     xmlns:controls="clr-namespace:AutomatizacionServicios.Controls"
     xmlns:viewModels="clr-namespace:AutomatizacionServicios.ViewModels"
     Shell.TitleColor="Black"
-    Shell.NavBarIsVisible="False"
-    Shell.TabBarIsVisible="False"
+    Shell.TabBarIsVisible="True"
     Shell.BackgroundColor="#512BD4"
+    Shell.TabBarBackgroundColor="#512BD4"
     FlyoutBackgroundImage="purpink.jpg"
     FlyoutBackgroundImageAspect="Fill"
     >

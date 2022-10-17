@@ -58,11 +58,12 @@ namespace AutomatizacionServicios.Services
             }
         }
 
-        public async Task<CopiaseImpresionesInsertRegisterResponse> CopiaseImpreseionesInsertRegistroSrv(string idFac, string idUser, string idMaterial, string nombreCopia, int color, string idCopias,int cantidad,decimal precio)
+        //string idUser
+        public async Task<CopiaseImpresionesInsertRegisterResponse> CopiaseImpreseionesInsertRegistroSrv(string idFac, string idMaterial, string nombreCopia, int color, string idCopias,int cantidad,decimal precio)
         {
             var responseList = new List<CopiaseImpresionesInsertRegisterResponse>();
 
-            CopiaseImpresionesInsertRegisterRequest request = new CopiaseImpresionesInsertRegisterRequest() { IdFacultad = idFac,IdUsuario =idUser,IdMaterial= idMaterial,NombreCopia = nombreCopia,Color = color,IdCopiasEImpresiones= idCopias,Cantidad= cantidad, Precio=precio};
+            CopiaseImpresionesInsertRegisterRequest request = new CopiaseImpresionesInsertRegisterRequest() {IdFacultad = idFac,IdUsuario=App.UserInfoDetails.Usuario_id, Token = App.UserInfoDetails.Api_token, IdMaterial= idMaterial,NombreCopia = nombreCopia,Color = color,IdCopiasEImpresiones= idCopias,Cantidad= cantidad, Precio=precio};
 
             StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
@@ -82,11 +83,11 @@ namespace AutomatizacionServicios.Services
             }
         }
 
-        public async Task<List<CopiaseImpresionesRegistrosResponse>> CopiaseImpreseionesRegistrosSrv(string idFac, string idUser)
+        public async Task<List<CopiaseImpresionesRegistrosResponse>> CopiaseImpreseionesRegistrosSrv(string idFac, string apiToken)
         {
             var responseList = new List<CopiaseImpresionesRegistrosResponse>();
 
-            CopiaseImpresionesRegistrosRequest request = new CopiaseImpresionesRegistrosRequest() { IdFacultad = idFac, IdUsuario = idUser};
+            CopiaseImpresionesRegistrosRequest request = new CopiaseImpresionesRegistrosRequest() { IdFacultad = idFac, Token = apiToken};
 
             StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 

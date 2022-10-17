@@ -45,7 +45,6 @@ namespace AutomatizacionServicios.ViewModels.Startup
             {
                 var userInfoDetails = JsonConvert.DeserializeObject<LoginResponse>(userInfoDetailsStr);
                 App.UserInfoDetails = userInfoDetails;
-                //await AppConstant.AddFlyoutMenusDetails(); Agregar FlyoutMenu Dinámico para usuario
                 //AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
                 await AppConstant.AddFlyoutMenusDetails();
                 //await Shell.Current.GoToAsync($"//{nameof(InicioPage)}"); 

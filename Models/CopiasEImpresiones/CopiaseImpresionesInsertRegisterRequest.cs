@@ -12,6 +12,8 @@ namespace AutomatizacionServicios.Models.CopiasEImpresiones
 
         public string IdUsuario { get; set; }
 
+        public string Token { get; set; }
+
         public string IdMaterial { get; set; }
 
         public string NombreCopia { get; set; }

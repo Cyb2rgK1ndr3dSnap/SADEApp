@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design"
              x:Class="AutomatizacionServicios.Views.Copias.CopiasConfirmarPage"
-             Title="CopiasConfirmarPage"
              BackgroundColor="White"
-             Shell.NavBarIsVisible="True"
-             Shell.FlyoutItemIsVisible="True"
-             Shell.FlyoutBehavior="Flyout"
              >
     <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
         <StackLayout Orientation="Vertical" Padding="0">
@@ -15,24 +12,26 @@
                 <Label Margin="0,10,0,10" Text="Servicio de Copias e Impresiones/Peticiones" FontSize="12" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center"/>
             </StackLayout>
             <ScrollView HorizontalOptions="CenterAndExpand" Orientation="Vertical" VerticalOptions="FillAndExpand">
-                <ListView ItemsSource="{Binding LstRegistros}"
+                <ListView 
+                  x:Name="LstRegistrosC"
+                  CachingStrategy="RecycleElement"
+                  ItemsSource="{Binding LstRegistros}"
                   SelectedItem="{Binding SelectedRegistro}"
-                  ItemTapped="ListView_ItemTapped"
                   SeparatorColor="Black"
                   HasUnevenRows="True"
-                  >
+                  > 
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <Grid>
+                                <ViewCell.ContextActions>
+                                    <MenuItem Text="Realizar tarea" BindingContext="{Binding Source={x:Reference LstRegistrosC}, Path=BindingContext}" Command="{Binding RealizarCommand}" ></MenuItem>
+                                    <MenuItem Text="Confirmar" BindingContext="{Binding Source={x:Reference LstRegistrosC}, Path=BindingContext}" Command="{Binding ConfirmarCommand}"/>
+                                    <ToolbarItem Text="Cancelar" BindingContext="{Binding Source={x:Reference LstRegistrosC}, Path=BindingContext}" Command="{Binding CancelarCommand}"></ToolbarItem>
+                                </ViewCell.ContextActions>
+                                <ViewCell.View>
                                     <Border BackgroundColor="#b6e8ff" Padding="5" Stroke="black" StrokeShape="RoundRectangle 40,0,0,40" Margin="10,10,10,10" VerticalOptions="FillAndExpand">
                                         <Grid >
                                             <VerticalStackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Margin="20,10,10,20" Spacing="5">
-                                                <StackLayout Orientation="Horizontal" Spacing="5">
-                                                    <Label Text="Tarea Realizado:" TextColor="Black"/>
-                                                    <Label Text="{Binding StatePrueba}" TextColor="Black"/>
-                                                    <ImageButton Source="{Binding StateImage}" Command="{Binding RealizadoCommand}" HeightRequest="20" WidthRequest="20"/>
-                                                </StackLayout>
                                                 <StackLayout Orientation="Horizontal" Spacing="5">
                                                     <Label Text="ID Petición:" TextColor="Black"/>
                                                     <Label Text="{Binding Id}" TextColor="Black"/>
@@ -45,30 +44,11 @@
                                                     <Label Text="Gastada:" TextColor="Black"/>
                                                     <Label Text="{Binding Gastado}" TextColor="Black"/>
                                                 </StackLayout>
-                                                <StackLayout Orientation="Horizontal" Spacing="15" HorizontalOptions="CenterAndExpand">
-                                                    <Border BackgroundColor="Red" Padding="0" Stroke="black" StrokeShape="RoundRectangle 20,20,20,20" HorizontalOptions="FillAndExpand">
-                                                        <Label Text="{Binding Pagado}" TextColor="Black" HorizontalOptions="CenterAndExpand"/>
-                                                    </Border>
-                                                    <Border BackgroundColor="Green" Padding="0" Stroke="black" StrokeShape="RoundRectangle 20,20,20,20" HorizontalOptions="FillAndExpand">
-                                                        <Label Text="{Binding Estado}" TextColor="Black" HorizontalOptions="CenterAndExpand"/>
-                                                    </Border>
-                                                </StackLayout>
-                                                <StackLayout Orientation="Horizontal" Spacing="15" HorizontalOptions="CenterAndExpand">
-                                                    <Button BackgroundColor="Green"
-                                                    Text="Confirmar petición"
-                                                    Command="{Binding ConfirmCommand}"
-                                                    HorizontalOptions="CenterAndExpand">
-                                                    </Button>
-                                                    <Button BackgroundColor="Red"
-                                                    Text="Cancelar petición"
-                                                    Command="{Binding CancelarCommand}"
-                                                    HorizontalOptions="CenterAndExpand">
-                                                    </Button>
-                                                </StackLayout>
                                             </VerticalStackLayout>
                                         </Grid>
                                     </Border>
-                                </Grid>
+                                        
+                                </ViewCell.View>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>

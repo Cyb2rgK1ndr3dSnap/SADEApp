@@ -2,6 +2,7 @@
 using AutomatizacionServicios.Views.Copias;
 using AutomatizacionServicios.Views.Dispositivos;
 using AutomatizacionServicios.Views.Inicio;
+using AutomatizacionServicios.Views.Materiales;
 using AutomatizacionServicios.Views.startup;
 using Microsoft.Maui.Controls;
 using System;
@@ -21,15 +22,15 @@ namespace AutomatizacionServicios.Models
         public async static Task AddFlyoutMenusDetails()
         {
 
-            AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
+            //AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
 
-            if (App.UserInfoDetails.Tipo_usuario_id == "3")
+            if (App.UserInfoDetails.Tipo_usuario_id == "2" || App.UserInfoDetails.Tipo_usuario_id == "3")
             {
-                permissionDocument = false;
+                permissionDocument = true;
             }
             else
             {
-                permissionDocument = true;
+                permissionDocument = false;
             }
 
             var inicioInfo = AppShell.Current.Items.Where(f => f.Route == nameof(InicioPage)).FirstOrDefault();
@@ -38,125 +39,37 @@ namespace AutomatizacionServicios.Models
             //if (App.UserInfoDetails.tipo_usuario_id == "3")
             //{
 
-            var tabPrueba = new FlyoutItem()
-            {
-                Title = "Home",
-                Route = nameof(DispositivosPage),
-                IsVisible = true,
-                FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
-                Items =
-            {
-                new Tab
-                {
-                    Route="DispositivosPage",
-                    Items =
-                    {
-                        new ShellContent
-                        {
-                            Title = "Home",
-                            Route = "DispositivosPage",
-                            ContentTemplate = new DataTemplate(typeof(DispositivosPage))
-                        },
-                        new ShellContent
-                        {
-                            Title = "Home",
-                            Route = "DispositivosPage",
-                            ContentTemplate = new DataTemplate(typeof(DispositivosPage))
-                        }
-                    }
-                }
-            }
-            };
-
-            /////////////////////////////////////////////////////////
-
-            var flyoutItem = new FlyoutItem()
-                {
-                    Route = nameof(InicioPage),
-                    FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
-                    Items =
-                                {
-                                    new ShellContent
-                                    {
-                                        Icon = "house.png",
-                                        Title = "Inicio",
-                                        Route="InicioPage",
-                                        ContentTemplate = new DataTemplate(typeof(InicioPage)),
-                                    },
-                                    new ShellContent
-                                    {
-                                        Icon = "document.png",
-                                        Title = "Copias e Impresiones",
-                                        Route="CopiasImpresionesPage",
-                                        //IsVisible = permissionDocument,
-                                        ContentTemplate = new DataTemplate(typeof(CopiasPage)),
-                                    }
-                                    ,
-                                    new ShellContent
-                                    {
-                                        Icon = "devices_icon.png",
-                                        Title = "Dispositivos",
-                                        Route="DispositivosPage",
-                                        ContentTemplate = new DataTemplate(typeof(DispositivosPage)),
-                                    }                     
-                                }
-                };
-            //
-
-            var tab = new Tab()
-            {
-                Route = "DispositivosPage",
-
-                //IsVisible = true,
-                FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
-                Items =
-                {
-                    
-                            new ShellContent
-                            {
-                                Title="Prueba1",
-                                
-                                ContentTemplate = new DataTemplate(typeof(DispositivosPage)),
-                            },
-                            new ShellContent
-                            {
-                                Title="Prueba2",
-
-                                ContentTemplate = new DataTemplate(typeof(DispositivosPage)),
-                                
-                            },
-                            new ShellContent
-                            {
-                                Title = "Prueba3",
-                                FlyoutItemIsVisible=true,
-                                ContentTemplate = new DataTemplate(typeof(DispositivosPage)),
-                            }
-                        
-
-                },
-            };
-
             //Flyout que se le presenta al usuario al entrar y loguearse correctamente
 
-            var flyoutItemP = new FlyoutItem()
+            var flyoutItemP = new TabBar()
             {
                 Route = "InicioPage",
                 FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                 Items =
                 {
+                    
+                            new ShellContent
+                                    {
+                                        Icon = "house.png",
+                                        Title = "Home",
+                                        Route="InicioPage",
+                                        ContentTemplate = new DataTemplate(typeof(InicioPage)),
+                                    },
+                        
                     new Tab
                     {
-                        Icon = "house.png",
-                        Title="Inicio",
+                        Icon = "stationery.png",
+                        Title="Materiales",
+                        IsVisible=permissionDocument,
                         Items =
                         {
                             new ShellContent
                                     {
-                                        Icon = "house.png",
-                                        Title = "Inicio",
-                                        Route="InicioPage",
-                                        ContentTemplate = new DataTemplate(typeof(InicioPage)),
-                                    },
+                                        Icon = "stationery.png",
+                                        Title = "Materiales",
+                                        Route="MaterialesPage",
+                                        ContentTemplate = new DataTemplate(typeof(MaterialesPage)),
+                                    },      
                         }
                     },
                     new Tab
@@ -165,21 +78,14 @@ namespace AutomatizacionServicios.Models
                         Title="Copias",
                         Items =
                         {
-                            new ShellContent
+                            /*new ShellContent
                                     {
                                         FlyoutIcon = "document.png",
                                         Title = "Peticiones",
                                         Route="CopiasImpresionesPage",
                                         //IsVisible = permissionDocument,
                                         ContentTemplate = new DataTemplate(typeof(CopiasPage)),      
-                                        MenuItems =
-                                        {
-                                            new MenuItem
-                                            {
-                                                Text="ADDITEM"
-                                            }
-                                        }
-                                    },
+                                    },*/
                             new ShellContent
                                     {
                                         FlyoutIcon = "document.png",
@@ -242,8 +148,6 @@ namespace AutomatizacionServicios.Models
             //
             ///////////////////nameof(CopiasImpresionesPage) = tab;
 
-
-            
             if (!AppShell.Current.Items.Contains(flyoutItemP))
                 {
                 AppShell.Current.Items.Add(flyoutItemP);

@@ -11,9 +11,5 @@ public partial class CopiasConfirmarPage : ContentPage
 		this.BindingContext = viewModel;
 	}
 	
-	private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
-	{
-		//Usuarios usuarios = e.Item as Usuarios;
-        //Shell.Current.GoToAsync($"{nameof(CopiasConfirmarSeleccionPage)}?IdSelect={usuarios.Cedula}");
-    }
+	
 }

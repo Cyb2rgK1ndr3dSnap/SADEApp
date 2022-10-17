@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutomatizacionServicios.Models.CopiasEImpresiones
+namespace AutomatizacionServicios.Models.Materiales
 {
-    public class CopiaseImpresionesRegistrosRequest
+    public class MaterialesRequest
     {
         public string IdFacultad { get; set; }
-
-        public string Token { get; set; }
     }
 }

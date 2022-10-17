@@ -20,6 +20,7 @@ namespace AutomatizacionServicios.ViewModels
             if (Preferences.ContainsKey(nameof(App.UserInfoDetails)))
             {
                 Preferences.Remove(nameof(App.UserInfoDetails));
+                //Preferences.Clear();
             }
             await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
         }
