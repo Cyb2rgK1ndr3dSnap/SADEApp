@@ -1,23 +1,20 @@
-﻿using AutomatizacionServicios.Models;
-using AutomatizacionServicios.ViewModels;
-using AutomatizacionServicios.ViewModels.Startup;
+﻿using AutomatizacionServicios.ViewModels;
 using AutomatizacionServicios.Views.Copias;
-using AutomatizacionServicios.Views.Dispositivos;
-using AutomatizacionServicios.Views.Inicio;
+using AutomatizacionServicios.Views.Materiales;
 using AutomatizacionServicios.Views.startup;
-using Newtonsoft.Json;
 
 namespace AutomatizacionServicios;
 
 public partial class AppShell : Shell
 {
     public AppShell()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         this.BindingContext = new AppShellViewModel();
 
+        Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
         Routing.RegisterRoute(nameof(CopiasSeleccionPage), typeof(CopiasSeleccionPage));
         Routing.RegisterRoute(nameof(CopiasConfirmarSeleccionPage), typeof(CopiasConfirmarSeleccionPage));
-        Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
+        Routing.RegisterRoute(nameof(MaterialesAgregarPage), typeof(MaterialesAgregarPage));
     }
 }

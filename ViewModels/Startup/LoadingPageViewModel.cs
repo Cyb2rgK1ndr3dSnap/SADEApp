@@ -1,18 +1,11 @@
-﻿using AutomatizacionServicios.Controls;
-using AutomatizacionServicios.Models;
+﻿using AutomatizacionServicios.Models;
 using AutomatizacionServicios.Models.Startup;
-using AutomatizacionServicios.Views.Inicio;
 using AutomatizacionServicios.Views.startup;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutomatizacionServicios.ViewModels.Startup
 {
-    public class LoadingPageViewModel 
+    public class LoadingPageViewModel
     {
 
         public LoadingPageViewModel()
@@ -52,5 +45,5 @@ namespace AutomatizacionServicios.ViewModels.Startup
         }
     }
 
-}   
+}
 

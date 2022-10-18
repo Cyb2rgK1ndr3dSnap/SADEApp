@@ -1,10 +1,6 @@
 ﻿using AutomatizacionServicios.Models.Startup;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace AutomatizacionServicios.Services
 {
@@ -16,15 +12,15 @@ namespace AutomatizacionServicios.Services
             var loginResponse = new List<LoginResponse>();
             HttpClient client = new HttpClient();
 
-            Uri url = new Uri (ILoginRepository.ApiUrl+"/login");
+            Uri url = new Uri(ILoginRepository.ApiUrl + "/login");
 
             //client.BaseAddress = url;
 
-            LoginRequest loginRequest = new LoginRequest(){ Correo = email, Contrasena = password };
+            LoginRequest loginRequest = new LoginRequest() { Correo = email, Contrasena = password };
 
-            StringContent content = new StringContent(JsonConvert.SerializeObject(loginRequest),Encoding.UTF8,"application/json");
+            StringContent content = new StringContent(JsonConvert.SerializeObject(loginRequest), Encoding.UTF8, "application/json");
 
-            using var response = await client.PostAsync(url,content);
+            using var response = await client.PostAsync(url, content);
 
             //client.DefaultRequestHeaders.Accept.Clear();
 

@@ -28,11 +28,11 @@
         </Style>
     </Shell.Resources>
 
-    <ShellContent FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled" 
+    <ShellContent FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled" Shell.TabBarIsVisible="False" 
     ContentTemplate="{DataTemplate startupPages:LoadingPage}" 
     Route="LoadingPage"/>
 
-    <ShellContent FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled" 
+    <ShellContent FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled" Shell.TabBarIsVisible="False" 
     ContentTemplate="{DataTemplate startupPages:LoginPage}"
     Route="LoginPage" />
 

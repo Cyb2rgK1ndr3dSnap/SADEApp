@@ -6,8 +6,8 @@ namespace AutomatizacionServicios.Views.Inicio
     public partial class InicioPage : ContentPage
     {
         public InicioPage(InicioPageViewModel viewModel)
-	    {
-		    InitializeComponent();
+        {
+            InitializeComponent();
             this.BindingContext = viewModel;
         }
 
@@ -15,6 +15,7 @@ namespace AutomatizacionServicios.Views.Inicio
         {
             base.OnAppearing();
             this.BindingContext = new InicioPageViewModel();
+
         }
     }
 }

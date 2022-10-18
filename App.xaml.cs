@@ -7,11 +7,11 @@ namespace AutomatizacionServicios;
 public partial class App : Application
 {
 
-	public static LoginResponse UserInfoDetails;
+    public static LoginResponse UserInfoDetails;
 
-	public App()
-	{
-		InitializeComponent();
+    public App()
+    {
+        InitializeComponent();
         Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping(nameof(BorderlessEntry), (handler, view) =>
         {
             if (view is BorderlessEntry)
@@ -24,7 +24,7 @@ public partial class App : Application
 #endif
             }
         });
-        
+
         MainPage = new AppShell();
     }
 }

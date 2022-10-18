@@ -1,14 +1,9 @@
-﻿using AutomatizacionServicios.Models.CopiasEImpresiones;
-using AutomatizacionServicios.Models.Materiales;
+﻿using AutomatizacionServicios.Models.Materiales;
 using AutomatizacionServicios.Services;
-using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
+using AutomatizacionServicios.Views.Materiales;
+using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutomatizacionServicios.ViewModels.Materiales
 {
@@ -16,7 +11,7 @@ namespace AutomatizacionServicios.ViewModels.Materiales
     {
         readonly MService getPost = new MService();
 
-        public ObservableCollection<MaterialesResponse> LstMateriales { get; set; }= new ObservableCollection<MaterialesResponse>();
+        public ObservableCollection<MaterialesResponse> LstMateriales { get; set; } = new ObservableCollection<MaterialesResponse>();
 
         private MaterialesResponse selectedMaterial;
 
@@ -55,15 +50,22 @@ namespace AutomatizacionServicios.ViewModels.Materiales
                     try
                     {
                         //##Traer en el objeto el número de facultad a la que pertenece el usuario
-                        materiales = await getPost.AddMateriales();
+                        materiales = await getPost.MaterialesServ();
 
                         await Task.Delay(1000);
 
                         try
                         {
-                            foreach (MaterialesResponse material in materiales)
+                            if(materiales != null)
                             {
-                                LstMateriales.Add(material);
+                                foreach (MaterialesResponse material in materiales)
+                                {
+                                    LstMateriales.Add(material);
+                                }
+                            }
+                            else
+                            {
+                                await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "No se ha podido cargar el feed", "OK");
                             }
                         }
                         catch (NullReferenceException)
@@ -86,5 +88,21 @@ namespace AutomatizacionServicios.ViewModels.Materiales
             );
             IsBusy = false;
         }
+
+        #region Command
+        [RelayCommand]
+        async Task Refresh()
+        {
+            IsRefreshing = true;
+            await AddMaterialesList();
+            IsRefreshing = false;
+        }
+
+        [RelayCommand]
+        async Task Agregar()
+        {
+            await Shell.Current.GoToAsync($"{nameof(MaterialesAgregarPage)}");
+        }
+        #endregion
     }
 }

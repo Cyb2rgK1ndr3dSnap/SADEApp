@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AutomatizacionServicios.Models.Materiales
+﻿namespace AutomatizacionServicios.Models.Materiales
 {
     public class MaterialesAddRequest
     {
+        public string Api_token { get; set; }
+
         public string IdFacultad { get; set; }
 
         public string NombreMaterial { get; set; }
@@ -22,6 +18,6 @@ namespace AutomatizacionServicios.Models.Materiales
 
         public string Otro { get; set; }
 
-        public int Tipo_Usuario { get; set; }
+        //public int Tipo_Usuario { get; set; }
     }
 }

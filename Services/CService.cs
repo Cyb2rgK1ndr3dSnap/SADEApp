@@ -1,10 +1,6 @@
 ﻿using AutomatizacionServicios.Models.CopiasEImpresiones;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace AutomatizacionServicios.Services
 {
@@ -38,7 +34,7 @@ namespace AutomatizacionServicios.Services
         {
             var copiaseImpresionesResponse = new List<CopiaseImpresionesHojasResponse>();
 
-            CopiaseImpresionesHojasRequest copiaseImpresionesRequest = new CopiaseImpresionesHojasRequest() { IdFacultad = idFac};
+            CopiaseImpresionesHojasRequest copiaseImpresionesRequest = new CopiaseImpresionesHojasRequest() { IdFacultad = idFac };
 
             StringContent content = new StringContent(JsonConvert.SerializeObject(copiaseImpresionesRequest), Encoding.UTF8, "application/json");
 
@@ -59,11 +55,11 @@ namespace AutomatizacionServicios.Services
         }
 
         //string idUser
-        public async Task<CopiaseImpresionesInsertRegisterResponse> CopiaseImpreseionesInsertRegistroSrv(string idFac, string idMaterial, string nombreCopia, int color, string idCopias,int cantidad,decimal precio)
+        public async Task<CopiaseImpresionesInsertRegisterResponse> CopiaseImpreseionesInsertRegistroSrv(string idFac, string idMaterial, string nombreCopia, int color, string idCopias, int cantidad, decimal precio)
         {
             var responseList = new List<CopiaseImpresionesInsertRegisterResponse>();
 
-            CopiaseImpresionesInsertRegisterRequest request = new CopiaseImpresionesInsertRegisterRequest() {IdFacultad = idFac,IdUsuario=App.UserInfoDetails.Usuario_id, Token = App.UserInfoDetails.Api_token, IdMaterial= idMaterial,NombreCopia = nombreCopia,Color = color,IdCopiasEImpresiones= idCopias,Cantidad= cantidad, Precio=precio};
+            CopiaseImpresionesInsertRegisterRequest request = new CopiaseImpresionesInsertRegisterRequest() { IdFacultad = idFac, IdUsuario = App.UserInfoDetails.Usuario_id, Token = App.UserInfoDetails.Api_token, IdMaterial = idMaterial, NombreCopia = nombreCopia, Color = color, IdCopiasEImpresiones = idCopias, Cantidad = cantidad, Precio = precio };
 
             StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
@@ -87,7 +83,7 @@ namespace AutomatizacionServicios.Services
         {
             var responseList = new List<CopiaseImpresionesRegistrosResponse>();
 
-            CopiaseImpresionesRegistrosRequest request = new CopiaseImpresionesRegistrosRequest() { IdFacultad = idFac, Token = apiToken};
+            CopiaseImpresionesRegistrosRequest request = new CopiaseImpresionesRegistrosRequest() { IdFacultad = idFac, Token = apiToken };
 
             StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 

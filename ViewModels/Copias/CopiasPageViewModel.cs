@@ -1,16 +1,10 @@
 ﻿using AutomatizacionServicios.Models.CopiasEImpresiones;
 using AutomatizacionServicios.Services;
 using AutomatizacionServicios.Views.Copias;
-using AutomatizacionServicios.Views.Inicio;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutomatizacionServicios.ViewModels.Copias
 {
@@ -39,12 +33,12 @@ namespace AutomatizacionServicios.ViewModels.Copias
             {
                 if (value != null)
                 {
-                //No se puede seleccionar elemento del Listview
-                LstState = false;
-                SetProperty(ref _selectedPeticion, value);
-                Seleccion();
+                    //No se puede seleccionar elemento del Listview
+                    LstState = false;
+                    SetProperty(ref _selectedPeticion, value);
+                    Seleccion();
                 }
-                
+
             }
         }
 
@@ -82,16 +76,21 @@ namespace AutomatizacionServicios.ViewModels.Copias
 
                         try
                         {
-                            foreach (CopiaseImpresionesResponse copia in copias)
+                            if(copias!= null) { 
+                                foreach (CopiaseImpresionesResponse copia in copias)
+                                {
+                                    LstCopias.Add(copia);
+                                }
+                            }else
                             {
-                                LstCopias.Add(copia);
+                                await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "No se ha podido cargar el feed", "OK");
                             }
-                        }
+                    }
                         catch (NullReferenceException e)
                         {
                             await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "No se ha podido cargar el feed", "OK");
                         }
-                        
+
                     }
                     catch (HttpRequestException)
                     {
@@ -114,7 +113,7 @@ namespace AutomatizacionServicios.ViewModels.Copias
         [RelayCommand]
         async Task Refresh()
         {
-            IsRefreshing=true;
+            IsRefreshing = true;
             await AddServList();
             IsRefreshing = false;
         }

@@ -1,11 +1,4 @@
-﻿using AutomatizacionServicios.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AutomatizacionServicios.Services
+﻿namespace AutomatizacionServicios.Services
 {
     public interface IGetPost
     {
@@ -40,14 +33,14 @@ namespace AutomatizacionServicios.Services
             VariabiliGlobali VarGlobal = VariabiliGlobali.Instance();
             HttpClient _client = new HttpClient();
             //Se agregó validación por token para que no haya violaciones de seguridad en la APP
-            if(App.UserInfoDetails!= null)
+            if (App.UserInfoDetails != null)
             {
                 _client.DefaultRequestHeaders.Add("token", App.UserInfoDetails.Api_token);
             }
             else
             {
                 _client.DefaultRequestHeaders.Add("token", "");
-            }         
+            }
             _client.BaseAddress = VarGlobal.UriBaseAddress;
             _client.Timeout = TimeSpan.FromSeconds(30);
 

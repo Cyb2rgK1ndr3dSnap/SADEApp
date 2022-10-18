@@ -24,9 +24,9 @@
                         <DataTemplate>
                             <ViewCell>
                                 <ViewCell.ContextActions>
-                                    <MenuItem Text="Realizar tarea" BindingContext="{Binding Source={x:Reference LstRegistrosC}, Path=BindingContext}" Command="{Binding RealizarCommand}" ></MenuItem>
+                                    <MenuItem Text="Realizar tarea" BindingContext="{Binding Source={x:Reference LstRegistrosC}, Path=BindingContext}" Command="{Binding RealizarCommand}"/>
                                     <MenuItem Text="Confirmar" BindingContext="{Binding Source={x:Reference LstRegistrosC}, Path=BindingContext}" Command="{Binding ConfirmarCommand}"/>
-                                    <ToolbarItem Text="Cancelar" BindingContext="{Binding Source={x:Reference LstRegistrosC}, Path=BindingContext}" Command="{Binding CancelarCommand}"></ToolbarItem>
+                                    <MenuItem Text="Cancelar" BindingContext="{Binding Source={x:Reference LstRegistrosC}, Path=BindingContext}" Command="{Binding CancelarCommand}"/>
                                 </ViewCell.ContextActions>
                                 <ViewCell.View>
                                     <Border BackgroundColor="#b6e8ff" Padding="5" Stroke="black" StrokeShape="RoundRectangle 40,0,0,40" Margin="10,10,10,10" VerticalOptions="FillAndExpand">

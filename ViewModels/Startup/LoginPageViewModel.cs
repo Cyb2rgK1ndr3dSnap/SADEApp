@@ -1,18 +1,11 @@
-﻿using AutomatizacionServicios.Controls;
-using AutomatizacionServicios.Models;
+﻿using AutomatizacionServicios.Models;
 using AutomatizacionServicios.Models.Startup;
 using AutomatizacionServicios.Services;
 using AutomatizacionServicios.Views.Inicio;
-using AutomatizacionServicios.Views.startup;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutomatizacionServicios.ViewModels.Startup
 {
@@ -44,7 +37,7 @@ namespace AutomatizacionServicios.ViewModels.Startup
                 if (!string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password) && Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
                 {
                     //LoginResponse loginResponse = await iLoginRepository.Login(Email, Password);
-                    LoginResponse loginResponse = await getPost.LoginSer(Email,Password);
+                    LoginResponse loginResponse = await getPost.LoginSer(Email, Password);
                     //App.UserInfo = await iLoginRepository.Login(Email, Password);
 
                     if (loginResponse != null)
@@ -54,7 +47,7 @@ namespace AutomatizacionServicios.ViewModels.Startup
                         {
                             Preferences.Remove(nameof(App.UserInfoDetails));
                             //Preferences.Clear();
-                        }                       
+                        }
                         string userInfoDetails = JsonConvert.SerializeObject(loginResponse);
                         Preferences.Set(nameof(App.UserInfoDetails), userInfoDetails);
                         App.UserInfoDetails = loginResponse;
@@ -82,7 +75,7 @@ namespace AutomatizacionServicios.ViewModels.Startup
                 await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "Problemas al cargar el feed", "OK");
             }
         }
-        
+
 
 
         [RelayCommand]

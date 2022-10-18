@@ -2,11 +2,81 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AutomatizacionServicios.Views.Materiales.MaterialesAgregarPage"
-             Title="MaterialesAgregarPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             Title="MaterialesAgregarPage"
+             BackgroundColor="White">
+    <VerticalStackLayout
+        VerticalOptions="CenterAndExpand"
+        Spacing="30"
+        Padding="10"
+        >
+        <Border BackgroundColor="White" Padding="20" Stroke="black" StrokeShape="RoundRectangle 40,0,0,40">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0">
+                <Grid Margin="10" Padding="0">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+
+                        <StackLayout HorizontalOptions="Center">
+                            <Border BackgroundColor="White" Stroke="white">
+                                <Image Source="stationery.png" HeightRequest="80" WidthRequest="60" HorizontalOptions="Center"/>
+                            </Border>
+                        </StackLayout>
+
+                        <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+                            <Entry Text="{Binding NombreMaterial}" HeightRequest="40" WidthRequest="300" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Placeholder="Nombre de Material" Margin="5,0,0,0" MaxLength="50"/>
+                        </Border>
+
+                        <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+                            <Entry Text="{Binding ColorNombre}" HeightRequest="40" WidthRequest="300" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Placeholder="Nombre del color" Margin="5,0,0,0" MaxLength="40"/>
+                        </Border>
+
+                        <Border Stroke="black" StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="35" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+                            <Entry Text="{Binding Otro}" HeightRequest="40" WidthRequest="300" TextColor="Black" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Placeholder="Otra descripción--No obligatorio" Margin="5,0,0,0" MaxLength="40"/>
+                        </Border>
+
+
+                        <StackLayout Orientation="Vertical" Spacing="10">
+                            <StackLayout Orientation="Horizontal" Spacing="30" Padding="0" HorizontalOptions="FillAndExpand">
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox IsChecked="{Binding Corta}" Margin="0,0,0,0" Color="Green" />
+                                    <Label Text="Corta" VerticalOptions="Center" Margin="0,0,0,0" HorizontalOptions="FillAndExpand" Padding="2" TextColor="Black"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox IsChecked="{Binding Larga}" Margin="0,0,0,0" Color="Green" />
+                                    <Label Text="Larga" VerticalOptions="Center" Margin="0,0,0,0" HorizontalOptions="FillAndExpand" Padding="2" TextColor="Black"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox IsChecked="{Binding Color}" Margin="0,0,0,0" Color="Green" />
+                                    <Label Text="Color" VerticalOptions="Center" Margin="0,0,0,0" HorizontalOptions="FillAndExpand" Padding="2" TextColor="Black"/>
+                                </StackLayout>
+                            </StackLayout>
+                            
+                            <StackLayout Orientation="Horizontal" Spacing="2" HorizontalOptions="CenterAndExpand">
+                                <Frame HasShadow="True" HeightRequest="50" WidthRequest="140" BorderColor="Transparent" Padding="0" BackgroundColor="Transparent">
+                                    <Button
+                                        Command="{Binding RealizarCommand}"
+                                        Text="Realizar Petición"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="CenterAndExpand"
+                                        CornerRadius="20"
+                                        BackgroundColor="ForestGreen"
+                                        >
+                                    </Button>
+                                </Frame>
+                                <Frame HasShadow="True" HeightRequest="50" WidthRequest="140" BorderColor="Transparent" Padding="0" BackgroundColor="Transparent">
+                                    <Button
+                                        Command="{Binding CancelarCommand}"
+                                        Text="Cancelar"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="CenterAndExpand"
+                                        CornerRadius="20"
+                                        BackgroundColor="Red"
+                                        >
+                                    </Button>
+                                </Frame>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+        </Border>
     </VerticalStackLayout>
 </ContentPage>

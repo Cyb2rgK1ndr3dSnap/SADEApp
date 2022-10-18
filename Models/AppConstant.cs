@@ -1,15 +1,6 @@
-﻿using AutomatizacionServicios.Controls;
-using AutomatizacionServicios.Views.Copias;
-using AutomatizacionServicios.Views.Dispositivos;
+﻿using AutomatizacionServicios.Views.Copias;
 using AutomatizacionServicios.Views.Inicio;
 using AutomatizacionServicios.Views.Materiales;
-using AutomatizacionServicios.Views.startup;
-using Microsoft.Maui.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutomatizacionServicios.Models
 {
@@ -47,7 +38,7 @@ namespace AutomatizacionServicios.Models
                 FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                 Items =
                 {
-                    
+
                             new ShellContent
                                     {
                                         Icon = "house.png",
@@ -55,7 +46,7 @@ namespace AutomatizacionServicios.Models
                                         Route="InicioPage",
                                         ContentTemplate = new DataTemplate(typeof(InicioPage)),
                                     },
-                        
+
                     new Tab
                     {
                         Icon = "stationery.png",
@@ -69,7 +60,7 @@ namespace AutomatizacionServicios.Models
                                         Title = "Materiales",
                                         Route="MaterialesPage",
                                         ContentTemplate = new DataTemplate(typeof(MaterialesPage)),
-                                    },      
+                                    },
                         }
                     },
                     new Tab
@@ -78,22 +69,22 @@ namespace AutomatizacionServicios.Models
                         Title="Copias",
                         Items =
                         {
-                            /*new ShellContent
+                            new ShellContent
                                     {
                                         FlyoutIcon = "document.png",
                                         Title = "Peticiones",
                                         Route="CopiasImpresionesPage",
                                         //IsVisible = permissionDocument,
                                         ContentTemplate = new DataTemplate(typeof(CopiasPage)),      
-                                    },*/
-                            new ShellContent
+                                    },
+                           /* new ShellContent
                                     {
                                         FlyoutIcon = "document.png",
                                         Title = "Confirmarciones",
                                         Route="CopiasConfirmarPage",
                                         //IsVisible = permissionDocument,
                                         ContentTemplate = new DataTemplate(typeof(CopiasConfirmarPage))
-                                    },/*
+                                    },*//*
                             new ShellContent
                                     {
                                         Icon = "document.png",
@@ -110,6 +101,22 @@ namespace AutomatizacionServicios.Models
                                         //IsVisible = permissionDocument,
                                         //ContentTemplate = new DataTemplate(typeof(CopiasPage)),
                                     },*/
+                        }
+                    },
+                     new Tab
+                    {
+                        Icon = "document.png",
+                        Title="Confirmarciones",
+                        Items =
+                        {
+                        new ShellContent
+                                    {
+                                        FlyoutIcon = "document.png",
+                                        Title = "Confirmarciones",
+                                        Route="CopiasConfirmarPage",
+                                        //IsVisible = permissionDocument,
+                                        ContentTemplate = new DataTemplate(typeof(CopiasConfirmarPage))
+                                    },
                         }
                     },
                     /*
@@ -149,21 +156,21 @@ namespace AutomatizacionServicios.Models
             ///////////////////nameof(CopiasImpresionesPage) = tab;
 
             if (!AppShell.Current.Items.Contains(flyoutItemP))
-                {
+            {
                 AppShell.Current.Items.Add(flyoutItemP);
 
                 if (DeviceInfo.Platform == DevicePlatform.WinUI)
-                    {
-                        AppShell.Current.Dispatcher.Dispatch(async () =>
-                        {
-                            await Shell.Current.GoToAsync($"//{nameof(InicioPage)}");
-                        });
-                    }
-                    else
+                {
+                    AppShell.Current.Dispatcher.Dispatch(async () =>
                     {
                         await Shell.Current.GoToAsync($"//{nameof(InicioPage)}");
-                    }
+                    });
                 }
+                else
+                {
+                    await Shell.Current.GoToAsync($"//{nameof(InicioPage)}");
+                }
+            }
             //}
         }
     }

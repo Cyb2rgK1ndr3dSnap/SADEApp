@@ -1,10 +1,6 @@
-﻿using AutomatizacionServicios;
-using AutomatizacionServicios.Models;
+﻿using AutomatizacionServicios.Models;
 using AutomatizacionServicios.Models.Startup;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 //using System.Threading.Tasks;
 
@@ -42,7 +38,7 @@ namespace AutomatizacionServicios.Services
 
             StringContent content = new StringContent(JsonConvert.SerializeObject(loginRequest), Encoding.UTF8, "application/json");
 
-            using var response = await IGetPost.PostAsyncResponse("/login",content);
+            using var response = await IGetPost.PostAsyncResponse("/login", content);
 
             if (response.IsSuccessStatusCode)
             {

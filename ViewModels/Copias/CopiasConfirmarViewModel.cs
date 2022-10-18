@@ -1,16 +1,9 @@
-﻿using AutomatizacionServicios.Models;
-using AutomatizacionServicios.Models.CopiasEImpresiones;
+﻿using AutomatizacionServicios.Models.CopiasEImpresiones;
 using AutomatizacionServicios.Services;
-using AutomatizacionServicios.Views.Copias;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutomatizacionServicios.ViewModels.Copias
 {
@@ -26,9 +19,9 @@ namespace AutomatizacionServicios.ViewModels.Copias
         public CopiaseImpresionesRegistrosResponse SelectedRegistro
         {
             get => _selectedRegistro;
-            set 
+            set
             {
-                    SetProperty(ref _selectedRegistro, value);
+                SetProperty(ref _selectedRegistro, value);
             }
         }
 
@@ -50,35 +43,41 @@ namespace AutomatizacionServicios.ViewModels.Copias
             LstRegistros.Clear();
             IsBusy = true;
             await Task.Run(() =>
-            {   
-                List<CopiaseImpresionesRegistrosResponse> registros = new List<CopiaseImpresionesRegistrosResponse>();             
+            {
+                List<CopiaseImpresionesRegistrosResponse> registros = new List<CopiaseImpresionesRegistrosResponse>();
                 Application.Current.Dispatcher.Dispatch(async () =>
                 {
                     try
                     {
-                        registros = await getPost.CopiaseImpreseionesRegistrosSrv(App.UserInfoDetails.Facultad_id,App.UserInfoDetails.Api_token);
+                        registros = await getPost.CopiaseImpreseionesRegistrosSrv(App.UserInfoDetails.Facultad_id, App.UserInfoDetails.Api_token);
                         //await Task.Delay(500);
                         try
                         {
-                            foreach (CopiaseImpresionesRegistrosResponse registro in registros)
+                            if(registros != null)
                             {
-                                LstRegistros.Add(registro);
+                                foreach (CopiaseImpresionesRegistrosResponse registro in registros)
+                                {
+                                    LstRegistros.Add(registro);
+                                }
                             }
-                            
+                            else
+                            {
+                                await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "No existen pedidos en este momento", "OK");
+                            }
                         }
                         catch (NullReferenceException)
                         {
                             await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "No existen pedidos en este momento", "OK");
                         }
-                        
+
                     }
                     catch (HttpRequestException)
                     {
-                        await Application.Current.MainPage.DisplayAlert("Connection Problem 500","No se ha podido actualizar el feed","OK");
+                        await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "No existen pedidos en este momento", "OK");
                     }
                     catch (WebException)
                     {
-                        await Application.Current.MainPage.DisplayAlert("Connection Problem 500","Error al conectarse","OK");
+                        await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "Error al conectarse", "OK");
                     }
                 });
             }
@@ -91,7 +90,7 @@ namespace AutomatizacionServicios.ViewModels.Copias
         [RelayCommand]
         async Task Refresh()
         {
-            IsRefreshing=true;
+            IsRefreshing = true;
             await AddUserList();
             IsRefreshing = false;
         }

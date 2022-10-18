@@ -24,11 +24,14 @@
         </Frame>
 
         <Frame Padding="0" BorderColor="Black">
-            <Label x:Name="lblId"             
-            Text="{Binding Billetera}"      
-            HorizontalOptions="Center" 
-            TextColor="Black"
-         />
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                <Image Source="digital_wallet.png" HeightRequest="50" WidthRequest="50" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"/>
+                <Label x:Name="lblId"             
+                Text="{Binding Billetera}"  
+                VerticalOptions="Center"
+                FontSize="20"
+                TextColor="Black"/>
+            </HorizontalStackLayout>
         </Frame>
     </VerticalStackLayout>
 </ContentPage>

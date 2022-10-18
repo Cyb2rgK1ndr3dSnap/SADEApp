@@ -9,7 +9,7 @@ public partial class MaterialesPage : ContentPage
 		InitializeComponent();
 		this.BindingContext = vm;
 
-    }
+	}
 
 	private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
 	{

@@ -1,16 +1,10 @@
 ﻿using AutomatizacionServicios.Models.CopiasEImpresiones;
+using AutomatizacionServicios.Models.Token;
 using AutomatizacionServicios.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutomatizacionServicios.ViewModels.Copias
 {
@@ -21,6 +15,7 @@ namespace AutomatizacionServicios.ViewModels.Copias
     public partial class CopiasSeleccionPageViewModel : BaseViewModel
     {
         readonly CService getPost = new CService();
+        readonly TService bGetPost = new TService();
 
         public ObservableCollection<CopiaseImpresionesHojasResponse> PkrHojas { get; set; } = new ObservableCollection<CopiaseImpresionesHojasResponse>();
         //
@@ -45,6 +40,9 @@ namespace AutomatizacionServicios.ViewModels.Copias
 
         [ObservableProperty]
         private bool flag;
+
+        [ObservableProperty]
+        private string billetera;
 
         private CopiaseImpresionesHojasResponse _selectedItem;
 
@@ -94,6 +92,7 @@ namespace AutomatizacionServicios.ViewModels.Copias
             User = App.UserInfoDetails.Nombre;
             Identificacion = App.UserInfoDetails.Cedula;
             AddHojas();
+            ServBilletera();
         }
 
         private void AddHojas()
@@ -121,13 +120,13 @@ namespace AutomatizacionServicios.ViewModels.Copias
                         }
                         catch (NullReferenceException)
                         {
-                            await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "No se ha podido cargar el feed", "OK");
+                            await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "No se ha podido cargar las hojas", "OK");
                         }
 
                     }
                     catch (HttpRequestException)
                     {
-                        await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "No se ha podido actualizar el feed", "OK");
+                        await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "No se ha podido actualizar las hojas", "OK");
                     }
                     catch (WebException)
                     {
@@ -138,6 +137,16 @@ namespace AutomatizacionServicios.ViewModels.Copias
             );
         }
 
+        async Task ServBilletera()
+        {
+            await Task.Run(async () =>
+            {
+                BilleteraResponse billeteraResponse = new BilleteraResponse();
+                billeteraResponse = await bGetPost.Billetera();
+                Billetera = billeteraResponse.Dinero;
+            });
+        }
+
         #region Commands
         /*[RelayCommand]
         async void ScannerId()
@@ -145,7 +154,7 @@ namespace AutomatizacionServicios.ViewModels.Copias
             Identificacion = "";
         }*/
 
-        
+
         [RelayCommand]
         async Task Realizar()
         {
@@ -153,10 +162,11 @@ namespace AutomatizacionServicios.ViewModels.Copias
             CopiaseImpresionesInsertRegisterResponse response = new CopiaseImpresionesInsertRegisterResponse();
             try
             {
-                if (!String.IsNullOrWhiteSpace(Cantidad)&&!String.IsNullOrWhiteSpace(MaterialCopiado)&&!String.IsNullOrWhiteSpace(Precio.ToString())&&SelectedItem!=null&&Int32.Parse(Cantidad)>0&&Cantidad.ToCharArray().All(Char.IsDigit)) { 
-                
-                    response = await getPost.CopiaseImpreseionesInsertRegistroSrv(App.UserInfoDetails.Facultad_id, _selectedItem.Material_Id, MaterialCopiado, SerColor, SerId, Int32.Parse(Cantidad),Precio);
-                    if (response.ErrorInfo!=null)
+                if (!String.IsNullOrWhiteSpace(Cantidad) && !String.IsNullOrWhiteSpace(MaterialCopiado) && !String.IsNullOrWhiteSpace(Precio.ToString()) && SelectedItem != null && Int32.Parse(Cantidad) > 0 && Cantidad.ToCharArray().All(Char.IsDigit))
+                {
+
+                    response = await getPost.CopiaseImpreseionesInsertRegistroSrv(App.UserInfoDetails.Facultad_id, _selectedItem.Material_Id, MaterialCopiado, SerColor, SerId, Int32.Parse(Cantidad), Precio);
+                    if (response.ErrorInfo != null)
                     {
                         AddHojas();
                         await Application.Current.MainPage.DisplayAlert("Sin exito", response.ErrorInfo[2], "OK");
@@ -172,7 +182,7 @@ namespace AutomatizacionServicios.ViewModels.Copias
                     await Application.Current.MainPage.DisplayAlert("No exitoso", "Por favor ingresar datos valídos", "OK");
                 }
             }
-            catch (IOException e)
+            catch (IOException)
             {
                 AddHojas();
                 await Application.Current.MainPage.DisplayAlert("No exitoso", "Error contactesé con el administrador", "OK");
