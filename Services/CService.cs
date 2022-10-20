@@ -26,7 +26,7 @@ namespace AutomatizacionServicios.Services
             }
             else
             {
-                return null;
+                return copiaseImpresionesResponse;
             }
         }
 
@@ -75,7 +75,7 @@ namespace AutomatizacionServicios.Services
             }
             else
             {
-                return null;
+                return responseList.FirstOrDefault();
             }
         }
 
@@ -99,7 +99,7 @@ namespace AutomatizacionServicios.Services
             }
             else
             {
-                return null;
+                return responseList;
             }
         }
     }

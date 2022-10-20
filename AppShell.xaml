@@ -16,6 +16,7 @@
     Shell.TabBarBackgroundColor="#512BD4"
     FlyoutBackgroundImage="purpink.jpg"
     FlyoutBackgroundImageAspect="Fill"
+    Shell.PresentationMode="Modal"
     >
 
     <Shell.Resources>
@@ -25,6 +26,15 @@
                 Value="Black" />
             <Setter Property="HeightRequest"
                 Value="100" />
+        </Style>
+
+        <Style TargetType="TabBar">
+            <Setter Property="Shell.TabBarBackgroundColor"
+            Value="Black" />
+            <Setter Property="Shell.TabBarTitleColor"
+            Value="#512BD4" />
+            <Setter Property="Shell.TabBarUnselectedColor"
+            Value="AntiqueWhite" />
         </Style>
     </Shell.Resources>
 

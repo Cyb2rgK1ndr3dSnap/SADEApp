@@ -5,17 +5,16 @@ namespace AutomatizacionServicios.Views.Inicio
 
     public partial class InicioPage : ContentPage
     {
-        public InicioPage(InicioPageViewModel viewModel)
+        public InicioPage(/*InicioPageViewModel viewModel*/)
         {
             InitializeComponent();
-            this.BindingContext = viewModel;
+            //this.BindingContext = viewModel;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
             this.BindingContext = new InicioPageViewModel();
-
         }
     }
 }

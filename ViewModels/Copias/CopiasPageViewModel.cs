@@ -13,8 +13,11 @@ namespace AutomatizacionServicios.ViewModels.Copias
 
         readonly CService getPost = new CService();
 
-        #region Properties
+        private List<CopiaseImpresionesResponse> copias;
+     
         public ObservableCollection<CopiaseImpresionesResponse> LstCopias { get; set; } = new ObservableCollection<CopiaseImpresionesResponse>();
+
+        #region Properties
 
         private CopiaseImpresionesResponse _selectedUsuarios;
 
@@ -36,61 +39,54 @@ namespace AutomatizacionServicios.ViewModels.Copias
                     //No se puede seleccionar elemento del Listview
                     LstState = false;
                     SetProperty(ref _selectedPeticion, value);
-                    Seleccion();
+                    Seleccion().ConfigureAwait(false);
                 }
 
             }
         }
 
         [ObservableProperty]
-        private bool btnAdd;
+        private bool btnAddVisible;
 
         #endregion
 
-        //[ObservableProperty]
-        //private bool lstState;
-
         public CopiasPageViewModel()
         {
-            BtnAdd = App.UserInfoDetails.Tipo_usuario_id == "2" ? false : true;
+            BtnAddVisible = App.UserInfoDetails.Tipo_usuario_id == "2" ? true : false;
             AddServList();
         }
 
-        async Task AddServList()
+        private void AddServList()
         {
             LstCopias.Clear();
+            //List<CopiaseImpresionesResponse> copias = new List<CopiaseImpresionesResponse>();
+
             IsBusy = true;
-            await Task.Run(() =>
+            Task.Run(async() =>
             {
-                //List<Usuarios> usuarios = await getPost.InfosSer();
-                List<CopiaseImpresionesResponse> copias = new List<CopiaseImpresionesResponse>();
-                //await Task.Delay(2000);                
-                Application.Current.Dispatcher.Dispatch(async () =>
-                {
+                //LstCopias.Clear();
+                copias = await getPost.CopiaseImpreseionesSrv(App.UserInfoDetails.Facultad_id, App.UserInfoDetails.Tipo_usuario_id);
+
+                /*App.Current.Dispatcher.Dispatch(() =>
+                {*/
+                    //LstCopias.Clear();
                     try
                     {
-                        //##Traer en el objeto el número de facultad a la que pertenece el usuario
-                        copias = await getPost.CopiaseImpreseionesSrv(App.UserInfoDetails.Facultad_id, App.UserInfoDetails.Tipo_usuario_id);
-
-                        await Task.Delay(1000);
-
-                        try
-                        {
-                            if(copias!= null) { 
-                                foreach (CopiaseImpresionesResponse copia in copias)
-                                {
-                                    LstCopias.Add(copia);
-                                }
-                            }else
+                        if (copias !=null) { 
+                            foreach(CopiaseImpresionesResponse copia in copias)
                             {
-                                await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "No se ha podido cargar el feed", "OK");
+                                LstCopias.Add(copia);
                             }
                     }
-                        catch (NullReferenceException e)
-                        {
-                            await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "No se ha podido cargar el feed", "OK");
-                        }
-
+                    else
+                    {
+                        await App.Current.MainPage.DisplayAlert("Connection Problem 500", "No se ha podido actualizar el feed", "OK");
+                    }
+                    //ObservableCollection<CopiaseImpresionesResponse> copiasItems = new ObservableCollection<CopiaseImpresionesResponse>(await Items(copias));
+                    //await Items(copias);
+                    //LstCopias = new ObservableCollection<CopiaseImpresionesResponse>(await Items(copias));
+                    //LstCopias = copiasItems;
+                    //Items(copias).GetAwaiter();
                     }
                     catch (HttpRequestException)
                     {
@@ -100,31 +96,41 @@ namespace AutomatizacionServicios.ViewModels.Copias
                     {
                         await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "Error al conectarse", "OK");
                     }
-                    LstState = true;
-                });
-            }
-            );
-            IsBusy = false;
+                //});
+                LstState = true;
+                IsBusy = false;
+            }).ConfigureAwait(false);
+            //LstState = true;
+            //IsBusy = false;
         }
-
-
+        //private async Task<CopiaseImpresionesResponse> Items(List<CopiaseImpresionesResponse> items)
+        /*async Task<List<CopiaseImpresionesResponse>> Items(List<CopiaseImpresionesResponse> items)
+        {
+            var listItems = new List<CopiaseImpresionesResponse>();
+            var taskCount = items.Count;
+            for(int i = 0; i < taskCount; i++)
+            {
+                //listItems.Add(items[i]) ;
+                listItems.Add(items[i]);
+            }
+            return listItems;
+        }*/
 
         #region Commands
         [RelayCommand]
-        async Task Refresh()
+        void Refresh()
         {
             IsRefreshing = true;
-            await AddServList();
+            AddServList();
             IsRefreshing = false;
         }
 
-        //[RelayCommand]
-        void Seleccion()
+        async Task Seleccion()
         {
-            Task.Run(() =>
+            /*Task.Run(() =>
             {
                 Application.Current.Dispatcher.Dispatch(async () =>
-                {
+                {*/
                     await Shell.Current.GoToAsync($"{nameof(CopiasSeleccionPage)}",
                     new Dictionary<string, object>
                     {
@@ -135,8 +141,8 @@ namespace AutomatizacionServicios.ViewModels.Copias
                     });
                     //Se puede seleccionar nuevamente un elementos del Listview
                     LstState = true;
-                });
-            });
+                /*});
+            });*/
         }
         #endregion
     }

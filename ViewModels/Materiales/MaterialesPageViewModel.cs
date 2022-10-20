@@ -11,6 +11,8 @@ namespace AutomatizacionServicios.ViewModels.Materiales
     {
         readonly MService getPost = new MService();
 
+        private List<MaterialesResponse> materiales = new List<MaterialesResponse>();
+
         public ObservableCollection<MaterialesResponse> LstMateriales { get; set; } = new ObservableCollection<MaterialesResponse>();
 
         private MaterialesResponse selectedMaterial;
@@ -33,46 +35,42 @@ namespace AutomatizacionServicios.ViewModels.Materiales
 
         public MaterialesPageViewModel()
         {
+            //AddMaterialesList().GetAwaiter();
             AddMaterialesList();
         }
 
-        async Task AddMaterialesList()
+        void AddMaterialesList()
         {
             LstMateriales.Clear();
+            //List<MaterialesResponse> materiales = new List<MaterialesResponse>(); 
             IsBusy = true;
-            await Task.Run(() =>
+            Task.Run(async() =>
             {
-                //List<Usuarios> usuarios = await getPost.InfosSer();
-                List<MaterialesResponse> materiales = new List<MaterialesResponse>();
-                //await Task.Delay(2000);                
-                Application.Current.Dispatcher.Dispatch(async () =>
-                {
-                    try
+                /*App.Current.Dispatcher.Dispatch(async() =>
+                {*/
+                    try { 
+                    materiales = await getPost.MaterialesServ();
+                    /*try
+                        {*/
+                    if (materiales != null)
                     {
-                        //##Traer en el objeto el número de facultad a la que pertenece el usuario
-                        materiales = await getPost.MaterialesServ();
-
-                        await Task.Delay(1000);
-
-                        try
+                        foreach (MaterialesResponse material in materiales)
                         {
-                            if(materiales != null)
-                            {
-                                foreach (MaterialesResponse material in materiales)
-                                {
-                                    LstMateriales.Add(material);
-                                }
-                            }
-                            else
-                            {
-                                await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "No se ha podido cargar el feed", "OK");
-                            }
+                            LstMateriales.Add(material);
                         }
-                        catch (NullReferenceException)
+                    }
+                    else
+                    {
+                        await App.Current.MainPage.DisplayAlert("Connection Problem 500", "No se ha podido actualizar el feed", "OK");
+                    }   
+                        //await Items(materiales);
+                        /*var taskCount = materiales.Count;
+                        for (int i = 0; i < taskCount; i++)
                         {
-                            await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "No se ha podido cargar el feed", "OK");
+                            this.LstMateriales.Add(materiales[i]);
                         }
-
+                        LstState = true;
+                        IsBusy = false;*/
                     }
                     catch (HttpRequestException)
                     {
@@ -83,19 +81,32 @@ namespace AutomatizacionServicios.ViewModels.Materiales
                         await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "Error al conectarse", "OK");
                     }
                     LstState = true;
-                });
-            }
-            );
-            IsBusy = false;
+                //});
+                IsBusy = false;
+            }).ConfigureAwait(false);
+            //IsBusy = false;
         }
+
+        /*
+        private async Task Items(List<MaterialesResponse> items)
+        {
+            //CopiaseImpresionesResponse item = new CopiaseImpresionesResponse();
+            var taskCount = items.Count;
+            for (int i = 0; i < taskCount; i++)
+            {
+                this.LstMateriales.Add(items[i]);
+            }
+            //return await Task.FromResult(item);
+        }*/
 
         #region Command
         [RelayCommand]
-        async Task Refresh()
+        void Refresh()
         {
             IsRefreshing = true;
-            await AddMaterialesList();
+            AddMaterialesList();
             IsRefreshing = false;
+            //return Task.CompletedTask;
         }
 
         [RelayCommand]

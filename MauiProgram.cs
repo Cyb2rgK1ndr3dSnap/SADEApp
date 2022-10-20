@@ -1,4 +1,5 @@
-﻿using AutomatizacionServicios.ViewModels;
+﻿using AutomatizacionServicios.Services;
+using AutomatizacionServicios.ViewModels;
 using AutomatizacionServicios.ViewModels.Copias;
 using AutomatizacionServicios.ViewModels.Dispositivos;
 using AutomatizacionServicios.ViewModels.Inicio;
@@ -29,15 +30,21 @@ public static class MauiProgram
         //return builder.Build();
         //builder.Services.AddSingleton<>();
 
+        //Services
+        builder.Services.AddSingleton<LServices>();
+        builder.Services.AddSingleton<MService>();
+        builder.Services.AddSingleton<CService>();
+        builder.Services.AddSingleton<TService>();
+
         //View
         //builder.Services.AddTransient<AppShell>();
-        builder.Services.AddSingleton<AppShell>();
+        //builder.Services.AddSingleton<AppShell>();
 
         builder.Services.AddTransient<RegisterPage>();
         builder.Services.AddTransient<LoadingPage>();
         builder.Services.AddTransient<LoginPage>();
 
-        builder.Services.AddTransient<InicioPage>();
+        builder.Services.AddSingleton<InicioPage>();
 
         builder.Services.AddSingleton<MaterialesPage>();
         builder.Services.AddTransient<MaterialesAgregarPage>();
@@ -45,17 +52,17 @@ public static class MauiProgram
         builder.Services.AddSingleton<CopiasPage>();
         builder.Services.AddTransient<CopiasSeleccionPage>();
         builder.Services.AddSingleton<CopiasConfirmarPage>();
-        builder.Services.AddTransient<CopiasConfirmarSeleccionPage>();
+        //builder.Services.AddTransient<CopiasConfirmarSeleccionPage>();
 
-        builder.Services.AddTransient<DispositivosPage>();
+        //builder.Services.AddTransient<DispositivosPage>();
 
         //ViewModels Login
-        builder.Services.AddSingleton<AppShellViewModel>();
+        //builder.Services.AddSingleton<AppShellViewModel>();
         builder.Services.AddTransient<RegisterPageViewModel>();
         builder.Services.AddTransient<LoadingPageViewModel>();
         builder.Services.AddTransient<LoginPageViewModel>();
 
-        builder.Services.AddTransient<InicioPageViewModel>();
+        builder.Services.AddSingleton<InicioPageViewModel>();
 
         builder.Services.AddSingleton<MaterialesPageViewModel>();
         builder.Services.AddTransient<MaterialesAgregarPageViewModel>();
@@ -63,9 +70,9 @@ public static class MauiProgram
         builder.Services.AddSingleton<CopiasPageViewModel>();
         builder.Services.AddTransient<CopiasSeleccionPageViewModel>();
         builder.Services.AddSingleton<CopiasConfirmarViewModel>();
-        builder.Services.AddTransient<CopiasConfirmarSeleccionViewModel>();
+        //builder.Services.AddTransient<CopiasConfirmarSeleccionViewModel>();
 
-        builder.Services.AddTransient<DispositivosPageViewModel>();
+        //builder.Services.AddTransient<DispositivosPageViewModel>();
         return builder.Build();
     }
 }

@@ -45,39 +45,35 @@ namespace AutomatizacionServicios.ViewModels.Materiales
             MaterialesAddResponse response = new MaterialesAddResponse();
             try
             {
-                if (!String.IsNullOrWhiteSpace(NombreMaterial))
+                if (String.IsNullOrEmpty(Otro))
                 {
-                    if (Corta==1 && Larga==1)
-                    {
-                        if (Color == 1 && String.IsNullOrWhiteSpace(ColorNombre))
-                        {
-                            response = await getPost.MaterialAdd(NombreMaterial,Otro,ColorNombre,Color, Corta, Larga);
-                            if (response.ErrorInfo != null)
-                            {
-                                await Application.Current.MainPage.DisplayAlert("Sin exito", response.ErrorInfo[2], "OK");
-                            }
-                            else
-                            {
-                                await Application.Current.MainPage.DisplayAlert("Exitoso", response.Message, "OK");
-                                await Shell.Current.GoToAsync("..");
-                            }
-                        }
-                        else
-                        {
-                            await Application.Current.MainPage.DisplayAlert("No exitoso", "Por favor elegir una opción corta o larga", "OK");
-                        }
-                    }
-                    else
-                    {
-                        await Application.Current.MainPage.DisplayAlert("No exitoso", "Por favor elegir una opción corta o larga", "OK");
-                    }
+                    Otro = "";
+                }
+                if (String.IsNullOrWhiteSpace(NombreMaterial))
+                {
+                    await Application.Current.MainPage.DisplayAlert("No exitoso", "Por favor ingresar datos valídos", "OK");
+                }else if (Corta == 1 && Larga == 1)
+                {
+                    await Application.Current.MainPage.DisplayAlert("No exitoso", "Por favor elegir una opción corta o larga", "OK");
+                }else if (Color == 1 && String.IsNullOrWhiteSpace(ColorNombre) || Color == 0 && !String.IsNullOrWhiteSpace(ColorNombre))
+                {
+                    await Application.Current.MainPage.DisplayAlert("No exitoso", "Por favor ingrese el color de nombre o seleccionar el cuadro color", "OK");
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("No exitoso", "Por favor ingresar datos valídos", "OK");
+                    response = await getPost.MaterialAdd(NombreMaterial, Otro, ColorNombre, Color, Corta, Larga);
+                    if (response.ErrorInfo != null)
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Sin exito", response.ErrorInfo[2], "OK");
+                    }
+                    else
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Exitoso", response.Message, "OK");
+                        await Shell.Current.GoToAsync("..");
+                    }
                 }
             }
-            catch (IOException)
+            catch (NullReferenceException)
             {
                 await Application.Current.MainPage.DisplayAlert("No exitoso", "Error contactesé con el administrador", "OK");
             }

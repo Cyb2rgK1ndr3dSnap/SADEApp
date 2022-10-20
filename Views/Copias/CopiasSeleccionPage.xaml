@@ -7,7 +7,7 @@
              BackgroundColor="Gray"
              Shell.PresentationMode="Animated"
              Title="Petición"
-             >
+             Shell.TabBarIsVisible="False">
     <VerticalStackLayout
         VerticalOptions="CenterAndExpand"
         Spacing="30"

@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AutomatizacionServicios.Views.Materiales.MaterialesAgregarPage"
              Title="MaterialesAgregarPage"
-             BackgroundColor="White">
+             BackgroundColor="White"
+             Shell.TabBarIsVisible="False">
     <VerticalStackLayout
         VerticalOptions="CenterAndExpand"
         Spacing="30"

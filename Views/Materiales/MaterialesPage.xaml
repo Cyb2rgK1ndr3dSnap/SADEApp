@@ -5,15 +5,16 @@
              Title="MaterialesPage"
              BackgroundColor="White"
              >
-    
-    <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
-        <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Vertical" Padding="0">
-            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="End" Padding="10">
-                <ActivityIndicator IsRunning="True" IsVisible="{Binding IsBusy}" Color="BlueViolet"/>
-                <Label Margin="0,10,0,10" Text="Servicio de Copias e Impresiones/Peticiones" FontSize="12" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center"/>
+
+    <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Vertical" Padding="0">
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="End" Padding="10">
+            <Label Margin="0,10,0,10" Text="Servicio de Copias e Impresiones/Peticiones" FontSize="12" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center"/>
+            <Border BackgroundColor="#b6e8ff"  Stroke="black" StrokeShape="RoundRectangle 40,40,40,40" Margin="10,10,10,10">
+                <SearchBar Margin="10,0,10,1" MaxLength="30" Placeholder="Buscar Id"/>
+            </Border>
+            <ActivityIndicator IsRunning="True" IsVisible="{Binding IsBusy}" Color="BlueViolet"/>
                 <Button Command="{Binding AgregarCommand}" Text="Agregar material" BackgroundColor="AliceBlue" IsVisible="{Binding BtnAddMaterial}" TextColor="Black" BorderColor="Black" BorderWidth="1"/>
             </StackLayout>
-            <ScrollView VerticalOptions="FillAndExpand" Orientation="Vertical">
 
                 <ListView 
                       CachingStrategy="RecycleElement"
@@ -22,6 +23,11 @@
                       SelectedItem="{Binding SelectedMaterial}"
                       ItemTapped="ListView_ItemTapped" 
                       HasUnevenRows="True"
+                      VerticalOptions="FillAndExpand"
+                      IsPullToRefreshEnabled="True"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      IsRefreshing="{Binding IsRefreshing}"
+                      RefreshControlColor="Red"
                       >
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -36,7 +42,7 @@
                                                 <Image Source="stationery.png" HeightRequest="40" WidthRequest="40"/>
                                                 <VerticalStackLayout>
                                                     <Label Text="{Binding Nombre}" Margin="10,10,0,0" FontAttributes="Bold" TextColor="Black"/>
-                                                    <Label Text="{Binding Color_material}" Margin="10,10,0,0" FontAttributes="Bold" TextColor="Black"/>
+                                                    <Label Text="{Binding Color_material}" Margin="10,0,0,10" FontAttributes="Bold" TextColor="Black"/>
                                                 </VerticalStackLayout>
                                             </HorizontalStackLayout>
                                         </Grid>
@@ -55,7 +61,5 @@
                     </ListView.Footer>
                 </ListView>
 
-            </ScrollView>
         </StackLayout>
-    </RefreshView>
 </ContentPage>

@@ -50,7 +50,7 @@ namespace AutomatizacionServicios.Services
             }
             else
             {
-                return null;
+                return loginResponse.FirstOrDefault();
             }
         }
 

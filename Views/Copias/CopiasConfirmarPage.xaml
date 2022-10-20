@@ -5,56 +5,64 @@
              x:Class="AutomatizacionServicios.Views.Copias.CopiasConfirmarPage"
              BackgroundColor="White"
              >
-    <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
-        <StackLayout Orientation="Vertical" Padding="0">
-            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="End" Padding="10">
-                <ActivityIndicator IsRunning="True" IsVisible="{Binding IsBusy}" Color="BlueViolet"/>
-                <Label Margin="0,10,0,10" Text="Servicio de Copias e Impresiones/Peticiones" FontSize="12" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center"/>
-            </StackLayout>
-            <ScrollView HorizontalOptions="CenterAndExpand" Orientation="Vertical" VerticalOptions="FillAndExpand">
-                <ListView 
+
+    <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Vertical" Padding="0">
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="End" Padding="10">
+            <Label Margin="0,10,0,10" Text="Servicio de Copias e Impresiones/Peticiones" FontSize="12" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center"/>
+            <Border BackgroundColor="#b6e8ff"  Stroke="black" StrokeShape="RoundRectangle 40,40,40,40" Margin="10,10,10,10">
+                <SearchBar Margin="10,0,10,1" MaxLength="30" Placeholder="Buscar Id"/>
+            </Border>
+            <ActivityIndicator IsRunning="True" IsVisible="{Binding IsBusy}" Color="BlueViolet"/>
+        </StackLayout>
+        <ListView 
                   x:Name="LstRegistrosC"
                   CachingStrategy="RecycleElement"
+                  
                   ItemsSource="{Binding LstRegistros}"
                   SelectedItem="{Binding SelectedRegistro}"
                   SeparatorColor="Black"
                   HasUnevenRows="True"
-                  > 
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <ViewCell.ContextActions>
-                                    <MenuItem Text="Realizar tarea" BindingContext="{Binding Source={x:Reference LstRegistrosC}, Path=BindingContext}" Command="{Binding RealizarCommand}"/>
-                                    <MenuItem Text="Confirmar" BindingContext="{Binding Source={x:Reference LstRegistrosC}, Path=BindingContext}" Command="{Binding ConfirmarCommand}"/>
-                                    <MenuItem Text="Cancelar" BindingContext="{Binding Source={x:Reference LstRegistrosC}, Path=BindingContext}" Command="{Binding CancelarCommand}"/>
-                                </ViewCell.ContextActions>
-                                <ViewCell.View>
-                                    <Border BackgroundColor="#b6e8ff" Padding="5" Stroke="black" StrokeShape="RoundRectangle 40,0,0,40" Margin="10,10,10,10" VerticalOptions="FillAndExpand">
-                                        <Grid >
-                                            <VerticalStackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Margin="20,10,10,20" Spacing="5">
-                                                <StackLayout Orientation="Horizontal" Spacing="5">
-                                                    <Label Text="ID Petición:" TextColor="Black"/>
-                                                    <Label Text="{Binding Id}" TextColor="Black"/>
-                                                    <Label Text="ID Usuario:" TextColor="Black"/>
-                                                    <Label Text="{Binding Usuario_Id}" TextColor="Black"/>
-                                                </StackLayout>
-                                                <StackLayout Orientation="Horizontal" Spacing="15">
-                                                    <Label Text="Material:" TextColor="Black"/>
-                                                    <Label Text="{Binding Matnombre}" TextColor="Black"/>
-                                                    <Label Text="Gastada:" TextColor="Black"/>
-                                                    <Label Text="{Binding Gastado}" TextColor="Black"/>
-                                                </StackLayout>
-                                            </VerticalStackLayout>
-                                        </Grid>
-                                    </Border>
-                                        
-                                </ViewCell.View>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                  VerticalOptions="FillAndExpand"
+                  IsPullToRefreshEnabled="True"
+                  RefreshCommand="{Binding RefreshCommand}"
+                  IsRefreshing="{Binding IsRefreshing}"
+                  RefreshControlColor="Red"
+                  >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Realizar tarea" BindingContext="{Binding Source={x:Reference LstRegistrosC}, Path=BindingContext}" Command="{Binding RealizarCommand}"/>
+                            <MenuItem Text="Confirmar" BindingContext="{Binding Source={x:Reference LstRegistrosC}, Path=BindingContext}" Command="{Binding ConfirmarCommand}"/>
+                            <MenuItem Text="Cancelar" BindingContext="{Binding Source={x:Reference LstRegistrosC}, Path=BindingContext}" Command="{Binding CancelarCommand}"/>
+                        </ViewCell.ContextActions>
+                        <ViewCell.View>
+                            <Grid>
+                            <Border BackgroundColor="#b6e8ff" Padding="5" Stroke="black" StrokeShape="RoundRectangle 40,0,0,40" Margin="10,10,10,10">
+                                    <StackLayout>
+                                    <VerticalStackLayout HorizontalOptions="FillAndExpand" Margin="20,10,10,20" Spacing="5">
+                                        <StackLayout Orientation="Horizontal" Spacing="5">
+                                            <Label Text="ID Petición:" TextColor="Black"/>
+                                            <Label Text="{Binding Id}" TextColor="Black"/>
+                                            <Label Text="ID Usuario:" TextColor="Black"/>
+                                            <Label Text="{Binding Usuario_Id}" TextColor="Black"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal" Spacing="15">
+                                            <Label Text="Material:" TextColor="Black"/>
+                                            <Label Text="{Binding Matnombre}" TextColor="Black"/>
+                                            <Label Text="Gastada:" TextColor="Black"/>
+                                            <Label Text="{Binding Gastado}" TextColor="Black"/>
+                                        </StackLayout>
+                                    </VerticalStackLayout>
+                                        </StackLayout>
 
-            </ScrollView>
-        </StackLayout>
-    </RefreshView>
+                                </Border>
+                            </Grid>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </StackLayout>
 </ContentPage>

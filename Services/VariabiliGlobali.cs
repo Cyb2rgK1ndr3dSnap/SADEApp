@@ -8,7 +8,7 @@
 
         VariabiliGlobali()
         {
-            this.UriBaseAddress = new Uri("https://sadeservice.000webhostapp.com/");
+            this.UriBaseAddress = new Uri("https://sadeservice.000webhostapp.com");
         }
 
         public static VariabiliGlobali Instance()

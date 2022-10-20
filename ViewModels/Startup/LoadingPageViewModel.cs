@@ -13,35 +13,36 @@ namespace AutomatizacionServicios.ViewModels.Startup
             CheckUserIsConnect();
         }
 
-        private async void CheckUserIsConnect()
+        void CheckUserIsConnect()
         {
+            Task.Run(async () =>
+            {
             await Task.Delay(1000);
             string userInfoDetailsStr = Preferences.Get(nameof(App.UserInfoDetails), "");
 
-            if (string.IsNullOrWhiteSpace(userInfoDetailsStr))
-            {
-
-                if (DeviceInfo.Platform == DevicePlatform.WinUI)
+                if (string.IsNullOrWhiteSpace(userInfoDetailsStr))
                 {
-                    AppShell.Current.Dispatcher.Dispatch(async () =>
+
+                    if (DeviceInfo.Platform == DevicePlatform.WinUI)
+                    {
+                        AppShell.Current.Dispatcher.Dispatch(async () =>
+                        {
+                            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+                        });
+                    }
+                    else
                     {
                         await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
-                    });
+                    }
                 }
                 else
                 {
-                    await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+                        var userInfoDetails = JsonConvert.DeserializeObject<LoginResponse>(userInfoDetailsStr);
+                        App.UserInfoDetails = userInfoDetails;
+                        //await AppConstant.AddFlyoutMenusDetails();
+                        AppConstant.AddFlyoutMenusDetails();
                 }
-                // navigate to Login Page
-            }
-            else
-            {
-                var userInfoDetails = JsonConvert.DeserializeObject<LoginResponse>(userInfoDetailsStr);
-                App.UserInfoDetails = userInfoDetails;
-                //AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
-                await AppConstant.AddFlyoutMenusDetails();
-                //await Shell.Current.GoToAsync($"//{nameof(InicioPage)}"); 
-            }
+            });
         }
     }
 

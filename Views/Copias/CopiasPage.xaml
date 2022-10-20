@@ -5,25 +5,29 @@
              Title=""
              Shell.NavBarIsVisible="True"
              BackgroundColor="White"
-             Shell.PresentationMode="Animated"
              >
-    
-    <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+
     <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Vertical" Padding="0">
         <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="End" Padding="10">
-            <ActivityIndicator IsRunning="True" IsVisible="{Binding IsBusy}" Color="BlueViolet"/>
             <Label Margin="0,10,0,10" Text="Servicio de Copias e Impresiones/Peticiones" FontSize="12" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center"/>
-            <Button Text="Agregar servicio" BackgroundColor="AliceBlue" IsVisible="{Binding BtnAddServicio}" TextColor="Black" BorderColor="Black" BorderWidth="1"/>
-        </StackLayout>
-            <ScrollView VerticalOptions="FillAndExpand" Orientation="Vertical">
-
-                <ListView 
-                      IsEnabled="{Binding LstState}"
+            <Border BackgroundColor="#b6e8ff"  Stroke="black" StrokeShape="RoundRectangle 40,40,40,40" Margin="10,10,10,10">
+                <SearchBar Margin="10,0,10,1" MaxLength="30" Placeholder="Buscar Id"/>
+            </Border>
+            <ActivityIndicator IsRunning="True" IsVisible="{Binding IsBusy}" Color="BlueViolet"/>
+                <Button Text="Agregar servicio" BackgroundColor="AliceBlue" IsVisible="{Binding BtnAddVisible}" TextColor="Black" BorderColor="Black" BorderWidth="1"/>
+            </StackLayout>
+            <ListView 
                       CachingStrategy="RecycleElement"
+                      IsEnabled="{Binding LstState}"                      
                       ItemsSource="{Binding LstCopias}"
                       SelectedItem="{Binding SelectedPeticion}"
                       ItemTapped="ListView_ItemTapped"
                       HasUnevenRows="True"
+                      VerticalOptions="FillAndExpand"
+                      IsPullToRefreshEnabled="True"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      IsRefreshing="{Binding IsRefreshing}"
+                      RefreshControlColor="Red"
                       >
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -33,7 +37,7 @@
                                     <MenuItem Text="Confirmar"/>
                                     <MenuItem Text="Cancelar"/>
                                 </ViewCell.ContextActions>
-                                <Grid Style="{StaticResource GridColorStyle}">
+                                <Grid>
                                     <Border BackgroundColor="White" Padding="5" Stroke="black" StrokeShape="RoundRectangle 40,0,0,40" Margin="10,10,10,10" >
                                         <Grid>
                                             <Border BackgroundColor="Transparent" Padding="0" Stroke="black" StrokeShape="RoundRectangle 40,0,0,40">
@@ -43,9 +47,9 @@
                                                 <Image Source="document.png" HeightRequest="40" WidthRequest="40"/>
                                                 <VerticalStackLayout>
                                                     <Label Text="{Binding Nombre}" Margin="10,10,0,0" FontAttributes="Bold" TextColor="Black"/>
-                                                    <HorizontalStackLayout Margin="10,5,0,10">
-                                                    <Label Text="C/U: $" FontAttributes="Bold" TextColor="Black"/>
-                                                    <Label Text="{Binding Costo}" FontAttributes="Bold" TextColor="Black"/>
+                                                        <HorizontalStackLayout Margin="10,5,0,10">
+                                                            <Label Text="C/U: $" FontAttributes="Bold" TextColor="Black"/>
+                                                            <Label Text="{Binding Costo}" FontAttributes="Bold" TextColor="Black"/>
                                                         </HorizontalStackLayout>
                                                 </VerticalStackLayout>
                                             </HorizontalStackLayout>
@@ -64,8 +68,5 @@
                         </StackLayout>
                     </ListView.Footer>
                 </ListView>
-
-            </ScrollView>
         </StackLayout>
-    </RefreshView>
 </ContentPage>

@@ -11,8 +11,12 @@ namespace AutomatizacionServicios.ViewModels.Copias
     {
         readonly CService getPost = new CService();
 
+        private List<CopiaseImpresionesRegistrosResponse> registros;
+
         #region Properties
         public ObservableCollection<CopiaseImpresionesRegistrosResponse> LstRegistros { get; set; } = new ObservableCollection<CopiaseImpresionesRegistrosResponse>();
+
+        //ObservableCollection<CopiaseImpresionesRegistrosResponse> LstRegistro { get; set; } = new ObservableCollection<CopiaseImpresionesRegistrosResponse>();
 
         private CopiaseImpresionesRegistrosResponse _selectedRegistro;
 
@@ -38,69 +42,85 @@ namespace AutomatizacionServicios.ViewModels.Copias
             AddUserList();
         }
 
-        async Task AddUserList()
+        void AddUserList()
         {
             LstRegistros.Clear();
             IsBusy = true;
-            await Task.Run(() =>
+            Task.Run(async() =>
             {
-                List<CopiaseImpresionesRegistrosResponse> registros = new List<CopiaseImpresionesRegistrosResponse>();
-                Application.Current.Dispatcher.Dispatch(async () =>
-                {
-                    try
+                registros = await getPost.CopiaseImpreseionesRegistrosSrv(App.UserInfoDetails.Facultad_id, App.UserInfoDetails.Api_token);
+                //List<CopiaseImpresionesRegistrosResponse> registros = new List<CopiaseImpresionesRegistrosResponse>();
+                /*App.Current.MainPage.Dispatcher.Dispatch(() =>
+                {*/
+                    /*try
                     {
                         registros = await getPost.CopiaseImpreseionesRegistrosSrv(App.UserInfoDetails.Facultad_id, App.UserInfoDetails.Api_token);
-                        //await Task.Delay(500);
-                        try
+                        */
+
+                    try
+                    {
+
+
+                    if (registros != null)
+                    {
+
+                    /*CopiaseImpresionesRegistrosResponse registro;
+                    Parallel.ForEach(registros, registro =>
+                    {
+                        LstRegistros.Add(registro);
+                    });*/
+                    
+                
+                        foreach (var registro in registros)
                         {
-                            if(registros != null)
-                            {
-                                foreach (CopiaseImpresionesRegistrosResponse registro in registros)
-                                {
-                                    LstRegistros.Add(registro);
-                                }
-                            }
-                            else
+                            //App.Current.Dispatcher.DispatchAsync(() => { LstRegistros.Add(registro); })
+                            //;
+                            //Application.Current.Dispatcher.Dispatch(new Action(() => this.LstRegistros.Add(registro))).ToVisibility();
+                            //await Task.Run(() =>
+                            //{
+                                LstRegistros.Add(registro);
+                            //}).ConfigureAwait(false);
+                        }
+                    }
+                    //LstRegistros = LstRegistro;
+
+                        else
                             {
                                 await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "No existen pedidos en este momento", "OK");
                             }
                         }
-                        catch (NullReferenceException)
+                        catch (HttpRequestException)
                         {
                             await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "No existen pedidos en este momento", "OK");
                         }
-
-                    }
-                    catch (HttpRequestException)
-                    {
-                        await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "No existen pedidos en este momento", "OK");
-                    }
-                    catch (WebException)
-                    {
-                        await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "Error al conectarse", "OK");
-                    }
-                });
-            }
-            );
-            IsBusy = false;
+                        catch (WebException)
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "Error al conectarse", "OK");
+                        }
+                //});
+                IsBusy = false;
+            }).ConfigureAwait(false);
+            //IsBusy = false;
         }
 
         #region Commands
 
         [RelayCommand]
-        async Task Refresh()
+        void Refresh()
         {
             IsRefreshing = true;
-            await AddUserList();
+            AddUserList();
             IsRefreshing = false;
+            //return Task.CompletedTask;
         }
 
+        /*
         [RelayCommand]
         async Task Realizar()
         {
             var tmp = SelectedRegistro;
             LstRegistros.RemoveAt(0);
-        }
+        }*/
 
         [RelayCommand]
         async Task Cancelar()

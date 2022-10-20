@@ -6,6 +6,13 @@
              Shell.NavBarIsVisible="True"
              >
 
+    <ContentPage.MenuBarItems>
+        <MenuBarItem Text="Logout">
+        <MenuFlyoutItem Text="Exit"
+            Command="{Binding ExitCommand}" />
+        </MenuBarItem>
+    </ContentPage.MenuBarItems>
+
     <VerticalStackLayout 
         Spacing="10"
         Padding="10"

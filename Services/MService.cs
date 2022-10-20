@@ -27,7 +27,7 @@ namespace AutomatizacionServicios.Services
             }
             else
             {
-                return null;
+                return materialesResponse;
             }
         }
 
@@ -51,7 +51,7 @@ namespace AutomatizacionServicios.Services
             }
             else
             {
-                return null;
+                return materialResponse.FirstOrDefault();
             }
         }
     }

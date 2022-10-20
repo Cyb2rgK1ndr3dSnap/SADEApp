@@ -137,9 +137,9 @@ namespace AutomatizacionServicios.ViewModels.Copias
             );
         }
 
-        async Task ServBilletera()
+        void ServBilletera()
         {
-            await Task.Run(async () =>
+            Task.Run(async () =>
             {
                 BilleteraResponse billeteraResponse = new BilleteraResponse();
                 billeteraResponse = await bGetPost.Billetera();

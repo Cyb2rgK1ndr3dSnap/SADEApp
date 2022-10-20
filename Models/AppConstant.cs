@@ -10,50 +10,51 @@ namespace AutomatizacionServicios.Models
 
         public bool PermissionDocument { get; set; }
 
-        public async static Task AddFlyoutMenusDetails()
+        public static void AddFlyoutMenusDetails()
         {
-
-            //AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
-
-            if (App.UserInfoDetails.Tipo_usuario_id == "2" || App.UserInfoDetails.Tipo_usuario_id == "3")
+            Task.Run(async () =>
             {
-                permissionDocument = true;
-            }
-            else
+                //AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
+
+                if (App.UserInfoDetails.Tipo_usuario_id == "2" || App.UserInfoDetails.Tipo_usuario_id == "3")
+                {
+                    permissionDocument = true;
+                }
+                else
+                {
+                    permissionDocument = false;
+                }
+
+                var inicioInfo = AppShell.Current.Items.Where(f => f.Route == nameof(InicioPage)).FirstOrDefault();
+                if (inicioInfo != null) AppShell.Current.Items.Remove(inicioInfo);
+
+                //if (App.UserInfoDetails.tipo_usuario_id == "3")
+                //{
+
+                //Flyout que se le presenta al usuario al entrar y loguearse correctamente
+
+            TabBar flyoutItemP = new TabBar()
             {
-                permissionDocument = false;
-            }
-
-            var inicioInfo = AppShell.Current.Items.Where(f => f.Route == nameof(InicioPage)).FirstOrDefault();
-            if (inicioInfo != null) AppShell.Current.Items.Remove(inicioInfo);
-
-            //if (App.UserInfoDetails.tipo_usuario_id == "3")
-            //{
-
-            //Flyout que se le presenta al usuario al entrar y loguearse correctamente
-
-            var flyoutItemP = new TabBar()
-            {
-                Route = "InicioPage",
-                FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
+                //Route = "InicioPage",
+                //FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                 Items =
                 {
 
                             new ShellContent
                                     {
-                                        Icon = "house.png",
-                                        Title = "Home",
+                                        Icon ="house.png",
+                                        Title ="Home",
                                         Route="InicioPage",
                                         ContentTemplate = new DataTemplate(typeof(InicioPage)),
                                     },
 
-                    new Tab
+                    /*new Tab
                     {
                         Icon = "stationery.png",
                         Title="Materiales",
                         IsVisible=permissionDocument,
                         Items =
-                        {
+                        {*/
                             new ShellContent
                                     {
                                         Icon = "stationery.png",
@@ -61,17 +62,17 @@ namespace AutomatizacionServicios.Models
                                         Route="MaterialesPage",
                                         ContentTemplate = new DataTemplate(typeof(MaterialesPage)),
                                     },
-                        }
-                    },
-                    new Tab
+                        /*}
+                    },*/
+                    /*new Tab
                     {
                         Icon = "document.png",
                         Title="Copias",
                         Items =
-                        {
+                        {*/
                             new ShellContent
                                     {
-                                        FlyoutIcon = "document.png",
+                                        Icon = "document.png",
                                         Title = "Peticiones",
                                         Route="CopiasImpresionesPage",
                                         //IsVisible = permissionDocument,
@@ -101,24 +102,24 @@ namespace AutomatizacionServicios.Models
                                         //IsVisible = permissionDocument,
                                         //ContentTemplate = new DataTemplate(typeof(CopiasPage)),
                                     },*/
-                        }
-                    },
-                     new Tab
+                        /*}
+                    },*/
+                     /*new Tab
                     {
                         Icon = "document.png",
                         Title="Confirmarciones",
                         Items =
-                        {
+                        {*/
                         new ShellContent
                                     {
-                                        FlyoutIcon = "document.png",
+                                        Icon = "document.png",
                                         Title = "Confirmarciones",
                                         Route="CopiasConfirmarPage",
                                         //IsVisible = permissionDocument,
                                         ContentTemplate = new DataTemplate(typeof(CopiasConfirmarPage))
                                     },
-                        }
-                    },
+                        /*}
+                    },*/
                     /*
                     new Tab
                     {
@@ -161,16 +162,22 @@ namespace AutomatizacionServicios.Models
 
                 if (DeviceInfo.Platform == DevicePlatform.WinUI)
                 {
+                    /*Task.Run(async() =>
+                    {*/
+                        await Shell.Current.GoToAsync($"//{nameof(InicioPage)}");
+                    /*});*/
+                    /*
                     AppShell.Current.Dispatcher.Dispatch(async () =>
                     {
                         await Shell.Current.GoToAsync($"//{nameof(InicioPage)}");
-                    });
+                    });*/
                 }
                 else
                 {
                     await Shell.Current.GoToAsync($"//{nameof(InicioPage)}");
                 }
             }
+            });
             //}
         }
     }

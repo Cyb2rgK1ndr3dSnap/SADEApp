@@ -30,7 +30,7 @@ namespace AutomatizacionServicios.Services
             }
             else
             {
-                return null;
+                return billeteraResponse.FirstOrDefault();
             }
         }
     }

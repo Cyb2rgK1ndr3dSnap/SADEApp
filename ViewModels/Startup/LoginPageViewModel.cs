@@ -30,58 +30,65 @@ namespace AutomatizacionServicios.ViewModels.Startup
         }
 
         [RelayCommand]
-        async void Login()
+         void Login()
         {
-            try
+            Task.Run(async () =>
             {
-                if (!string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password) && Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
-                {
-                    //LoginResponse loginResponse = await iLoginRepository.Login(Email, Password);
-                    LoginResponse loginResponse = await getPost.LoginSer(Email, Password);
-                    //App.UserInfo = await iLoginRepository.Login(Email, Password);
-
-                    if (loginResponse != null)
+                    try
                     {
-                        Email = "";
-                        if (Preferences.ContainsKey(nameof(App.UserInfoDetails)))
+                        if (!string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password) && Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
                         {
-                            Preferences.Remove(nameof(App.UserInfoDetails));
-                            //Preferences.Clear();
+                            //LoginResponse loginResponse = await iLoginRepository.Login(Email, Password);
+                            LoginResponse loginResponse = await getPost.LoginSer(Email, Password);
+                            //App.UserInfo = await iLoginRepository.Login(Email, Password);
+
+                            if (loginResponse != null)
+                            {
+                                Email = "";
+                                if (Preferences.ContainsKey(nameof(App.UserInfoDetails)))
+                                {
+                                    Preferences.Remove(nameof(App.UserInfoDetails));
+                                    //Preferences.Clear();
+                                }
+                                string userInfoDetails = JsonConvert.SerializeObject(loginResponse);
+                                Preferences.Set(nameof(App.UserInfoDetails), userInfoDetails);
+                                App.UserInfoDetails = loginResponse;
+                                //await AppConstant.AddFlyoutMenusDetails();
+                                AppConstant.AddFlyoutMenusDetails();
+                            }
+                            else
+                            {
+                                Password = "";
+                                await Application.Current.MainPage.DisplayAlert("Warning", "usuario o contraseña incorrectos", "OK");
+                            }
                         }
-                        string userInfoDetails = JsonConvert.SerializeObject(loginResponse);
-                        Preferences.Set(nameof(App.UserInfoDetails), userInfoDetails);
-                        App.UserInfoDetails = loginResponse;
-                        await AppConstant.AddFlyoutMenusDetails();
+                        else
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Incorrecto", "Ingresa el usuario y contraseña", "OK");
+                        }
                     }
-                    else
+                    catch (HttpRequestException)
                     {
                         Password = "";
-                        await Application.Current.MainPage.DisplayAlert("Warning", "usuario o contraseña incorrectos", "OK");
+                        await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "Sin conexión a internet", "OK");
                     }
-                }
-                else
-                {
-                    await Application.Current.MainPage.DisplayAlert("Incorrecto", "Ingresa el usuario y contraseña", "OK");
-                }
-            }
-            catch (HttpRequestException)
-            {
-                Password = "";
-                await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "Sin conexión a internet", "OK");
-            }
-            catch (WebException)
-            {
-                Password = "";
-                await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "Problemas al cargar el feed", "OK");
-            }
+                    catch (WebException)
+                    {
+                        Password = "";
+                        await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "Problemas al cargar el feed", "OK");
+                    }
+            });
         }
 
 
 
         [RelayCommand]
-        async void RegisterPage()
+        void RegisterPage()
         {
-            await Shell.Current.GoToAsync($"{nameof(RegisterPage)}");
+            Task.Run(async () =>
+            {
+                await Shell.Current.GoToAsync($"{nameof(RegisterPage)}");
+            });
         }
         #endregion
     }
