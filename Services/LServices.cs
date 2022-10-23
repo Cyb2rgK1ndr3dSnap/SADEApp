@@ -9,6 +9,7 @@ namespace AutomatizacionServicios.Services
 {
     public class LServices : IGetPost
     {
+        /*
         public async Task<List<Usuarios>> InfosSer()
         {
             var infosResponse = new List<Usuarios>();
@@ -27,7 +28,7 @@ namespace AutomatizacionServicios.Services
             {
                 return null;
             }
-        }
+        }*/
 
         //LoginPrueba
         public async Task<LoginResponse> LoginSer(string email, string password)

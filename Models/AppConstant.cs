@@ -1,4 +1,5 @@
-﻿using AutomatizacionServicios.Views.Copias;
+﻿using AutomatizacionServicios.Controls;
+using AutomatizacionServicios.Views.Copias;
 using AutomatizacionServicios.Views.Inicio;
 using AutomatizacionServicios.Views.Materiales;
 
@@ -14,7 +15,7 @@ namespace AutomatizacionServicios.Models
         {
             Task.Run(async () =>
             {
-                //AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
+                AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
 
                 if (App.UserInfoDetails.Tipo_usuario_id == "2" || App.UserInfoDetails.Tipo_usuario_id == "3")
                 {
@@ -32,29 +33,110 @@ namespace AutomatizacionServicios.Models
                 //{
 
                 //Flyout que se le presenta al usuario al entrar y loguearse correctamente
+                
+                FlyoutItem flyoutItems = new FlyoutItem()
+                {
+                    Route=nameof(InicioPage),
+                    FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
+                    Items =
+                    {
+                        new Tab
+                        {
+                            //Icon = "stationery.png",
+                            Title="Home",
+                            Icon ="house.png",
+                            Route="InicioPage",
+                            //IsVisible=permissionDocument,
+                            FlyoutItemIsVisible=false,
+                            Items =
+                            {
+                                new ShellContent
+                                        {
+                                            //Icon ="house.png",
+                                            Title ="Home",
+                                            //Route="InicioPage",
+                                            ContentTemplate = new DataTemplate(typeof(InicioPage)),
+                                        },
+                            }
+                        },
+                        new Tab
+                        {
+                            Icon = "stationery.png",
+                            Title="Materiales",
+                            IsVisible=permissionDocument,
+                            FlyoutItemIsVisible=false,
+                            Items =
+                            {
+                                new ShellContent
+                                        {
+                                            Icon = "stationery.png",
+                                            Title = "Materiales",
+                                            Route="MaterialesPage",
+                                            ContentTemplate = new DataTemplate(typeof(MaterialesPage)),
+                                        },
+                            }
+                        },
+                        new Tab
+                        {
+                            Icon = "document.png",
+                            Title="Copias",
+                            Route="CopiasConfirmarPage",
+                            FlyoutItemIsVisible=false,
+                            Items =
+                            {
+                                new ShellContent
+                                        {
+                                            Icon = "document.png",
+                                            Title = "Peticiones",
+                                            //Route="CopiasImpresionesPage",
+                                            //IsVisible = permissionDocument,
+                                            ContentTemplate = new DataTemplate(typeof(CopiasPage)),
+                                        },
+                                new ShellContent
+                                        {
+                                            Icon = "document.png",
+                                            Title = "Confirmarciones",
+                                            Route="CopiasConfirmarPage",
+                                            //IsVisible = permissionDocument,
+                                            ContentTemplate = new DataTemplate(typeof(CopiasConfirmarPage))
+                                        },
+                            },
+                        },
+                    }
+                };
+                
 
-            TabBar flyoutItemP = new TabBar()
+            TabBar tabBarP = new TabBar()
             {
                 //Route = "InicioPage",
                 //FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                 Items =
                 {
-
+                    new Tab
+                    {
+                        //Icon = "stationery.png",
+                        Title="Home",
+                        Icon ="house.png",
+                        Route="InicioPage",
+                        //IsVisible=permissionDocument,
+                        Items =
+                        {
                             new ShellContent
                                     {
-                                        Icon ="house.png",
+                                        //Icon ="house.png",
                                         Title ="Home",
-                                        Route="InicioPage",
+                                        //Route="InicioPage",
                                         ContentTemplate = new DataTemplate(typeof(InicioPage)),
                                     },
-
-                    /*new Tab
+                            }
+                    },
+                    new Tab
                     {
                         Icon = "stationery.png",
                         Title="Materiales",
                         IsVisible=permissionDocument,
                         Items =
-                        {*/
+                        {
                             new ShellContent
                                     {
                                         Icon = "stationery.png",
@@ -62,30 +144,31 @@ namespace AutomatizacionServicios.Models
                                         Route="MaterialesPage",
                                         ContentTemplate = new DataTemplate(typeof(MaterialesPage)),
                                     },
-                        /*}
-                    },*/
-                    /*new Tab
+                        }
+                    },
+                    new Tab
                     {
                         Icon = "document.png",
                         Title="Copias",
+                        Route="CopiasConfirmarPage", 
                         Items =
-                        {*/
+                        {
                             new ShellContent
                                     {
                                         Icon = "document.png",
                                         Title = "Peticiones",
-                                        Route="CopiasImpresionesPage",
+                                        //Route="CopiasImpresionesPage",
                                         //IsVisible = permissionDocument,
                                         ContentTemplate = new DataTemplate(typeof(CopiasPage)),      
                                     },
-                           /* new ShellContent
+                            new ShellContent
                                     {
-                                        FlyoutIcon = "document.png",
+                                        Icon = "document.png",
                                         Title = "Confirmarciones",
                                         Route="CopiasConfirmarPage",
                                         //IsVisible = permissionDocument,
                                         ContentTemplate = new DataTemplate(typeof(CopiasConfirmarPage))
-                                    },*//*
+                                    },/*
                             new ShellContent
                                     {
                                         Icon = "document.png",
@@ -102,22 +185,22 @@ namespace AutomatizacionServicios.Models
                                         //IsVisible = permissionDocument,
                                         //ContentTemplate = new DataTemplate(typeof(CopiasPage)),
                                     },*/
-                        /*}
-                    },*/
+                        }
+                    },
                      /*new Tab
                     {
                         Icon = "document.png",
                         Title="Confirmarciones",
                         Items =
                         {*/
-                        new ShellContent
+                        /*new ShellContent
                                     {
                                         Icon = "document.png",
                                         Title = "Confirmarciones",
                                         Route="CopiasConfirmarPage",
                                         //IsVisible = permissionDocument,
                                         ContentTemplate = new DataTemplate(typeof(CopiasConfirmarPage))
-                                    },
+                                    },#########*/
                         /*}
                     },*/
                     /*
@@ -156,10 +239,12 @@ namespace AutomatizacionServicios.Models
             //
             ///////////////////nameof(CopiasImpresionesPage) = tab;
 
-            if (!AppShell.Current.Items.Contains(flyoutItemP))
+            if (!AppShell.Current.Items.Contains(tabBarP))
             {
-                AppShell.Current.Items.Add(flyoutItemP);
-
+                
+                //AppShell.Current.Items.Add(tabBarP);
+                AppShell.Current.Items.Add(flyoutItems);
+                
                 if (DeviceInfo.Platform == DevicePlatform.WinUI)
                 {
                     /*Task.Run(async() =>

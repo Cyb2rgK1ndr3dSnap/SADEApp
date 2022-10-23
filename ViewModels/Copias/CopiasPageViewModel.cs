@@ -8,6 +8,7 @@ using System.Net;
 
 namespace AutomatizacionServicios.ViewModels.Copias
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CopiasPageViewModel : BaseViewModel
     {
 
@@ -99,7 +100,7 @@ namespace AutomatizacionServicios.ViewModels.Copias
                 //});
                 LstState = true;
                 IsBusy = false;
-            }).ConfigureAwait(false);
+            });
             //LstState = true;
             //IsBusy = false;
         }

@@ -38,7 +38,7 @@ public static class MauiProgram
 
         //View
         //builder.Services.AddTransient<AppShell>();
-        //builder.Services.AddSingleton<AppShell>();
+        builder.Services.AddSingleton<AppShell>();
 
         builder.Services.AddTransient<RegisterPage>();
         builder.Services.AddTransient<LoadingPage>();
@@ -57,7 +57,7 @@ public static class MauiProgram
         //builder.Services.AddTransient<DispositivosPage>();
 
         //ViewModels Login
-        //builder.Services.AddSingleton<AppShellViewModel>();
+        builder.Services.AddSingleton<AppShellViewModel>();
         builder.Services.AddTransient<RegisterPageViewModel>();
         builder.Services.AddTransient<LoadingPageViewModel>();
         builder.Services.AddTransient<LoginPageViewModel>();

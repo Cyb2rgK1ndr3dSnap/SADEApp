@@ -46,6 +46,12 @@
     ContentTemplate="{DataTemplate startupPages:LoginPage}"
     Route="LoginPage" />
 
+    <FlyoutItem Title="About" Icon="tab_about.png" FlyoutDisplayOptions="AsMultipleItems">
+            <ShellContent Title="Perfil" Icon="user.png"/>
+ 
+            <ShellContent Title="Sobre la UTP" />
+    </FlyoutItem>
+
     <Shell.FlyoutFooter>
         <StackLayout Padding="40">
             <Button Text="Cerrar Sesión" Command="{Binding CerrarSesionCommand}" />

@@ -99,7 +99,7 @@ namespace AutomatizacionServicios.ViewModels.Copias
                         }
                 //});
                 IsBusy = false;
-            }).ConfigureAwait(false);
+            });
             //IsBusy = false;
         }
 

@@ -83,7 +83,7 @@ namespace AutomatizacionServicios.ViewModels.Materiales
                     LstState = true;
                 //});
                 IsBusy = false;
-            }).ConfigureAwait(false);
+            });
             //IsBusy = false;
         }
 
