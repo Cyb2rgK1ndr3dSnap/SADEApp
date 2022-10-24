@@ -28,12 +28,16 @@ namespace AutomatizacionServicios.ViewModels.Startup
         {
             await Shell.Current.GoToAsync($"//{nameof(InicioPage)}");
         }
-
+        /// <summary>
+        /// ARREGLAR EL LOGIN CUANDO SE PRESIONE SE DESHABILITE EL BOTÓN HASTA QUE CONFIRME Y ENTRE O DE ERROR
+        /// </summary>
         [RelayCommand]
          void Login()
         {
             Task.Run(async () =>
             {
+                Application.Current.Dispatcher.Dispatch(async () =>
+                {
                     try
                     {
                         if (!string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password) && Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
@@ -45,6 +49,7 @@ namespace AutomatizacionServicios.ViewModels.Startup
                             if (loginResponse != null)
                             {
                                 Email = "";
+                                Password = "";
                                 if (Preferences.ContainsKey(nameof(App.UserInfoDetails)))
                                 {
                                     Preferences.Remove(nameof(App.UserInfoDetails));
@@ -58,7 +63,7 @@ namespace AutomatizacionServicios.ViewModels.Startup
                             }
                             else
                             {
-                                Password = "";
+                                Password = "";                                
                                 await Application.Current.MainPage.DisplayAlert("Warning", "usuario o contraseña incorrectos", "OK");
                             }
                         }
@@ -77,18 +82,16 @@ namespace AutomatizacionServicios.ViewModels.Startup
                         Password = "";
                         await Application.Current.MainPage.DisplayAlert("Connection Problem 500", "Problemas al cargar el feed", "OK");
                     }
+                });
             });
         }
 
 
 
         [RelayCommand]
-        void RegisterPage()
+        async Task RegisterPage()
         {
-            Task.Run(async () =>
-            {
                 await Shell.Current.GoToAsync($"{nameof(RegisterPage)}");
-            });
         }
         #endregion
     }

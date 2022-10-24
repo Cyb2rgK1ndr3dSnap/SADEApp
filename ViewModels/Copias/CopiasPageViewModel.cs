@@ -42,7 +42,6 @@ namespace AutomatizacionServicios.ViewModels.Copias
                     SetProperty(ref _selectedPeticion, value);
                     Seleccion().ConfigureAwait(false);
                 }
-
             }
         }
 
@@ -53,7 +52,7 @@ namespace AutomatizacionServicios.ViewModels.Copias
 
         public CopiasPageViewModel()
         {
-            BtnAddVisible = App.UserInfoDetails.Tipo_usuario_id == "2" ? true : false;
+            BtnAddVisible = App.UserInfoDetails.Tipo_usuario_id == "3" ? true : false;
             AddServList();
         }
 

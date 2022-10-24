@@ -1,5 +1,6 @@
 ﻿using AutomatizacionServicios.Models.Materiales;
 using AutomatizacionServicios.Services;
+using AutomatizacionServicios.Views.Copias;
 using AutomatizacionServicios.Views.Materiales;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
@@ -15,19 +16,19 @@ namespace AutomatizacionServicios.ViewModels.Materiales
 
         public ObservableCollection<MaterialesResponse> LstMateriales { get; set; } = new ObservableCollection<MaterialesResponse>();
 
-        private MaterialesResponse selectedMaterial;
+        private MaterialesResponse _selectedMaterial;
 
         public MaterialesResponse SelectedMaterial
         {
-            get => selectedMaterial;
+            get => _selectedMaterial;
             set
             {
                 if (value != null)
                 {
                     //No se puede seleccionar elemento del Listview
                     LstState = false;
-                    SetProperty(ref selectedMaterial, value);
-                    //Seleccion();
+                    SetProperty(ref _selectedMaterial, value);
+                    Seleccion().ConfigureAwait(false); ;
                 }
 
             }
@@ -87,6 +88,20 @@ namespace AutomatizacionServicios.ViewModels.Materiales
             //IsBusy = false;
         }
 
+        async Task Seleccion()
+        {
+                await Shell.Current.GoToAsync($"{nameof(MaterialesSeleccionPage)}",
+                    new Dictionary<string, object>
+                    {
+                        ["MatId"] = _selectedMaterial.Id,
+                        ["MatFacultadId"] = _selectedMaterial.Facultad_id,
+                        ["MatSelect"] = _selectedMaterial.Nombre,
+                        ["MatColor"] = _selectedMaterial.Color_material,
+                        ["MatOtro"] = _selectedMaterial.Otro,
+                    });
+            //Se puede seleccionar nuevamente un elementos del Listview
+            LstState = true;
+        }
         /*
         private async Task Items(List<MaterialesResponse> items)
         {

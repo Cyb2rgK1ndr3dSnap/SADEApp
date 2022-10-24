@@ -16,7 +16,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(CopiasSeleccionPage), typeof(CopiasSeleccionPage));
         Routing.RegisterRoute(nameof(CopiasConfirmarSeleccionPage), typeof(CopiasConfirmarSeleccionPage));
         Routing.RegisterRoute(nameof(MaterialesAgregarPage), typeof(MaterialesAgregarPage));
-        //Routing.RegisterRoute(nameof(CopiasConfirmarPage), typeof(CopiasConfirmarPage));
+        Routing.RegisterRoute(nameof(MaterialesSeleccionPage), typeof(MaterialesSeleccionPage));
 
     }
     // ...
@@ -35,21 +35,4 @@ public partial class AppShell : Shell
         token.Complete();*/
     }
 
-    bool startUp = true;
-    protected override void OnNavigated(ShellNavigatedEventArgs args)
-    {
-        base.OnNavigated(args);
-        startUp = false;
-    }
-
-    protected async override void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propertyName = null)
-    {
-        base.OnPropertyChanged(propertyName);
-        if (!startUp && propertyName.Equals("CurrentItem") && DeviceInfo.Platform == DevicePlatform.Android)
-        {
-            FlyoutIsPresented = true;
-            await System.Threading.Tasks.Task.Delay(300);
-            FlyoutIsPresented = false;
-        }
-    }
 }

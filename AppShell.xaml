@@ -4,19 +4,22 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:AutomatizacionServicios"
-    xmlns:Inicio="clr-namespace:AutomatizacionServicios.Views.Inicio"
+    xmlns:inicio="clr-namespace:AutomatizacionServicios.Views.Inicio"
+    xmlns:materiales="clr-namespace:AutomatizacionServicios.Views.Materiales"
     xmlns:startupPages="clr-namespace:AutomatizacionServicios.Views.startup"
     xmlns:dispositivosPages="clr-namespace:AutomatizacionServicios.Views.Dispositivos"
     xmlns:copiasPages="clr-namespace:AutomatizacionServicios.Views.Copias"
     xmlns:controls="clr-namespace:AutomatizacionServicios.Controls"
     xmlns:viewModels="clr-namespace:AutomatizacionServicios.ViewModels"
-    Shell.TitleColor="Black"
+    Shell.TitleColor="White"
+    Shell.NavBarIsVisible="False"
     Shell.TabBarIsVisible="True"
-    Shell.BackgroundColor="#512BD4"
-    Shell.TabBarBackgroundColor="#512BD4"
+    Shell.BackgroundColor="Black"
+    Shell.TabBarBackgroundColor="Black"
     FlyoutBackgroundImage="purpink.jpg"
     FlyoutBackgroundImageAspect="Fill"
     Shell.PresentationMode="Modal"
+    
     >
 
     <Shell.Resources>
@@ -45,12 +48,6 @@
     <ShellContent FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled" Shell.TabBarIsVisible="False" 
     ContentTemplate="{DataTemplate startupPages:LoginPage}"
     Route="LoginPage" />
-
-    <FlyoutItem Title="About" Icon="tab_about.png" FlyoutDisplayOptions="AsMultipleItems">
-            <ShellContent Title="Perfil" Icon="user.png"/>
- 
-            <ShellContent Title="Sobre la UTP" />
-    </FlyoutItem>
 
     <Shell.FlyoutFooter>
         <StackLayout Padding="40">

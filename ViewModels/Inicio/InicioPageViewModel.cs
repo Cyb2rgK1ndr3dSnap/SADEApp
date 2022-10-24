@@ -1,6 +1,8 @@
 ﻿using AutomatizacionServicios.Models.Token;
 using AutomatizacionServicios.Services;
+using AutomatizacionServicios.Views.startup;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace AutomatizacionServicios.ViewModels.Inicio
 {
@@ -36,7 +38,18 @@ namespace AutomatizacionServicios.ViewModels.Inicio
                 billeteraResponse = await IGetPost.Billetera();
                 Billetera = billeteraResponse.Dinero;
                 //});
-            }).ConfigureAwait(false);
+            });
+        }
+
+        [RelayCommand]
+        async void CerrarSesion()
+        {
+            if (Preferences.ContainsKey(nameof(App.UserInfoDetails)))
+            {
+                Preferences.Remove(nameof(App.UserInfoDetails));
+                //Preferences.Clear();
+            }
+            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
         }
     }
 }

@@ -49,6 +49,10 @@ namespace AutomatizacionServicios.ViewModels.Materiales
                 {
                     Otro = "";
                 }
+                if (String.IsNullOrEmpty(ColorNombre))
+                {
+                    ColorNombre = "";
+                }
                 if (String.IsNullOrWhiteSpace(NombreMaterial))
                 {
                     await Application.Current.MainPage.DisplayAlert("No exitoso", "Por favor ingresar datos valídos", "OK");

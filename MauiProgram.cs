@@ -48,6 +48,7 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<MaterialesPage>();
         builder.Services.AddTransient<MaterialesAgregarPage>();
+        builder.Services.AddTransient<MaterialesSeleccionPage>();
 
         builder.Services.AddSingleton<CopiasPage>();
         builder.Services.AddTransient<CopiasSeleccionPage>();
@@ -66,6 +67,7 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<MaterialesPageViewModel>();
         builder.Services.AddTransient<MaterialesAgregarPageViewModel>();
+        builder.Services.AddTransient<MaterialesSeleccionPageViewModel>();
 
         builder.Services.AddSingleton<CopiasPageViewModel>();
         builder.Services.AddTransient<CopiasSeleccionPageViewModel>();

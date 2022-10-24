@@ -6,13 +6,10 @@
              Shell.NavBarIsVisible="True"
              >
 
-    <ContentPage.MenuBarItems>
-        <MenuBarItem Text="Logout">
-        <MenuFlyoutItem Text="Exit"
-            Command="{Binding ExitCommand}" />
-        </MenuBarItem>
-    </ContentPage.MenuBarItems>
-
+    <Shell.TitleView>
+        <Button Text="Cerrar Sesión" Command="{Binding CerrarSesionCommand}" WidthRequest="100" HeightRequest="35" FontSize="10" HorizontalOptions="End" CornerRadius="20" Margin="2"/>
+    </Shell.TitleView>
+    
     <VerticalStackLayout 
         Spacing="10"
         Padding="10"

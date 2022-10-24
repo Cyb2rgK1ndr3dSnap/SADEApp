@@ -15,7 +15,7 @@ namespace AutomatizacionServicios.Models
         {
             Task.Run(async () =>
             {
-                AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
+                //AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
 
                 if (App.UserInfoDetails.Tipo_usuario_id == "2" || App.UserInfoDetails.Tipo_usuario_id == "3")
                 {
@@ -33,8 +33,8 @@ namespace AutomatizacionServicios.Models
                 //{
 
                 //Flyout que se le presenta al usuario al entrar y loguearse correctamente
-                
-                FlyoutItem flyoutItems = new FlyoutItem()
+
+                TabBar flyoutItems = new TabBar()
                 {
                     Route=nameof(InicioPage),
                     FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
@@ -102,10 +102,39 @@ namespace AutomatizacionServicios.Models
                                         },
                             },
                         },
+                        new Tab
+                        {
+                            Icon="user.png",
+                            Title="Perfil",
+                            Items =
+                            {
+                                new ShellContent
+                                {
+                                    Icon="user.png",
+                                    Title="Perfil",
+                                    Route="PerfilPage",
+                                    ContentTemplate=new DataTemplate(typeof(PerfilPage)),
+                                },
+                            }/*
+                        new ShellContent
+                        {
+                            Icon="user.png",
+                            Title="Perfil",
+                            Route="PerfilPage",
+                            ContentTemplate=new DataTemplate(typeof(PerfilPage)),
+                        },
+                        new ShellContent
+                        {
+                            Icon="user.png",
+                            Title="Perfil",
+                            Route="PerfilPage",
+                            ContentTemplate=new DataTemplate(typeof(PerfilPage)),
+                        },*/
+                        }
                     }
                 };
                 
-
+            /*
             TabBar tabBarP = new TabBar()
             {
                 //Route = "InicioPage",
@@ -168,7 +197,7 @@ namespace AutomatizacionServicios.Models
                                         Route="CopiasConfirmarPage",
                                         //IsVisible = permissionDocument,
                                         ContentTemplate = new DataTemplate(typeof(CopiasConfirmarPage))
-                                    },/*
+                                    },
                             new ShellContent
                                     {
                                         Icon = "document.png",
@@ -184,26 +213,26 @@ namespace AutomatizacionServicios.Models
                                         //Route="CopiasImpresionesPage",
                                         //IsVisible = permissionDocument,
                                         //ContentTemplate = new DataTemplate(typeof(CopiasPage)),
-                                    },*/
+                                    },
                         }
                     },
-                     /*new Tab
+                     new Tab
                     {
                         Icon = "document.png",
                         Title="Confirmarciones",
                         Items =
-                        {*/
-                        /*new ShellContent
+                        {
+                        new ShellContent
                                     {
                                         Icon = "document.png",
                                         Title = "Confirmarciones",
                                         Route="CopiasConfirmarPage",
                                         //IsVisible = permissionDocument,
                                         ContentTemplate = new DataTemplate(typeof(CopiasConfirmarPage))
-                                    },#########*/
-                        /*}
-                    },*/
-                    /*
+                                    },
+                        }
+                    },
+                    
                     new Tab
                     {
                         Icon = "devices_icon.png",
@@ -230,21 +259,24 @@ namespace AutomatizacionServicios.Models
                                     }
                         }
                     },
-                    */
+                    
                 }
             };
+            */
+
+
             //DE QUÉ ES LA COPIA
             //NOMBRE,AULA,FACULTAD,
             //CONTROL NOMBRE,AULA,HORA DE ENTRADA Y SALIDA; //QUE ATIENDA
             //
             ///////////////////nameof(CopiasImpresionesPage) = tab;
 
-            if (!AppShell.Current.Items.Contains(tabBarP))
+            if (!AppShell.Current.Items.Contains(flyoutItems))
             {
                 
                 //AppShell.Current.Items.Add(tabBarP);
                 AppShell.Current.Items.Add(flyoutItems);
-                
+
                 if (DeviceInfo.Platform == DevicePlatform.WinUI)
                 {
                     /*Task.Run(async() =>
