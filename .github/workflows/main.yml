@@ -6,7 +6,9 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Setup .NET
-        uses: actions/setup-dotnet@'7.0.x'
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.x'
       - name: Restore dependencies
         run: dotnet restore ./path/to/your.sln
       - name: Run Snyk to check for vulnerabilities
